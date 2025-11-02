@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://nbdahyrpfj32"]
+[gd_scene load_steps=6 format=3 uid="uid://b8v0nprw323av"]
 
 [ext_resource type="Texture2D" uid="uid://djp6buun7env3" path="res://assets/art/characters/soccer-player.png" id="1_rp718"]
 
@@ -14,7 +14,7 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45000002),
+"times": PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857146),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -43,9 +43,9 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rp718"]
 radius = 4.0
-height = 20.0
+height = 18.0
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_rp718")
