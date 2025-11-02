@@ -11,10 +11,19 @@ config_version=5
 [application]
 
 config/name="Sportec"
+run/main_scene="uid://dptrshbm4h1w4"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=280
+window/size/viewport_height=180
+window/size/window_width_override=1400
+window/size/window_height_override=900
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
