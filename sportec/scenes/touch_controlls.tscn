@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://co3vcm7ghiauy"]
+
+[ext_resource type="Script" uid="uid://ctqquhfxkmdyr" path="res://scenes/controls/touch_controlls.gd" id="1_h32m1"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_rioan"]
+[ext_resource type="Texture2D" uid="uid://40opfk5j0oy2" path="res://assets/art/shoot.png" id="2_r1ut2"]
+[ext_resource type="Texture2D" uid="uid://duvm38t44u1o4" path="res://assets/art/pass.png" id="4_023mw"]
+
+[node name="TouchControlls" type="CanvasLayer"]
+script = ExtResource("1_h32m1")
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("1_rioan")]
+offset_left = 8.0
+offset_top = -64.0
+offset_right = 208.0
+offset_bottom = 136.0
+scale = Vector2(0.3, 0.3)
+pressed_color = Color(0.25882354, 0.37254903, 1, 1)
+deadzone_size = 2.0
+clampzone_size = 10.0
+action_left = "p_left"
+action_right = "p_right"
+action_up = "p_up"
+action_down = "p_down"
+
+[node name="Shoot" type="TouchScreenButton" parent="."]
+position = Vector2(244.00002, 118)
+scale = Vector2(0.089, 0.095)
+texture_normal = ExtResource("2_r1ut2")
+action = "p_shoot"
+
+[node name="Pass" type="TouchScreenButton" parent="."]
+position = Vector2(217, 137.00002)
+scale = Vector2(0.08904105, 0.09363295)
+texture_normal = ExtResource("4_023mw")
+action = "p_pass"
+
+[connection signal="pressed" from="Shoot" to="." method="_on_shoot_pressed"]
+[connection signal="released" from="Shoot" to="." method="_on_shoot_released"]
+[connection signal="pressed" from="Pass" to="." method="_on_pass_pressed"]
+[connection signal="released" from="Pass" to="." method="_on_pass_released"]
