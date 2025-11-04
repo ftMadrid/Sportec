@@ -44,4 +44,3 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TouchControlls" parent="Control" instance=ExtResource("5_pn4dk")]
-visible = false
