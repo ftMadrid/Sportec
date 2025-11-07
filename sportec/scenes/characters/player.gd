@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 enum ControlScheme {CPU, P1}
-enum State {MOVING, TACKLING}
+enum State {MOVING, TACKLING, RECOVERING}
 
 @export var control_scheme : ControlScheme
 @export var speed : float = 100.0
@@ -14,11 +14,11 @@ var current_state: PlayerState = null
 var state_fact := PlayerStateFactory.new()
 var heading := Vector2.RIGHT
 
-func _ready() -> void:
-	switch_st(State.MOVING)
-
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
+	
+func _ready() -> void:
+	switch_st(State.MOVING)
 	
 func switch_st(state: State) -> void:
 	if current_state != null:
