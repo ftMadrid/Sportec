@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bh20y3k86g6y6" path="res://assets/art/backgrounds/pitch-pattern.png" id="2_7156t"]
 [ext_resource type="Texture2D" uid="uid://s638jh3ppch7" path="res://assets/art/backgrounds/pitch-lines.png" id="3_pn4dk"]
 [ext_resource type="PackedScene" uid="uid://c3y47nomxvaje" path="res://scenes/characters/player.tscn" id="4_7156t"]
-[ext_resource type="PackedScene" uid="uid://co3vcm7ghiauy" path="res://scenes/touch_controlls.tscn" id="5_pn4dk"]
+[ext_resource type="PackedScene" uid="uid://monxg28fypqs" path="res://scenes/touch_controlls.tscn" id="5_pn4dk"]
 
 [node name="Field" type="Node2D"]
 
@@ -29,10 +29,10 @@ centered = false
 
 [node name="Player" parent="." instance=ExtResource("4_7156t")]
 position = Vector2(123, 77)
-control_scheme = 1
 
 [node name="Player2" parent="." instance=ExtResource("4_7156t")]
 position = Vector2(167, 98)
+control_scheme = 1
 
 [node name="Player3" parent="." instance=ExtResource("4_7156t")]
 position = Vector2(221, 74)
