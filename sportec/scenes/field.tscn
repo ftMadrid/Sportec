@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=7 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
 [ext_resource type="Texture2D" uid="uid://bh20y3k86g6y6" path="res://assets/art/backgrounds/pitch-pattern.png" id="2_7156t"]
 [ext_resource type="Texture2D" uid="uid://s638jh3ppch7" path="res://assets/art/backgrounds/pitch-lines.png" id="3_pn4dk"]
 [ext_resource type="PackedScene" uid="uid://c3y47nomxvaje" path="res://scenes/characters/player.tscn" id="4_7156t"]
 [ext_resource type="PackedScene" uid="uid://monxg28fypqs" path="res://scenes/touch_controlls.tscn" id="5_pn4dk"]
+[ext_resource type="PackedScene" uid="uid://jrqbx3nawwhr" path="res://scenes/ball/ball.tscn" id="6_wnvii"]
 
 [node name="Field" type="Node2D"]
 
@@ -27,16 +28,6 @@ position = Vector2(-10, -18)
 texture = ExtResource("3_pn4dk")
 centered = false
 
-[node name="Player" parent="." instance=ExtResource("4_7156t")]
-position = Vector2(123, 77)
-
-[node name="Player2" parent="." instance=ExtResource("4_7156t")]
-position = Vector2(167, 98)
-control_scheme = 1
-
-[node name="Player3" parent="." instance=ExtResource("4_7156t")]
-position = Vector2(221, 74)
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -44,3 +35,19 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TouchControlls" parent="Control" instance=ExtResource("5_pn4dk")]
+
+[node name="Actors" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Actors" instance=ExtResource("4_7156t")]
+position = Vector2(123, 77)
+
+[node name="Player2" parent="Actors" instance=ExtResource("4_7156t")]
+position = Vector2(167, 98)
+control_scheme = 1
+
+[node name="Player3" parent="Actors" instance=ExtResource("4_7156t")]
+position = Vector2(221, 74)
+
+[node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
+position = Vector2(256, 111)
