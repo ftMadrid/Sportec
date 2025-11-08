@@ -39,15 +39,18 @@ offset_bottom = 40.0
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="Actors" instance=ExtResource("4_7156t")]
+[node name="Player" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
 position = Vector2(123, 77)
+ball = NodePath("../Ball")
 
-[node name="Player2" parent="Actors" instance=ExtResource("4_7156t")]
+[node name="Player2" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
 position = Vector2(167, 98)
 control_scheme = 1
+ball = NodePath("../Ball")
 
-[node name="Player3" parent="Actors" instance=ExtResource("4_7156t")]
+[node name="Player3" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
 position = Vector2(221, 74)
+ball = NodePath("../Ball")
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
 position = Vector2(256, 111)
