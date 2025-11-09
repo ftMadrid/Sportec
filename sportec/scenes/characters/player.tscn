@@ -124,6 +124,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [49, 50, 51]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animation_complete"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76oj4"]
 _data = {
@@ -143,6 +157,9 @@ height = 18.0
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_yewv4")
+control_scheme = null
+speed = null
+power = null
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_rp718")

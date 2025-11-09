@@ -7,9 +7,11 @@ var ball : Ball = null
 var detection_area : Area2D = null
 var carrier : Player = null
 var player_animation : AnimationPlayer = null
+var bsprite : Sprite2D = null
 
-func setup(context_ball: Ball, context_detection_area: Area2D, context_carrier: Player, context_player_animation: AnimationPlayer) -> void:
-	ball = context_ball
-	detection_area = context_detection_area
-	carrier = context_carrier
-	player_animation = context_player_animation
+func setup(manage_ball: Ball, manage_detection_area: Area2D, manage_carrier: Player, manage_player_animation: AnimationPlayer, manage_ball_sprite: Sprite2D ) -> void:
+	ball = manage_ball
+	detection_area = manage_detection_area
+	player_animation = manage_player_animation
+	carrier = manage_carrier
+	bsprite = manage_ball_sprite

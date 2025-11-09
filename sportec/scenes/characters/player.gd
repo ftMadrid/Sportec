@@ -22,12 +22,12 @@ func _physics_process(_delta: float) -> void:
 func _ready() -> void:
 	switch_st(State.MOVING)
 	
-func switch_st(state: State) -> void:
+func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, player_animation)
+	current_state.setup(self, state_data, player_animation, ball)
 	current_state.state_transition_requested.connect(switch_st.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
@@ -49,4 +49,7 @@ func set_heading() -> void:
 func has_ball() -> bool:
 	return ball.carrier == self
 		
-	
+
+func animation_complete() -> void:
+	if current_state != null:
+		current_state.animation_complete()

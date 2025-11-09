@@ -1,11 +1,23 @@
 class_name PlayerState
 extends Node
 
-signal state_transition_requested(new_state: Player.State)
+signal state_transition_requested(new_state: Player.State, state_data: PlayerStateData)
 
 var player_animation : AnimationPlayer = null
 var player : Player = null
+var state_data : PlayerStateData = PlayerStateData.new()
+var ball : Ball = null
 
-func setup(context_player: Player, context_player_animation: AnimationPlayer) -> void:
-	player = context_player
-	player_animation = context_player_animation
+# setting up the player context to get her references (more simple to setup references)
+func setup(manage_player: Player, manage_data: PlayerStateData, manage_player_animation: AnimationPlayer, manage_ball: Ball) -> void:
+	player = manage_player
+	player_animation = manage_player_animation
+	state_data = manage_data
+	ball = manage_ball
+
+# to control in a good way the states from the player
+func trans_state(new_state: Player.State, data: PlayerStateData = PlayerStateData.new()) -> void:
+	state_transition_requested.emit(new_state, data)
+
+func animation_complete() -> void:
+	pass # override the original method from player.gd

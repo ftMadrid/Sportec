@@ -15,4 +15,4 @@ func handle_human_moves() -> void:
 	player.velocity = dir * player.speed
 	
 	if player.has_ball() and Input.is_action_just_pressed("p_shoot"):
-		state_transition_requested.emit(Player.State.PREP_SHOOT)
+		trans_state(Player.State.PREP_SHOOT)

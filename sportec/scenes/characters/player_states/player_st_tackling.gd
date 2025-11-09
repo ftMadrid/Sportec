@@ -18,4 +18,4 @@ func _physics_process(delta: float) -> void:
 			time_finish_tackle = Time.get_ticks_msec()
 
 	elif Time.get_ticks_msec() - time_finish_tackle > tackle_duration:
-		state_transition_requested.emit(Player.State.RECOVERING)
+		trans_state(Player.State.RECOVERING)

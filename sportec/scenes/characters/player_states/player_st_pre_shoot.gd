@@ -29,4 +29,5 @@ func _physics_process(_delta: float) -> void:
 		var bonus := ease(st_time, ease_factor)
 		var shoot_power := player.power * (1.0 + bonus)
 		shoot_direction = shoot_direction.normalized()
-		print(shoot_power, shoot_direction)
+		var data = PlayerStateData.build().set_shoot_power(shoot_power).set_shoot_direction(shoot_direction)
+		trans_state(Player.State.SHOOTING, data)
