@@ -11,6 +11,7 @@ func _enter_tree() -> void:
 	player_animation.play("pre_kick")
 	player.velocity = Vector2.ZERO
 	start_shoot = Time.get_ticks_msec()
+	shoot_direction = player.heading # to can shoot being idle
 	
 func _physics_process(_delta: float) -> void:
 	

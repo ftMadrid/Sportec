@@ -28,7 +28,7 @@ func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()
 		
 	current_state = state_fact.get_state(state)
 	current_state.setup(self, state_data, player_animation, ball)
-	current_state.state_transition_requested.connect(switch_st.bind())
+	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
 	

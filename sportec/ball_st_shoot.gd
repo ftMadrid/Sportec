@@ -8,20 +8,14 @@ const shoot_duration := 1000
 var since_shoot := Time.get_ticks_msec()
 
 func _enter_tree() -> void:
-	if ball.velocity.x >= 0:
-		player_animation.play("rolling")
-		player_animation.advance(0)
-	else:
-		player_animation.play_backwards("rolling")
-		player_animation.advance(0)
-		
+	set_ball_animation_velocity()
 	bsprite.scale.y = shoot_scale
 	ball.height = shoot_height
 	since_shoot = Time.get_ticks_msec()
 	
 func _physics_process(delta: float) -> void:
 	if Time.get_ticks_msec() - since_shoot > shoot_duration:
-		state_transition_requested.emit(Ball.State.FREEFORM)
+		transition_state.emit(Ball.State.FREEFORM)
 	
 	ball.move_and_collide(ball.velocity * delta)
 

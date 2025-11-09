@@ -1,7 +1,7 @@
 class_name PlayerState
 extends Node
 
-signal state_transition_requested(new_state: Player.State, state_data: PlayerStateData)
+signal transition_state(new_state: Player.State, state_data: PlayerStateData)
 
 var player_animation : AnimationPlayer = null
 var player : Player = null
@@ -17,7 +17,7 @@ func setup(manage_player: Player, manage_data: PlayerStateData, manage_player_an
 
 # to control in a good way the states from the player
 func trans_state(new_state: Player.State, data: PlayerStateData = PlayerStateData.new()) -> void:
-	state_transition_requested.emit(new_state, data)
+	transition_state.emit(new_state, data)
 
 func animation_complete() -> void:
 	pass # override the original method from player.gd
