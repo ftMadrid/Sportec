@@ -7,9 +7,10 @@ func _enter_tree() -> void:
 
 func animation_complete() -> void:
 	var pass_target := teammate_in_view()
-	print(pass_target)
-	var target := Vector2(10, 10)
-	ball.pass_to(target)
+	if pass_target == null: # to pass the ball to the real target and make the condition if is not null
+		ball.pass_to(ball.position + player.heading * player.speed)
+	else:
+		ball.pass_to(pass_target.position + pass_target.velocity)
 	trans_state(Player.State.MOVING)
 
 func teammate_in_view() -> Player:
