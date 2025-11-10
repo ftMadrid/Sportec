@@ -5,6 +5,7 @@ var states : Dictionary
 func _init() -> void:
 	states = {
 		Player.State.MOVING: PlayerStateMoving,
+		Player.State.PASSING: PlayerStatePassing,
 		Player.State.TACKLING: PlayerStateTackling,
 		Player.State.RECOVERING: PlayerStateRecovering,
 		Player.State.PREP_SHOOT: PlayerStatePrepShoot,

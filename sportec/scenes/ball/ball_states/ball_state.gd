@@ -1,7 +1,7 @@
 class_name BallState
 extends Node
 
-signal transition_state(new_state: BallState) # signal to all (dictorionary)
+signal transition_state(new_state: BallState) # signal to all (dictionary)
 
 const gravity := 10.0
 

@@ -1,9 +1,6 @@
 class_name BallStateFreeForm
 extends BallState
 
-const air_fric := 35.0
-const ground_fric := 250.0
-
 func _enter_tree() -> void:
 	detection_area.body_entered.connect(player_enter.bind())
 
@@ -13,7 +10,7 @@ func player_enter(body: Player) -> void:
 
 func _physics_process(delta: float) -> void:
 	set_ball_animation_velocity()
-	var fric := air_fric if ball.height > 0 else ground_fric
+	var fric := ball.air_fric if ball.height > 0 else ball.ground_fric
 	ball.velocity = ball.velocity.move_toward(Vector2.ZERO, fric * delta)
 	gravity_process(delta, 0.8)
 	ball.move_and_collide(ball.velocity * delta)
