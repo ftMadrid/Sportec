@@ -7,7 +7,7 @@ func _enter_tree() -> void:
 
 func animation_complete() -> void:
 	var pass_target := teammate_in_view()
-	if pass_target == null: # to pass the ball to the real target and make the condition if is not null
+	if pass_target == null: # to pass the ball to the target and make the condition if is not null
 		ball.pass_to(ball.position + player.heading * player.speed)
 	else:
 		ball.pass_to(pass_target.position + pass_target.velocity)

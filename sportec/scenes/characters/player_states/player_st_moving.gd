@@ -23,5 +23,5 @@ func handle_human_moves() -> void:
 	if player.has_ball() and Input.is_action_just_pressed("p_shoot"): # checks if the player has the ball to make the shoot
 		trans_state(Player.State.PREP_SHOOT)
 	
-	#if !player.has_ball() and Input.is_action_just_pressed("p_shoot"):
-	#	trans_state(Player.State.TACKLING)
+	if !player.has_ball() and Input.is_action_just_pressed("p_shoot"):
+		trans_state(Player.State.TACKLING)

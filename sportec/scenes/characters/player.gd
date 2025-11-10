@@ -1,6 +1,11 @@
 class_name Player
 extends CharacterBody2D
 
+const control_scheme_map : Dictionary = {
+	ControlScheme.CPU: preload("res://assets/art/props/cpu.png"),
+	ControlScheme.P1: preload("res://assets/art/props/1p.png"),
+}
+
 enum ControlScheme {CPU, P1}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING}
 
@@ -9,19 +14,21 @@ enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING}
 @export var power : float = 80.0
 @export var ball : Ball
 
-
 @onready var player_animation: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $PlayerSprite
 @onready var teammate_area: Area2D = %TeammateArea
+@onready var control_sprite: Sprite2D = %ControlSprite
 
 var current_state: PlayerState = null
 var state_fact := PlayerStateFactory.new()
 var heading := Vector2.RIGHT
 
 func _physics_process(_delta: float) -> void:
+	#sprite_visibility() DISABLED FOR NOW, ONLY TESTING
 	move_and_slide()
 	
 func _ready() -> void:
+	set_actual_target()
 	switch_st(State.MOVING)
 	
 func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
@@ -50,8 +57,13 @@ func set_heading() -> void:
 
 func has_ball() -> bool:
 	return ball.carrier == self
-		
 
 func animation_complete() -> void:
 	if current_state != null:
 		current_state.animation_complete()
+
+func set_actual_target() -> void:
+	control_sprite.texture = control_scheme_map[control_scheme]
+
+func sprite_visibility() -> void:
+	control_sprite.visible = has_ball() or not control_scheme == ControlScheme.CPU
