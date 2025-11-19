@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=8 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
+[ext_resource type="Script" uid="uid://puhad2r74cml" path="res://scenes/camera.gd" id="1_tcubs"]
 [ext_resource type="Texture2D" uid="uid://bh20y3k86g6y6" path="res://assets/art/backgrounds/pitch-pattern.png" id="2_7156t"]
 [ext_resource type="Texture2D" uid="uid://s638jh3ppch7" path="res://assets/art/backgrounds/pitch-lines.png" id="3_pn4dk"]
 [ext_resource type="PackedScene" uid="uid://c3y47nomxvaje" path="res://scenes/characters/player.tscn" id="4_7156t"]
@@ -9,11 +10,21 @@
 
 [node name="Field" type="Node2D"]
 
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("ball")]
+limit_left = 0
+limit_top = 1
+limit_right = 843
+limit_bottom = 356
+position_smoothing_enabled = true
+script = ExtResource("1_tcubs")
+ball = NodePath("../Actors/Ball")
+
 [node name="Backgrounds" type="Node2D" parent="."]
 
 [node name="Floor" type="Sprite2D" parent="Backgrounds"]
 modulate = Color(0.61960787, 0.7607843, 0.23529412, 1)
-position = Vector2(-7, -4)
+position = Vector2(0, 1)
+scale = Vector2(0.9917647, 0.9861111)
 texture = ExtResource("1_lptdg")
 centered = false
 
