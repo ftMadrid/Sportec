@@ -13,4 +13,4 @@ func _physics_process(delta: float) -> void:
 	var fric := ball.air_fric if ball.height > 0 else ball.ground_fric
 	ball.velocity = ball.velocity.move_toward(Vector2.ZERO, fric * delta)
 	gravity_process(delta, 0.8)
-	ball.move_and_collide(ball.velocity * delta)
+	move_bounce(delta)

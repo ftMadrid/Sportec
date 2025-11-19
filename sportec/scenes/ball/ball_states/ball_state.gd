@@ -40,3 +40,10 @@ func gravity_process(delta: float, rebound: float = 0.0) -> void:
 			if rebound > 0 and ball.height_velocity < 0: # adding the rebound checking 
 				ball.height_velocity = -ball.height_velocity * rebound
 				ball.velocity = ball.velocity * rebound
+
+func move_bounce(delta: float) -> void:
+	var collision := ball.move_and_collide(ball.velocity * delta)
+	if collision != null:
+		ball.velocity = ball.velocity.bounce(collision.get_normal()) * 0.8
+		ball.switch_st(Ball.State.FREEFORM)
+	

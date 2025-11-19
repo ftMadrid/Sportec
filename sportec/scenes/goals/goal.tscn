@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct6af4bjrf68t"]
+
+[ext_resource type="Texture2D" uid="uid://bee4fjm1p05et" path="res://assets/art/backgrounds/goal-bottom.png" id="1_e45id"]
+[ext_resource type="Script" uid="uid://cum5wkfsjubi6" path="res://scenes/goals/goal.gd" id="1_m61db"]
+[ext_resource type="Texture2D" uid="uid://dse4xxoppvb18" path="res://assets/art/backgrounds/goal-top.png" id="2_6oxqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m61db"]
+size = Vector2(27, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t0mi"]
+size = Vector2(27.5, 2.5)
+
+[node name="Goal" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_m61db")
+
+[node name="FrameSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_e45id")
+centered = false
+offset = Vector2(-23, -125)
+
+[node name="FrameTopSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -65)
+texture = ExtResource("2_6oxqv")
+centered = false
+offset = Vector2(-23, -59)
+
+[node name="BackArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BackArea"]
+polygon = PackedVector2Array(-20, -2, -12, -65, -10, -65, -18, -2)
+
+[node name="BottomFrame" type="StaticBody2D" parent="."]
+visibility_layer = 0
+position = Vector2(-3, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomFrame"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_m61db")
+
+[node name="TopFrame" type="StaticBody2D" parent="."]
+visibility_layer = 0
+position = Vector2(7, -67)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopFrame"]
+position = Vector2(-0.75, -0.25)
+shape = SubResource("RectangleShape2D_8t0mi")
