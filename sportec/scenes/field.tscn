@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=14 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
 [ext_resource type="Script" uid="uid://puhad2r74cml" path="res://scenes/camera.gd" id="1_tcubs"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://drpvilo68h6q6" path="res://assets/art/backgrounds/top-wall.png" id="7_aaam2"]
 [ext_resource type="Texture2D" uid="uid://dtrdpm8ra84fg" path="res://assets/art/backgrounds/bottom-wall.png" id="8_5qjf2"]
 [ext_resource type="Texture2D" uid="uid://c3chxlno5av6c" path="res://assets/art/backgrounds/side-wall.png" id="9_mwwu5"]
+[ext_resource type="AudioStream" uid="uid://ccr8sldn6vsti" path="res://assets/music/testing.mp3" id="12_kxpcs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qjf2"]
 size = Vector2(802, 7)
@@ -136,3 +137,8 @@ ball = NodePath("../Ball")
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
 position = Vector2(197, 96)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_kxpcs")
+volume_db = -15.467
+autoplay = true

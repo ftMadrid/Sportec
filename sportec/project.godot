@@ -13,7 +13,11 @@ config_version=5
 config/name="Sportec"
 run/main_scene="uid://dptrshbm4h1w4"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.050980393, 0.0627451, 0.13725491, 1)
+boot_splash/fullsize=false
+boot_splash/image="uid://s8rmj3gg5gqb"
+config/icon="uid://dowd2m1mbalww"
+boot_splash/minimum_display_time=3500
 
 [autoload]
 
