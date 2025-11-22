@@ -10,7 +10,8 @@ const control_scheme_map : Dictionary = {
 const gravity := 6.0
 
 enum ControlScheme {CPU, P1, P2}
-enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, BICYCLE, VOLLEY, HEADER}
+enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
+			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL}
 
 @export var control_scheme : ControlScheme
 @export var speed : float = 100.0
@@ -87,3 +88,7 @@ func process_gravity(delta: float) -> void:
 			height_velocity = 0
 	
 	sprite.position = Vector2.UP * height
+
+func control_ball() -> void:
+	if ball.height > 10.0:
+		switch_st(Player.State.CHEST_CONTROL)

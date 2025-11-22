@@ -13,6 +13,7 @@ func _init() -> void:
 		Player.State.BICYCLE: PlayerStateBicycle,
 		Player.State.VOLLEY: PlayerStateVolley,
 		Player.State.HEADER: PlayerStateHeader,
+		Player.State.CHEST_CONTROL: PlayerStateChest,
 	}
 
 func get_state(state: Player.State) -> PlayerState:

@@ -6,6 +6,7 @@ func _enter_tree() -> void:
 
 func player_enter(body: Player) -> void:
 	ball.carrier = body
+	body.control_ball()
 	transition_state.emit(Ball.State.CARRIED)
 
 func _physics_process(delta: float) -> void:
