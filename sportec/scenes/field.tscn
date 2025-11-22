@@ -53,7 +53,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TouchControlls" parent="Control" instance=ExtResource("5_pn4dk")]
-visible = false
 
 [node name="Actors" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -132,6 +131,7 @@ ball = NodePath("../Ball")
 
 [node name="Player3" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
 position = Vector2(59, 167)
+control_scheme = 2
 ball = NodePath("../Ball")
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]

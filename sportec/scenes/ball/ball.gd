@@ -5,6 +5,8 @@ enum State {CARRIED, SHOOT, FREEFORM}
 
 @export var air_fric : float = 35.0
 @export var ground_fric : float = 250.0
+@export var air_min_height : float = 10.0
+@export var air_max_height : float = 30.0
 
 @onready var player_animation : AnimationPlayer = %AnimationPlayer
 @onready var detection_area : Area2D = %DetectionArea
@@ -43,8 +45,16 @@ func pass_to(destination: Vector2) -> void:
 	var distance := position.distance_to(destination)
 	var intensity := sqrt(2 * distance * ground_fric)
 	velocity = intensity * direction
+	if distance > 130:
+		height_velocity = BallState.gravity * distance / (1.8 * intensity) # equation to give a gravity effect to the pass ball
 	carrier = null
 	switch_st(Ball.State.FREEFORM)
 	
 func stop() -> void:
 	velocity = Vector2.ZERO
+
+func in_air_action() -> bool:
+	return current_state != null and current_state.in_air_action()
+
+func air_connect() -> bool:
+	return height >= air_min_height and height <= air_max_height

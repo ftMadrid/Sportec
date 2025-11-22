@@ -13,18 +13,11 @@ func _enter_tree() -> void:
 	start_shoot = Time.get_ticks_msec()
 	shoot_direction = player.heading # to can shoot being idle
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
-	var input_vec := Input.get_vector(
-		"p_left", 
-		"p_right", 
-		"p_up", 
-		"p_down"
-	)
-	if input_vec != Vector2.ZERO:
-		shoot_direction = input_vec
+	shoot_direction += KeyUtils.get_input_vector(player.control_scheme) * delta
 	
-	if Input.is_action_just_released("p_shoot"):
+	if KeyUtils.action_just_released(player.control_scheme, KeyUtils.Action.SHOOT):
 		var duration_press := clampf(Time.get_ticks_msec() - start_shoot, 0.0, max_duration)
 		var st_time := duration_press / max_duration
 		var bonus := ease(st_time, ease_factor)

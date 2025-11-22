@@ -14,3 +14,6 @@ func _physics_process(delta: float) -> void:
 	ball.velocity = ball.velocity.move_toward(Vector2.ZERO, fric * delta)
 	gravity_process(delta, 0.8)
 	move_bounce(delta)
+
+func in_air_action() -> bool:
+	return true

@@ -4,10 +4,13 @@ extends CharacterBody2D
 const control_scheme_map : Dictionary = {
 	ControlScheme.CPU: preload("res://assets/art/props/cpu.png"),
 	ControlScheme.P1: preload("res://assets/art/props/1p.png"),
+	ControlScheme.P2: preload("res://assets/art/props/2p.png"),
 }
 
-enum ControlScheme {CPU, P1}
-enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING}
+const gravity := 6.0
+
+enum ControlScheme {CPU, P1, P2}
+enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, BICYCLE, VOLLEY, HEADER}
 
 @export var control_scheme : ControlScheme
 @export var speed : float = 100.0
@@ -18,13 +21,17 @@ enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING}
 @onready var sprite: Sprite2D = $PlayerSprite
 @onready var teammate_area: Area2D = %TeammateArea
 @onready var control_sprite: Sprite2D = %ControlSprite
+@onready var ball_area: Area2D = %BallArea
 
 var current_state: PlayerState = null
 var state_fact := PlayerStateFactory.new()
 var heading := Vector2.RIGHT
+var height := 0.0
+var height_velocity := 0.0
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#sprite_visibility() DISABLED FOR NOW, ONLY TESTING
+	process_gravity(delta)
 	move_and_slide()
 	
 func _ready() -> void:
@@ -36,7 +43,7 @@ func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, state_data, player_animation, ball, teammate_area)
+	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area)
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
@@ -67,3 +74,14 @@ func set_actual_target() -> void:
 
 func sprite_visibility() -> void:
 	control_sprite.visible = has_ball() or not control_scheme == ControlScheme.CPU
+
+func process_gravity(delta: float) -> void:
+	if height > 0 or height_velocity != 0:
+		height_velocity -= gravity * delta
+		height += height_velocity
+	
+		if height <= 0:
+			height = 0
+			height_velocity = 0
+	
+	sprite.position = Vector2.UP * height

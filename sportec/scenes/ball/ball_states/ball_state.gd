@@ -46,4 +46,6 @@ func move_bounce(delta: float) -> void:
 	if collision != null:
 		ball.velocity = ball.velocity.bounce(collision.get_normal()) * 0.8
 		ball.switch_st(Ball.State.FREEFORM)
-	
+
+func in_air_action() -> bool:
+	return false
