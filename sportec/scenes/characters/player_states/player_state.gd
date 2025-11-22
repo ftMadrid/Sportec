@@ -9,10 +9,12 @@ var state_data : PlayerStateData = PlayerStateData.new()
 var ball : Ball = null
 var teammate_area : Area2D = null
 var ball_area : Area2D = null
+var own_goal : Goal = null
+var target_goal : Goal = null
 
 # setting up the player context to get her references (more simple to setup references)
 func setup(manage_player: Player, manage_data: PlayerStateData, manage_player_animation: AnimationPlayer, 
-manage_ball: Ball, manage_teammate_area: Area2D, manage_ball_area: Area2D) -> void:
+manage_ball: Ball, manage_teammate_area: Area2D, manage_ball_area: Area2D, manage_own_goal: Goal, manage_target_goal: Goal) -> void:
 	
 	player = manage_player
 	player_animation = manage_player_animation
@@ -20,6 +22,8 @@ manage_ball: Ball, manage_teammate_area: Area2D, manage_ball_area: Area2D) -> vo
 	ball = manage_ball
 	teammate_area = manage_teammate_area
 	ball_area = manage_ball_area
+	own_goal = manage_own_goal
+	target_goal = manage_target_goal
 
 # to control in a good way the states from the player
 func trans_state(new_state: Player.State, data: PlayerStateData = PlayerStateData.new()) -> void:

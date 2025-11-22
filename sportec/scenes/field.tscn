@@ -121,19 +121,25 @@ position = Vector2(-9.536743e-07, 0.19487762)
 scale = Vector2(0.99999994, 1.004984)
 polygon = PackedVector2Array(14, -4, 26, -4, 11, 113, -1, 113)
 
-[node name="Player" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
+[node name="Player" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
 position = Vector2(400, 170)
 ball = NodePath("../Ball")
+own_goal = NodePath("../Objects/FrameHome")
+target_goal = NodePath("../Objects/FrameAway")
 
-[node name="Player2" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
+[node name="Player2" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
 position = Vector2(167, 98)
 control_scheme = 1
 ball = NodePath("../Ball")
+own_goal = NodePath("../Objects/FrameHome")
+target_goal = NodePath("../Objects/FrameAway")
 
-[node name="Player3" parent="Actors" node_paths=PackedStringArray("ball") instance=ExtResource("4_7156t")]
+[node name="Player3" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
 position = Vector2(59, 167)
 control_scheme = 2
 ball = NodePath("../Ball")
+own_goal = NodePath("../Objects/FrameHome")
+target_goal = NodePath("../Objects/FrameAway")
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
 position = Vector2(197, 96)
@@ -141,4 +147,3 @@ position = Vector2(197, 96)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_kxpcs")
 volume_db = -15.467
-autoplay = true

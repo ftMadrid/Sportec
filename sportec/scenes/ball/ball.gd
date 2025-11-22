@@ -5,8 +5,6 @@ enum State {CARRIED, SHOOT, FREEFORM}
 
 @export var air_fric : float = 35.0
 @export var ground_fric : float = 250.0
-@export var air_min_height : float = 10.0
-@export var air_max_height : float = 30.0
 
 @onready var player_animation : AnimationPlayer = %AnimationPlayer
 @onready var detection_area : Area2D = %DetectionArea
@@ -56,5 +54,5 @@ func stop() -> void:
 func in_air_action() -> bool:
 	return current_state != null and current_state.in_air_action()
 
-func air_connect() -> bool:
+func air_connect(air_min_height: float, air_max_height: float) -> bool:
 	return height >= air_min_height and height <= air_max_height

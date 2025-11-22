@@ -49,3 +49,15 @@ position = Vector2(7, -67)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopFrame"]
 position = Vector2(-0.75, -0.25)
 shape = SubResource("RectangleShape2D_8t0mi")
+
+[node name="Targets" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Top" type="Node2D" parent="Targets"]
+position = Vector2(22, -56)
+
+[node name="Middle" type="Node2D" parent="Targets"]
+position = Vector2(22, -35)
+
+[node name="Bottom" type="Node2D" parent="Targets"]
+position = Vector2(22, -10)
