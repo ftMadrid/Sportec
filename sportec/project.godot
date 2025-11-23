@@ -22,6 +22,7 @@ boot_splash/minimum_display_time=3500
 [autoload]
 
 KeyUtils="*res://utils/key_utils.gd"
+Data="*res://utils/data.gd"
 
 [debug]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=16 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
 [ext_resource type="Script" uid="uid://puhad2r74cml" path="res://scenes/camera.gd" id="1_tcubs"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://dtrdpm8ra84fg" path="res://assets/art/backgrounds/bottom-wall.png" id="8_5qjf2"]
 [ext_resource type="Texture2D" uid="uid://c3chxlno5av6c" path="res://assets/art/backgrounds/side-wall.png" id="9_mwwu5"]
 [ext_resource type="AudioStream" uid="uid://ccr8sldn6vsti" path="res://assets/music/testing.mp3" id="12_kxpcs"]
+[ext_resource type="Texture2D" uid="uid://cdqttxg3gmhtj" path="res://assets/art/ui/mainmenu/image-removebg-preview (3).png" id="13_7bjmq"]
+[ext_resource type="Texture2D" uid="uid://d4j0gcggm8wch" path="res://assets/art/ui/mainmenu/ball-selection.png" id="14_bsxxv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qjf2"]
 size = Vector2(802, 7)
@@ -69,8 +71,8 @@ position = Vector2(808, 202)
 scale = Vector2(-1, 1)
 
 [node name="TopWall" type="Sprite2D" parent="Actors/Objects"]
-position = Vector2(38, 12)
-scale = Vector2(1.0026596, 1.0172414)
+position = Vector2(31, 2.3841858e-07)
+scale = Vector2(1.0026596, 1.1120689)
 texture = ExtResource("7_aaam2")
 centered = false
 
@@ -78,8 +80,8 @@ centered = false
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Actors/Objects/TopWall/StaticBody2D"]
-position = Vector2(3.794514e-06, 0.9830509)
-polygon = PackedVector2Array(3.8146973e-06, 116.00001, 12.931221, 0, 739.06885, 0, 752.00006, 116.00001, 742.0529, 116, 729.1217, 12.779661, 22.878307, 13.7627125, 9.94709, 116)
+position = Vector2(6.981432, 8.220472)
+polygon = PackedVector2Array(3.8146973e-06, 116.00001, 12.931221, 0, 739.06885, 0, 752.00006, 116.00001, 742.0529, 116, 729.1217, 12.779661, 19.946949, 14.614174, 9.94709, 116)
 
 [node name="BottomWall" type="Sprite2D" parent="Actors/Objects"]
 position = Vector2(13, 326)
@@ -121,6 +123,18 @@ position = Vector2(-9.536743e-07, 0.19487762)
 scale = Vector2(0.99999994, 1.004984)
 polygon = PackedVector2Array(14, -4, 26, -4, 11, 113, -1, 113)
 
+[node name="test1" type="Sprite2D" parent="Actors"]
+position = Vector2(382, 13)
+scale = Vector2(0.063126266, 0.041999992)
+texture = ExtResource("13_7bjmq")
+centered = false
+
+[node name="test2" type="Sprite2D" parent="Actors"]
+position = Vector2(449.00003, 15.000002)
+scale = Vector2(0.42499954, 0.42499995)
+texture = ExtResource("14_bsxxv")
+centered = false
+
 [node name="Player" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
 position = Vector2(400, 170)
 ball = NodePath("../Ball")
@@ -147,3 +161,4 @@ position = Vector2(197, 96)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_kxpcs")
 volume_db = -15.467
+autoplay = true

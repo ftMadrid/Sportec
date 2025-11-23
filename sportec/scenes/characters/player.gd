@@ -12,6 +12,8 @@ const gravity := 6.0
 enum ControlScheme {CPU, P1, P2}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
 			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL}
+enum Role {KEEPER, DEFENSE, MIDFIELD, ATTACK}
+enum SkinColor {LIGHT, MEDIUM, DARK}
 
 @export var control_scheme : ControlScheme
 @export var speed : float = 100.0
