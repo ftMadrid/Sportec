@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://puhad2r74cml" path="res://scenes/camera.gd" id="1_tcubs"]
 [ext_resource type="Texture2D" uid="uid://bh20y3k86g6y6" path="res://assets/art/backgrounds/pitch-pattern.png" id="2_7156t"]
 [ext_resource type="Texture2D" uid="uid://s638jh3ppch7" path="res://assets/art/backgrounds/pitch-lines.png" id="3_pn4dk"]
-[ext_resource type="PackedScene" uid="uid://c3y47nomxvaje" path="res://scenes/characters/player.tscn" id="4_7156t"]
 [ext_resource type="PackedScene" uid="uid://monxg28fypqs" path="res://scenes/touch_controlls.tscn" id="5_pn4dk"]
+[ext_resource type="Script" uid="uid://c7oqjavp7aw10" path="res://scenes/actors.gd" id="6_bsxxv"]
 [ext_resource type="PackedScene" uid="uid://ct6af4bjrf68t" path="res://scenes/goals/goal.tscn" id="6_vjqoj"]
 [ext_resource type="PackedScene" uid="uid://jrqbx3nawwhr" path="res://scenes/ball/ball.tscn" id="6_wnvii"]
 [ext_resource type="Texture2D" uid="uid://drpvilo68h6q6" path="res://assets/art/backgrounds/top-wall.png" id="7_aaam2"]
@@ -56,9 +56,38 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TouchControlls" parent="Control" instance=ExtResource("5_pn4dk")]
+visible = false
 
-[node name="Actors" type="Node2D" parent="."]
+[node name="Actors" type="Node2D" parent="." node_paths=PackedStringArray("ball", "frame_home", "frame_away")]
 y_sort_enabled = true
+script = ExtResource("6_bsxxv")
+ball = NodePath("Ball")
+frame_home = NodePath("Objects/FrameHome")
+frame_away = NodePath("Objects/FrameAway")
+home_team = "REAL MADRID"
+away_team = "BARCELONA"
+
+[node name="Ready" type="Node2D" parent="Actors"]
+unique_name_in_owner = true
+position = Vector2(415, 162)
+
+[node name="KeeperPos" type="Node2D" parent="Actors/Ready"]
+position = Vector2(-344, 1)
+
+[node name="DefensePos" type="Node2D" parent="Actors/Ready"]
+position = Vector2(-234, -30)
+
+[node name="DefensePos2" type="Node2D" parent="Actors/Ready"]
+position = Vector2(-234, 31)
+
+[node name="MidPos" type="Node2D" parent="Actors/Ready"]
+position = Vector2(-131, -1)
+
+[node name="Attack1Pos" type="Node2D" parent="Actors/Ready"]
+position = Vector2(-29, -79)
+
+[node name="Attack2Pos" type="Node2D" parent="Actors/Ready"]
+position = Vector2(-29, 80)
 
 [node name="Objects" type="Node2D" parent="Actors"]
 y_sort_enabled = true
@@ -135,28 +164,8 @@ scale = Vector2(0.42499954, 0.42499995)
 texture = ExtResource("14_bsxxv")
 centered = false
 
-[node name="Player" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
-position = Vector2(400, 170)
-ball = NodePath("../Ball")
-own_goal = NodePath("../Objects/FrameHome")
-target_goal = NodePath("../Objects/FrameAway")
-
-[node name="Player2" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
-position = Vector2(167, 98)
-control_scheme = 1
-ball = NodePath("../Ball")
-own_goal = NodePath("../Objects/FrameHome")
-target_goal = NodePath("../Objects/FrameAway")
-
-[node name="Player3" parent="Actors" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_7156t")]
-position = Vector2(59, 167)
-control_scheme = 2
-ball = NodePath("../Ball")
-own_goal = NodePath("../Objects/FrameHome")
-target_goal = NodePath("../Objects/FrameAway")
-
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
-position = Vector2(197, 96)
+position = Vector2(415, 167)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_kxpcs")

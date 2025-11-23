@@ -34,6 +34,10 @@ var heading := Vector2.RIGHT
 var height := 0.0
 var height_velocity := 0.0
 
+var pname := ""
+var role := Player.Role.MIDFIELD
+var skincolor := Player.SkinColor.MEDIUM
+
 func _physics_process(delta: float) -> void:
 	#sprite_visibility() DISABLED FOR NOW, ONLY TESTING
 	process_gravity(delta)
@@ -41,7 +45,30 @@ func _physics_process(delta: float) -> void:
 	
 func _ready() -> void:
 	set_actual_target()
+	
+	# applied heading calculate in loader
+	if heading == Vector2.LEFT:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+		
 	switch_st(State.MOVING)
+
+func loader(manage_position: Vector2, manage_ball: Ball, manage_own_frame: Goal, 
+			manage_target_frame: Goal, manage_player_data: PlayerResources):
+	
+	position = manage_position
+	ball = manage_ball # i put this to make work the control_scheme texture for the players
+	own_goal = manage_own_frame
+	target_goal = manage_target_frame
+	speed = manage_player_data.speed
+	power = manage_player_data.power
+	pname = manage_player_data.name
+	role = manage_player_data.role
+	skincolor = manage_player_data.skincolor
+	
+	# calculate heading logic for the away team
+	heading = Vector2.LEFT if target_goal.position.x < position.x else Vector2.RIGHT
 	
 func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
 	if current_state != null:

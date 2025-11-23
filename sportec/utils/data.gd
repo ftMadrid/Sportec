@@ -1,3 +1,4 @@
+class_name DataLoad
 extends Node
 
 # string = name, array = players
