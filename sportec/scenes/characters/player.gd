@@ -9,6 +9,7 @@ const control_scheme_map : Dictionary = {
 
 const teams := ["DEFAULT", "REAL MADRID", "BARCELONA", "AC MILAN", "BAYERN MUNICH", "INTER", "LIVERPOOL", "M. UNITED", "ARSENAL"]
 const gravity := 6.0
+const walk_anim := 0.5
 
 enum ControlScheme {CPU, P1, P2}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
@@ -35,6 +36,9 @@ var heading := Vector2.RIGHT
 var height := 0.0
 var height_velocity := 0.0
 var team := ""
+var ia_behavior : IABehavior = IABehavior.new()
+var spawn_position := Vector2.ZERO
+var weight_steering := 0.0
 
 var pname := ""
 var role := Player.Role.MIDFIELD
@@ -58,6 +62,8 @@ func _ready() -> void:
 
 	apply_custom_skin_and_team()
 	switch_st(State.MOVING)
+	setup_ia_behavior()
+	spawn_position = position
 
 func loader(player_position: Vector2, manage_ball: Ball, own_frame: Goal, 
 			target_frame: Goal, player_data: PlayerResources, manage_team: String):
@@ -98,22 +104,31 @@ func apply_custom_skin_and_team() -> void:
 	var team_idx = clamp(teams.find(team), 0, teams.size() - 1)
 	mat.set_shader_parameter("team_color", team_idx)
 	mat.set_shader_parameter("skin_color", int(skincolor))
-	
+
+func setup_ia_behavior() -> void:
+	ia_behavior.setup(self, ball)
+	ia_behavior.name = "IA Behavior"
+	add_child(ia_behavior)
+
 func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal)
+	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, ia_behavior)
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
 	
 func movement_animation() -> void:
-	if velocity.length() > 0:
-		player_animation.play("run")
-	else:
+	var vel := velocity.length()
+	
+	if vel < 1:
 		player_animation.play("idle")
+	elif vel < speed * walk_anim:
+		player_animation.play("walk")
+	else:
+		player_animation.play("run")
 
 func set_heading() -> void:
 	if velocity.x > 0:
