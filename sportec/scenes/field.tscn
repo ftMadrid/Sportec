@@ -64,8 +64,8 @@ script = ExtResource("6_bsxxv")
 ball = NodePath("Ball")
 frame_home = NodePath("Objects/FrameHome")
 frame_away = NodePath("Objects/FrameAway")
-home_team = "REAL MADRID"
-away_team = "BARCELONA"
+home_team = "ARSENAL"
+away_team = "M. UNITED"
 
 [node name="Ready" type="Node2D" parent="Actors"]
 unique_name_in_owner = true
@@ -170,4 +170,3 @@ position = Vector2(415, 167)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_kxpcs")
 volume_db = -15.467
-autoplay = true

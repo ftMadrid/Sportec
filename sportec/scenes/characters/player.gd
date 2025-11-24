@@ -7,6 +7,7 @@ const control_scheme_map : Dictionary = {
 	ControlScheme.P2: preload("res://assets/art/props/2p.png"),
 }
 
+const teams := ["DEFAULT", "REAL MADRID", "BARCELONA", "AC MILAN", "BAYERN MUNICH", "INTER", "LIVERPOOL", "M. UNITED", "ARSENAL"]
 const gravity := 6.0
 
 enum ControlScheme {CPU, P1, P2}
@@ -33,42 +34,70 @@ var state_fact := PlayerStateFactory.new()
 var heading := Vector2.RIGHT
 var height := 0.0
 var height_velocity := 0.0
+var team := ""
 
 var pname := ""
 var role := Player.Role.MIDFIELD
 var skincolor := Player.SkinColor.MEDIUM
 
+const SKIN_PALETTE = preload("res://assets/art/palettes/skin-colors-palette.png")
+const TEAM_PALETTE = preload("res://assets/art/palettes/teams-color-palette.png")
+const SHADER = preload("res://shaders/replace_color.gdshader")
+
 func _physics_process(delta: float) -> void:
-	#sprite_visibility() DISABLED FOR NOW, ONLY TESTING
+	#sprite_visibility() DISABLED FOR NOW
 	process_gravity(delta)
 	move_and_slide()
-	
+
 func _ready() -> void:
 	set_actual_target()
-	
-	# applied heading calculate in loader
 	if heading == Vector2.LEFT:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
-		
+
+	apply_custom_skin_and_team()
 	switch_st(State.MOVING)
 
-func loader(manage_position: Vector2, manage_ball: Ball, manage_own_frame: Goal, 
-			manage_target_frame: Goal, manage_player_data: PlayerResources):
+func loader(player_position: Vector2, manage_ball: Ball, own_frame: Goal, 
+			target_frame: Goal, player_data: PlayerResources, manage_team: String):
 	
-	position = manage_position
-	ball = manage_ball # i put this to make work the control_scheme texture for the players
-	own_goal = manage_own_frame
-	target_goal = manage_target_frame
-	speed = manage_player_data.speed
-	power = manage_player_data.power
-	pname = manage_player_data.name
-	role = manage_player_data.role
-	skincolor = manage_player_data.skincolor
+	position = player_position
+	ball = manage_ball
+	own_goal = own_frame
+	target_goal = target_frame
 	
-	# calculate heading logic for the away team
+	speed = player_data.speed
+	power = player_data.power
+	pname = player_data.name
+	role = player_data.role
+	skincolor = player_data.skincolor
+	team = manage_team
+	
+	# pre-calc of the header
 	heading = Vector2.LEFT if target_goal.position.x < position.x else Vector2.RIGHT
+
+# function to apply all the shaders
+func apply_custom_skin_and_team() -> void:
+	if not sprite: return
+	
+	var mat: ShaderMaterial
+	if sprite.material:
+		mat = sprite.material.duplicate()
+	else:
+		mat = ShaderMaterial.new()
+		mat.shader = SHADER
+	
+	sprite.material = mat
+	
+	# set the textures
+	mat.set_shader_parameter("skin_palette", SKIN_PALETTE)
+	mat.set_shader_parameter("team_palette", TEAM_PALETTE)
+	
+	# set the indexs
+	var team_idx = clamp(teams.find(team), 0, teams.size() - 1)
+	mat.set_shader_parameter("team_color", team_idx)
+	mat.set_shader_parameter("skin_color", int(skincolor))
 	
 func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
 	if current_state != null:

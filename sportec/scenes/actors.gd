@@ -26,10 +26,10 @@ func spawn_players(team: String, own_frame: Goal) -> void:
 	for i in players.size():
 		var player_position := spawns.get_child(i).global_position as Vector2
 		var player_data := players[i] as PlayerResources
-		var player := spawn_player(player_position, own_frame, target_frame, player_data)
+		var player := spawn_player(player_position, own_frame, target_frame, player_data, team)
 		add_child(player)
 
-func spawn_player(player_position: Vector2, own_frame: Goal, target_frame: Goal, player_data: PlayerResources) -> Player:
+func spawn_player(player_position: Vector2, own_frame: Goal, target_frame: Goal, player_data: PlayerResources, team: String) -> Player:
 	var player := player_preload.instantiate()
-	player.loader(player_position, ball, own_frame, target_frame, player_data)
+	player.loader(player_position, ball, own_frame, target_frame, player_data, team)
 	return player
