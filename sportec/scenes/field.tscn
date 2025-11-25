@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=19 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
 [ext_resource type="Script" uid="uid://puhad2r74cml" path="res://scenes/camera.gd" id="1_tcubs"]
@@ -18,6 +18,45 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qjf2"]
 size = Vector2(802, 7)
 
+[sub_resource type="Animation" id="Animation_7bjmq"]
+resource_name = "rotation"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actors/ballsprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0471975511965976, 2.181661564992912, 3.3161255787892263, 4.799655442984406]
+}
+
+[sub_resource type="Animation" id="Animation_bsxxv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Actors/ballsprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7dnn"]
+_data = {
+&"RESET": SubResource("Animation_bsxxv"),
+&"rotation": SubResource("Animation_7bjmq")
+}
+
 [node name="Field" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("ball")]
@@ -33,7 +72,7 @@ ball = NodePath("../Actors/Ball")
 
 [node name="Floor" type="Sprite2D" parent="Backgrounds"]
 modulate = Color(0.61960787, 0.7607843, 0.23529412, 1)
-position = Vector2(0, 1)
+position = Vector2(-13, 2)
 scale = Vector2(0.9917647, 0.9861111)
 texture = ExtResource("1_lptdg")
 centered = false
@@ -64,8 +103,8 @@ script = ExtResource("6_bsxxv")
 ball = NodePath("Ball")
 frame_home = NodePath("Objects/FrameHome")
 frame_away = NodePath("Objects/FrameAway")
-home_team = "ARSENAL"
-away_team = "M. UNITED"
+home_team = "REAL MADRID"
+away_team = "LIVERPOOL"
 
 [node name="Ready" type="Node2D" parent="Actors"]
 unique_name_in_owner = true
@@ -158,11 +197,22 @@ scale = Vector2(0.063126266, 0.041999992)
 texture = ExtResource("13_7bjmq")
 centered = false
 
-[node name="test2" type="Sprite2D" parent="Actors"]
-position = Vector2(446, 14.000002)
-scale = Vector2(0.42499954, 0.42499995)
+[node name="ballsprite" type="TextureRect" parent="Actors"]
+offset_left = 438.0
+offset_top = 8.000001
+offset_right = 458.0
+offset_bottom = 28.0
+scale = Vector2(0.45, 0.45)
+pivot_offset = Vector2(10, 10)
 texture = ExtResource("14_bsxxv")
-centered = false
+stretch_mode = 2
+
+[node name="ballanimation" type="AnimationPlayer" parent="Actors"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_b7dnn")
+}
+autoplay = "rotation"
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
 position = Vector2(398, 88)

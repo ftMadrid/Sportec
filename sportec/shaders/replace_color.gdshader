@@ -17,13 +17,12 @@ vec2 px_to_uv(ivec2 pos, ivec2 tex_size){
 
 vec4 palette_color(vec4 color, sampler2D palette, int selection){
 	ivec2 tex_size = textureSize(palette, 0);
-	
-	for(int i = 0; i < tex_size.x; i++){ 
-		
+
+	for(int i = 0; i < tex_size.x; i++){
+
 		vec2 uv_color_ref = px_to_uv(ivec2(i, 0), tex_size);
 		vec4 color_ref = texture(palette, uv_color_ref);
-		
-		// just to secure the check
+
 		if(distance(color, color_ref) < 0.01){
 			vec2 uv_color_dest = px_to_uv(ivec2(i, selection), tex_size);
 			return texture(palette, uv_color_dest);
@@ -34,14 +33,14 @@ vec4 palette_color(vec4 color, sampler2D palette, int selection){
 
 void fragment() {
 	vec4 current_color = texture(TEXTURE, UV);
-	
+
 	// just for optimization
-	if (current_color.a == 0.0) {
+	if (current_color.a == 0.01) {
 		discard;
 	}
 
 	current_color = palette_color(current_color, team_palette, team_color);
 	current_color = palette_color(current_color, skin_palette, skin_color);
-	
+
 	COLOR = current_color;
 }

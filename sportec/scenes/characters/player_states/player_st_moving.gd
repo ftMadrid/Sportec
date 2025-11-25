@@ -3,7 +3,7 @@ extends PlayerState
 
 func _physics_process(_delta: float) -> void:
 	if player.control_scheme == Player.ControlScheme.CPU:
-		pass #ia_behavior.process_ia()
+		ia_behavior.process_ia()
 	else:
 		handle_human_moves()
 		
@@ -24,7 +24,7 @@ func handle_human_moves() -> void:
 			trans_state(Player.State.PREP_SHOOT)
 	elif ball.in_air_action() and KeyUtils.action_just_pressed(player.control_scheme, KeyUtils.Action.SHOOT):
 		if player.velocity == Vector2.ZERO:
-			if facing_target_goal():
+			if player.facing_target_goal():
 				trans_state(Player.State.VOLLEY)
 			else:
 				trans_state(Player.State.BICYCLE)
@@ -33,7 +33,3 @@ func handle_human_moves() -> void:
 	
 	#if !player.has_ball() and KeyUtils.action_just_pressed(player.control_scheme, KeyUtils.Action.SHOOT):
 		#trans_state(Player.State.TACKLING)
-
-func facing_target_goal() -> bool:
-	var dir_target_goal := player.position.direction_to(target_goal.position)
-	return player.heading.dot(dir_target_goal) > 0 # return angle of the heading

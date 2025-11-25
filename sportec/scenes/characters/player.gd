@@ -49,7 +49,7 @@ const TEAM_PALETTE = preload("res://assets/art/palettes/teams-color-palette.png"
 const SHADER = preload("res://shaders/replace_color.gdshader")
 
 func _physics_process(delta: float) -> void:
-	#sprite_visibility() DISABLED FOR NOW
+	sprite_visibility()
 	process_gravity(delta)
 	move_and_slide()
 
@@ -60,9 +60,9 @@ func _ready() -> void:
 	else:
 		sprite.flip_h = false
 
-	apply_custom_skin_and_team()
 	switch_st(State.MOVING)
 	setup_ia_behavior()
+	apply_custom_skin_and_team()
 	spawn_position = position
 
 func loader(player_position: Vector2, manage_ball: Ball, own_frame: Goal, 
@@ -87,22 +87,19 @@ func loader(player_position: Vector2, manage_ball: Ball, own_frame: Goal,
 func apply_custom_skin_and_team() -> void:
 	if not sprite: return
 	
-	var mat: ShaderMaterial
-	if sprite.material:
-		mat = sprite.material.duplicate()
-	else:
-		mat = ShaderMaterial.new()
-		mat.shader = SHADER
+	var mat = ShaderMaterial.new()
+	mat.shader = SHADER
 	
 	sprite.material = mat
 	
-	# set the textures
 	mat.set_shader_parameter("skin_palette", SKIN_PALETTE)
 	mat.set_shader_parameter("team_palette", TEAM_PALETTE)
 	
-	# set the indexs
-	var team_idx = clamp(teams.find(team), 0, teams.size() - 1)
-	mat.set_shader_parameter("team_color", team_idx)
+	var team_idx = teams.find(team)
+	if team_idx == -1:
+		team_idx = 0
+		
+	mat.set_shader_parameter("team_color", int(team_idx)) 
 	mat.set_shader_parameter("skin_color", int(skincolor))
 
 func setup_ia_behavior() -> void:
@@ -165,3 +162,7 @@ func process_gravity(delta: float) -> void:
 func control_ball() -> void:
 	if ball.height > 10.0:
 		switch_st(Player.State.CHEST_CONTROL)
+
+func facing_target_goal() -> bool:
+	var dir_target_goal := position.direction_to(target_goal.position)
+	return heading.dot(dir_target_goal) > 0 # return angle of the heading
