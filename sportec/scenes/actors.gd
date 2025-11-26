@@ -25,7 +25,7 @@ func _ready() -> void:
 	player.control_scheme = Player.ControlScheme.P1
 	player.set_actual_target()
 	
-	var player2 : Player = get_children().filter(func(p): return p is Player)[3]
+	var player2 : Player = get_children().filter(func(p): return p is Player)[11]
 	player2.control_scheme = Player.ControlScheme.P2
 	player2.set_actual_target()
 

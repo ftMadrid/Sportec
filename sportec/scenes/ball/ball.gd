@@ -56,3 +56,9 @@ func in_air_action() -> bool:
 
 func air_connect(air_min_height: float, air_max_height: float) -> bool:
 	return height >= air_min_height and height <= air_max_height
+
+func tumble(tumble_velocity: Vector2) -> void:
+	velocity = tumble_velocity
+	carrier = null
+	height_velocity = 3.0
+	switch_st(Ball.State.FREEFORM)

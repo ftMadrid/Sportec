@@ -58,6 +58,7 @@ _data = {
 }
 
 [node name="Field" type="Node2D"]
+position = Vector2(10, 0)
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("ball")]
 limit_left = 0
@@ -72,8 +73,8 @@ ball = NodePath("../Actors/Ball")
 
 [node name="Floor" type="Sprite2D" parent="Backgrounds"]
 modulate = Color(0.61960787, 0.7607843, 0.23529412, 1)
-position = Vector2(-13, 2)
-scale = Vector2(0.9917647, 0.9861111)
+position = Vector2(-45, -17)
+scale = Vector2(1.0917648, 1.0388889)
 texture = ExtResource("1_lptdg")
 centered = false
 
@@ -93,6 +94,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="TouchControlls" parent="Control" instance=ExtResource("5_pn4dk")]
 visible = false
@@ -206,6 +208,7 @@ scale = Vector2(0.45, 0.45)
 pivot_offset = Vector2(10, 10)
 texture = ExtResource("14_bsxxv")
 stretch_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="ballanimation" type="AnimationPlayer" parent="Actors"]
 root_node = NodePath("../..")

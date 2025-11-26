@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3y47nomxvaje"]
+[gd_scene load_steps=23 format=3 uid="uid://c3y47nomxvaje"]
 
 [ext_resource type="Texture2D" uid="uid://djp6buun7env3" path="res://assets/art/characters/soccer-player.png" id="1_rp718"]
 [ext_resource type="Script" uid="uid://dqqnov13eu7f1" path="res://scenes/characters/player.gd" id="1_yewv4"]
@@ -255,12 +255,30 @@ tracks/0/keys = {
 "values": [12, 13, 14, 15, 16, 17]
 }
 
+[sub_resource type="Animation" id="Animation_xhtjm"]
+resource_name = "hurt"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [54, 55]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_76oj4"]
 _data = {
 &"RESET": SubResource("Animation_yewv4"),
 &"bicycle": SubResource("Animation_eojnx"),
 &"chest_control": SubResource("Animation_2l4js"),
 &"header": SubResource("Animation_7vyk4"),
+&"hurt": SubResource("Animation_xhtjm"),
 &"idle": SubResource("Animation_rp718"),
 &"kick": SubResource("Animation_6eyoc"),
 &"pre_kick": SubResource("Animation_kqtwu"),
@@ -278,6 +296,13 @@ height = 18.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyp2m"]
 radius = 6.0
 height = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyp2m"]
+size = Vector2(7, 7)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atpat"]
+radius = 39.0
+height = 122.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -308,6 +333,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rp718")
@@ -336,5 +362,28 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallArea"]
+visible = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_dyp2m")
+
+[node name="TackleArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TackleArea"]
+position = Vector2(13, -3)
+shape = SubResource("RectangleShape2D_dyp2m")
+
+[node name="OpponentArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpponentArea"]
+position = Vector2(20, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_atpat")

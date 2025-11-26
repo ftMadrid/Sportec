@@ -2,17 +2,20 @@ class_name IABehavior
 extends Node
 
 const ia_tick := 200
+const tackle_distance := 15
 
 var ball : Ball = null
 var player : Player = null
 var time_ia_tick := Time.get_ticks_msec()
+var opponent_area : Area2D = null
 
 func _ready() -> void:
 	time_ia_tick = Time.get_ticks_msec() + randi_range(0, ia_tick)
 
-func setup(manage_player: Player, manage_ball: Ball) -> void:
+func setup(manage_player: Player, manage_ball: Ball, manage_opponent_area: Area2D) -> void:
 	player = manage_player
 	ball = manage_ball
+	opponent_area = manage_opponent_area
 
 func process_ia() -> void:
 	if Time.get_ticks_msec() - time_ia_tick > ia_tick:
@@ -32,13 +35,19 @@ func ia_movement() -> void:
 	player.velocity = total_st_force * player.speed
 
 func ia_decisions() -> void:
+	if ball_possessed_by_opponent() and player.position.distance_to(ball.position) < tackle_distance and randf() < 0.3:
+		player.switch_st(Player.State.TACKLING)
+	
 	if ball.carrier == player:
 		var target := player.target_goal.center_target_position()
+	
 		if player.position.distance_to(target) < 150 and randf() < 0.3:
 			face_target_goal()
 			var shoot_dir := player.position.direction_to(player.target_goal.random_target_position())
 			var data := PlayerStateData.build().set_shoot_power(player.power).set_shoot_direction(shoot_dir)
 			player.switch_st(Player.State.SHOOTING, data)
+		elif opponents_nearby() and randf() < 0.05:
+			player.switch_st(Player.State.PASSING)
 
 func duty_steering() -> Vector2:
 	return player.weight_steering * player.position.direction_to(ball.position)
@@ -75,3 +84,10 @@ func ball_carried_by_teammate() -> bool:
 func face_target_goal() -> void:
 	if not player.facing_target_goal():
 		player.heading = player.heading * -1
+
+func ball_possessed_by_opponent() -> bool:
+	return ball.carrier != null and ball.carrier.team != player.team
+
+func opponents_nearby() -> bool:
+	var players := opponent_area.get_overlapping_bodies()
+	return players.find_custom(func(p: Player): return p.team != player.team) > -1

@@ -13,7 +13,7 @@ const walk_anim := 0.5
 
 enum ControlScheme {CPU, P1, P2}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
-			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL}
+			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT}
 enum Role {KEEPER, DEFENSE, MIDFIELD, ATTACK}
 enum SkinColor {LIGHT, MEDIUM, DARK}
 
@@ -29,6 +29,8 @@ enum SkinColor {LIGHT, MEDIUM, DARK}
 @onready var teammate_area: Area2D = %TeammateArea
 @onready var control_sprite: Sprite2D = %ControlSprite
 @onready var ball_area: Area2D = %BallArea
+@onready var tackle_area: Area2D = %TackleArea
+@onready var opponent_area: Area2D = %OpponentArea
 
 var current_state: PlayerState = null
 var state_fact := PlayerStateFactory.new()
@@ -55,15 +57,22 @@ func _physics_process(delta: float) -> void:
 
 func _ready() -> void:
 	set_actual_target()
-	if heading == Vector2.LEFT:
-		sprite.flip_h = true
-	else:
-		sprite.flip_h = false
-
+	flipt_sprites()
 	switch_st(State.MOVING)
 	setup_ia_behavior()
 	apply_custom_skin_and_team()
+	tackle_area.body_entered.connect(tackle_player.bind())
 	spawn_position = position
+	
+func flipt_sprites() -> void:
+	if heading == Vector2.RIGHT:
+		sprite.flip_h = false
+		tackle_area.scale.x = 1
+		opponent_area.scale.x = 1
+	elif heading == Vector2.LEFT:
+		sprite.flip_h = true
+		tackle_area.scale.x = -1
+		opponent_area.scale.x = -1
 
 func loader(player_position: Vector2, manage_ball: Ball, own_frame: Goal, 
 			target_frame: Goal, player_data: PlayerResources, manage_team: String):
@@ -103,7 +112,7 @@ func apply_custom_skin_and_team() -> void:
 	mat.set_shader_parameter("skin_color", int(skincolor))
 
 func setup_ia_behavior() -> void:
-	ia_behavior.setup(self, ball)
+	ia_behavior.setup(self, ball, opponent_area)
 	ia_behavior.name = "IA Behavior"
 	add_child(ia_behavior)
 
@@ -112,7 +121,7 @@ func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, ia_behavior)
+	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, tackle_area, ia_behavior)
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
@@ -166,3 +175,10 @@ func control_ball() -> void:
 func facing_target_goal() -> bool:
 	var dir_target_goal := position.direction_to(target_goal.position)
 	return heading.dot(dir_target_goal) > 0 # return angle of the heading
+
+func get_hurt(hurt_pos: Vector2) -> void:
+	switch_st(Player.State.HURT, PlayerStateData.build().set_hurt_direction(hurt_pos))
+
+func tackle_player(player: Player) -> void:
+	if player != self and player.team != team and player == ball.carrier:
+		player.get_hurt(position.direction_to(player.position))
