@@ -15,6 +15,7 @@ func _init() -> void:
 		Player.State.HEADER: PlayerStateHeader,
 		Player.State.CHEST_CONTROL: PlayerStateChest,
 		Player.State.HURT: PlayerStateHurt,
+		Player.State.DIVING: PlayerStateDiving,
 	}
 
 func get_state(state: Player.State) -> PlayerState:

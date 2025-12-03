@@ -13,3 +13,6 @@ func _enter_tree() -> void:
 func _physics_process(_delta: float) -> void:
 	if Time.get_ticks_msec() - time_control > duration_control:
 		trans_state(Player.State.MOVING)
+
+func can_pass() -> bool:
+	return true

@@ -26,3 +26,6 @@ func _physics_process(delta: float) -> void:
 		var data = PlayerStateData.build().set_shoot_power(shoot_power).set_shoot_direction(shoot_direction)
 		print(shoot_power, shoot_direction)
 		trans_state(Player.State.SHOOTING, data)
+
+func can_pass() -> bool:
+	return true

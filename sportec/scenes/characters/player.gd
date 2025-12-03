@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal swap_requested(player: Player)
+
 const control_scheme_map : Dictionary = {
 	ControlScheme.CPU: preload("res://assets/art/props/cpu.png"),
 	ControlScheme.P1: preload("res://assets/art/props/1p.png"),
@@ -13,7 +15,7 @@ const walk_anim := 0.5
 
 enum ControlScheme {CPU, P1, P2}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
-			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT}
+			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT, DIVING}
 enum Role {KEEPER, DEFENSE, MIDFIELD, ATTACK}
 enum SkinColor {LIGHT, MEDIUM, DARK}
 
@@ -31,6 +33,8 @@ enum SkinColor {LIGHT, MEDIUM, DARK}
 @onready var ball_area: Area2D = %BallArea
 @onready var tackle_area: Area2D = %TackleArea
 @onready var opponent_area: Area2D = %OpponentArea
+@onready var damage_area: Area2D = %DamageArea
+@onready var keeper_hands_collider: CollisionShape2D = %KeeperHandsCollider
 
 var current_state: PlayerState = null
 var state_fact := PlayerStateFactory.new()
@@ -38,9 +42,10 @@ var heading := Vector2.RIGHT
 var height := 0.0
 var height_velocity := 0.0
 var team := ""
-var ia_behavior : IABehavior = IABehavior.new()
 var spawn_position := Vector2.ZERO
 var weight_steering := 0.0
+var ia_behavior_fact := IABehaviorFact.new()
+var current_ia_behavior : IABehavior = null
 
 var pname := ""
 var role := Player.Role.MIDFIELD
@@ -58,10 +63,13 @@ func _physics_process(delta: float) -> void:
 func _ready() -> void:
 	set_actual_target()
 	flipt_sprites()
-	switch_st(State.MOVING)
 	setup_ia_behavior()
+	switch_st(State.MOVING)
 	apply_custom_skin_and_team()
+	damage_area.monitoring = role == Role.KEEPER
 	tackle_area.body_entered.connect(tackle_player.bind())
+	keeper_hands_collider.disabled = role != Role.KEEPER
+	damage_area.body_entered.connect(tackle_player.bind())
 	spawn_position = position
 	
 func flipt_sprites() -> void:
@@ -112,16 +120,17 @@ func apply_custom_skin_and_team() -> void:
 	mat.set_shader_parameter("skin_color", int(skincolor))
 
 func setup_ia_behavior() -> void:
-	ia_behavior.setup(self, ball, opponent_area)
-	ia_behavior.name = "IA Behavior"
-	add_child(ia_behavior)
+	current_ia_behavior = ia_behavior_fact.get_ia_behavior(role)
+	current_ia_behavior.setup(self, ball, opponent_area, teammate_area)
+	current_ia_behavior.name = "IA Behavior"
+	add_child(current_ia_behavior)
 
 func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, tackle_area, ia_behavior)
+	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, tackle_area, current_ia_behavior)
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
@@ -182,3 +191,10 @@ func get_hurt(hurt_pos: Vector2) -> void:
 func tackle_player(player: Player) -> void:
 	if player != self and player.team != team and player == ball.carrier:
 		player.get_hurt(position.direction_to(player.position))
+
+func can_carry_ball() -> bool:
+	return current_state != null and current_state.can_carry_ball()
+
+func get_pass_req(player: Player) -> void:
+	if ball.carrier == self and current_state != null and current_state.can_pass():
+		switch_st(Player.State.PASSING, PlayerStateData.build().set_pas_target(player))

@@ -9,6 +9,7 @@ enum State {CARRIED, SHOOT, FREEFORM}
 @onready var player_animation : AnimationPlayer = %AnimationPlayer
 @onready var detection_area : Area2D = %DetectionArea
 @onready var ball_sprite : Sprite2D = %BallSprite
+@onready var scoring_raycast : RayCast2D = %ScoringRayCast
 
 var state_fact := BallStateFactory.new()
 var current_state : BallState = null
@@ -22,13 +23,14 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	ball_sprite.position = Vector2.UP * height
+	scoring_raycast.rotation = velocity.angle()
 
-func switch_st(state: Ball.State) -> void:
+func switch_st(state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, detection_area, carrier, player_animation, ball_sprite)
+	current_state.setup(self, data, detection_area, carrier, player_animation, ball_sprite)
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| BallStateMachine" + str(state)
 	call_deferred("add_child", current_state)
@@ -46,7 +48,7 @@ func pass_to(destination: Vector2) -> void:
 	if distance > 130:
 		height_velocity = BallState.gravity * distance / (1.8 * intensity) # equation to give a gravity effect to the pass ball
 	carrier = null
-	switch_st(Ball.State.FREEFORM)
+	switch_st(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(500))
 	
 func stop() -> void:
 	velocity = Vector2.ZERO
@@ -61,4 +63,9 @@ func tumble(tumble_velocity: Vector2) -> void:
 	velocity = tumble_velocity
 	carrier = null
 	height_velocity = 3.0
-	switch_st(Ball.State.FREEFORM)
+	switch_st(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(200))
+
+func headed_scoring_are(scoring_area: Area2D) -> bool:
+	if not scoring_raycast.is_colliding():
+		return false
+	return scoring_raycast.get_collider() == scoring_area

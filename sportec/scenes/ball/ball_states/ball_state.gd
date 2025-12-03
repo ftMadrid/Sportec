@@ -10,14 +10,19 @@ var detection_area : Area2D = null
 var carrier : Player = null
 var player_animation : AnimationPlayer = null
 var bsprite : Sprite2D = null
+var state_data : BallStateData = null
 
 # manage ball statements features
-func setup(manage_ball: Ball, manage_detection_area: Area2D, manage_carrier: Player, manage_player_animation: AnimationPlayer, manage_ball_sprite: Sprite2D ) -> void:
+func setup(manage_ball: Ball, manage_state_data: BallStateData, manage_detection_area: Area2D, manage_carrier: Player, manage_player_animation: AnimationPlayer, manage_ball_sprite: Sprite2D ) -> void:
 	ball = manage_ball
 	detection_area = manage_detection_area
 	player_animation = manage_player_animation
 	carrier = manage_carrier
 	bsprite = manage_ball_sprite
+	state_data = manage_state_data
+
+func trans_state(new_state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
+	transition_state.emit(new_state, data)
 
 # making looks pretty while ball's velocity is comming to 0
 func set_ball_animation_velocity() -> void:

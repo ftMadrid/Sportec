@@ -36,3 +36,9 @@ func trans_state(new_state: Player.State, data: PlayerStateData = PlayerStateDat
 
 func animation_complete() -> void:
 	pass # override the original method from player.gd
+
+func can_carry_ball() -> bool:
+	return false
+
+func can_pass() -> bool:
+	return false

@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var back_area := %BackArea
 @onready var targets := %Targets
+@onready var scoring_area := %ScoringArea
 
 func _ready() -> void:
 	back_area.body_entered.connect(ball_enter_back_area.bind())
@@ -15,3 +16,12 @@ func random_target_position() -> Vector2:
 
 func center_target_position() -> Vector2:
 	return targets.get_child(int(targets.get_child_count() / 2.0)).global_position
+
+func top_target_pos() -> Vector2:
+	return targets.get_child(0).global_position
+
+func bottom_target_pos() -> Vector2:
+	return targets.get_child(targets.get_child_count() - 1).global_position
+
+func get_scoring_area() -> Area2D:
+	return scoring_area

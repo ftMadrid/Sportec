@@ -22,16 +22,17 @@ action_left = "p_left"
 action_right = "p_right"
 action_up = "p_up"
 action_down = "p_down"
+metadata/_edit_use_anchors_ = true
 
 [node name="Shoot" type="TouchScreenButton" parent="."]
-position = Vector2(343, 140)
-scale = Vector2(0.089, 0.095)
+position = Vector2(342, 137)
+scale = Vector2(0.1186441, 0.12313437)
 texture_normal = ExtResource("2_r1ut2")
 action = "p_shoot"
 
 [node name="Pass" type="TouchScreenButton" parent="."]
-position = Vector2(322.00003, 167.00002)
-scale = Vector2(0.08904105, 0.09363295)
+position = Vector2(312.00003, 163)
+scale = Vector2(0.116, 0.123)
 texture_normal = ExtResource("4_023mw")
 action = "p_pass"
 
