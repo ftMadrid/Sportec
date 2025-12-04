@@ -60,6 +60,7 @@ _data = {
 [node name="Field" type="Node2D"]
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("ball")]
+process_callback = 0
 limit_left = 0
 limit_top = 1
 limit_right = 843
@@ -105,8 +106,6 @@ script = ExtResource("6_bsxxv")
 ball = NodePath("Ball")
 frame_home = NodePath("Objects/FrameHome")
 frame_away = NodePath("Objects/FrameAway")
-home_team = "REAL MADRID"
-away_team = "BAYERN MUNICH"
 
 [node name="Ready" type="Node2D" parent="Actors"]
 unique_name_in_owner = true

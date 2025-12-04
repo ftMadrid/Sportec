@@ -15,7 +15,7 @@ const walk_anim := 0.5
 
 enum ControlScheme {CPU, P1, P2}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
-			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT, DIVING}
+			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT, DIVING, CELEBRATING, SAD}
 enum Role {KEEPER, DEFENSE, MIDFIELD, ATTACK}
 enum SkinColor {LIGHT, MEDIUM, DARK}
 
@@ -71,6 +71,7 @@ func _ready() -> void:
 	keeper_hands_collider.disabled = role != Role.KEEPER
 	damage_area.body_entered.connect(tackle_player.bind())
 	spawn_position = position
+	GameEvents.team_scored.connect(on_team_scored.bind())
 	
 func flipt_sprites() -> void:
 	if heading == Vector2.RIGHT:
@@ -198,3 +199,10 @@ func can_carry_ball() -> bool:
 func get_pass_req(player: Player) -> void:
 	if ball.carrier == self and current_state != null and current_state.can_pass():
 		switch_st(Player.State.PASSING, PlayerStateData.build().set_pas_target(player))
+
+func on_team_scored(team_on: String) -> void:
+	if team == team_on:
+		switch_st(Player.State.SAD)
+	else:
+		switch_st(Player.State.CELEBRATING)
+		

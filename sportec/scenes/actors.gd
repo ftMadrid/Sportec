@@ -7,8 +7,6 @@ const weight_cache := 200
 @export var ball: Ball
 @export var frame_home : Goal
 @export var frame_away : Goal
-@export var home_team : String
-@export var away_team : String
 
 @onready var spawns : Node2D = %Ready
 
@@ -17,9 +15,12 @@ var away_squad : Array[Player] = []
 var time_cache_refresh := Time.get_ticks_msec()
 
 func _ready() -> void:
-	home_squad = spawn_players(home_team, frame_home)
+	
+	home_squad = spawn_players(GameManager.teams[0], frame_home)
+	frame_home.init(GameManager.teams[0])
 	spawns.scale.x = -1
-	away_squad = spawn_players(away_team, frame_away)
+	away_squad = spawn_players(GameManager.teams[1], frame_away)
+	frame_away.init(GameManager.teams[1])
 	
 	var player : Player = get_children().filter(func(p): return p is Player)[4]
 	player.control_scheme = Player.ControlScheme.P1

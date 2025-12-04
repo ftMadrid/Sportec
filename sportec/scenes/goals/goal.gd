@@ -5,8 +5,14 @@ extends Node2D
 @onready var targets := %Targets
 @onready var scoring_area := %ScoringArea
 
+var team := ""
+
 func _ready() -> void:
 	back_area.body_entered.connect(ball_enter_back_area.bind())
+	scoring_area.body_entered.connect(ball_enter_scoring_area.bind())
+
+func init(manage_team: String) -> void:
+	team = manage_team
 
 func ball_enter_back_area(ball: Ball) -> void:
 	ball.stop()
@@ -25,3 +31,6 @@ func bottom_target_pos() -> Vector2:
 
 func get_scoring_area() -> Area2D:
 	return scoring_area
+
+func ball_enter_scoring_area(_ball: Ball) -> void:
+	GameEvents.team_scored.emit(team)

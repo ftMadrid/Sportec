@@ -23,6 +23,8 @@ boot_splash/minimum_display_time=3500
 
 KeyUtils="*res://utils/key_utils.gd"
 Data="*res://utils/data.gd"
+GameEvents="*res://scenes/game_events.gd"
+GameManager="*res://scenes/gamemanager/game_manager.gd"
 
 [debug]
 
