@@ -7,7 +7,6 @@ const weight_cache := 200
 @export var ball: Ball
 @export var frame_home : Goal
 @export var frame_away : Goal
-
 @onready var spawns : Node2D = %Ready
 @onready var kickoffs : Node2D = %Kickoffs
 
@@ -58,7 +57,31 @@ func spawn_player(player_position: Vector2, kickoffs_pos: Vector2, own_frame: Go
 	player.setControlScheme(Player.ControlScheme.CPU) 
 	player.loader(player_position, kickoffs_pos, ball,  own_frame, target_frame, player_data, team)
 	player.swap_requested.connect(player_swap_request.bind())
+	player.ball_possessed.connect(on_auto_switch_requested.bind())
 	return player
+
+func on_auto_switch_requested(new_carrier: Player) -> void:
+	var squad_to_check : Array[Player] = []
+	
+	if home_squad.has(new_carrier):
+		squad_to_check = home_squad
+	elif away_squad.has(new_carrier):
+		squad_to_check = away_squad
+	
+	if squad_to_check.is_empty(): return
+
+	var current_p1 : Player = null
+	
+	for p in squad_to_check:
+		if p.control_scheme == Player.ControlScheme.P1:
+			current_p1 = p
+			break
+	
+	if current_p1 and current_p1 != new_carrier:
+		current_p1.setControlScheme(Player.ControlScheme.CPU)
+		
+		new_carrier.setControlScheme(Player.ControlScheme.P1)
+		print("Auto-switch: P1 cambio de ", current_p1.pname, " a ", new_carrier.pname)
 
 func set_duty_weights() -> void:
 	for squad in [away_squad, home_squad]:

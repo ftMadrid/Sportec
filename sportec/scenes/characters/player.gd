@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 signal swap_requested(player: Player)
+signal ball_possessed(player: Player)
 
 const control_scheme_map : Dictionary = {
 	ControlScheme.CPU: preload("res://assets/art/props/cpu.png"),
@@ -47,6 +48,7 @@ var weight_steering := 0.0
 var ia_behavior_fact := IABehaviorFact.new()
 var current_ia_behavior : IABehavior = null
 var kickoff_pos := Vector2.ZERO
+var was_carrying_ball := false
 
 var pname := ""
 var role := Player.Role.MIDFIELD
@@ -60,6 +62,7 @@ func _physics_process(delta: float) -> void:
 	sprite_visibility()
 	process_gravity(delta)
 	move_and_slide()
+	check_auto_switch()
 
 func _ready() -> void:
 	set_actual_target()
@@ -74,7 +77,16 @@ func _ready() -> void:
 	GameEvents.team_scored.connect(on_team_scored.bind())
 	var init_pos := kickoff_pos if team == GameManager.teams[0] else spawn_position
 	switch_st(State.RESETING, PlayerStateData.build().setResetPosition(init_pos))
+
+func check_auto_switch() -> void:
+	var carrying_now = has_ball()
 	
+	if carrying_now and not was_carrying_ball:
+		if control_scheme == ControlScheme.CPU:
+			ball_possessed.emit(self)
+			
+	was_carrying_ball = carrying_now
+
 func flipt_sprites() -> void:
 	if heading == Vector2.RIGHT:
 		sprite.flip_h = false
