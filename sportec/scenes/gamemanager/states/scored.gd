@@ -12,4 +12,4 @@ func _enter_tree() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if Time.get_ticks_msec() - time_celebration > duration_celebration:
-		trans_state(GameManager.State.RESET)
+		trans_state(GameManager.State.RESET, state_data)

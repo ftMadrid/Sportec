@@ -42,3 +42,6 @@ func can_carry_ball() -> bool:
 
 func can_pass() -> bool:
 	return false
+
+func readyForKickoff() -> bool:
+	return false

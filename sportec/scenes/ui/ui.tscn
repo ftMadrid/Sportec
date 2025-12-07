@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://dhxmwgx4eymj7"]
+
+[ext_resource type="Script" uid="uid://o4oc133ie3sk" path="res://scenes/ui/ui.gd" id="1_aac20"]
+[ext_resource type="Texture2D" uid="uid://bcbffnccqpe16" path="res://assets/art/ui/teams/team-placeholder.png" id="1_u7n8c"]
+[ext_resource type="Texture2D" uid="uid://d4j0gcggm8wch" path="res://assets/art/ui/mainmenu/ball-selection.png" id="2_f5cxw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7n8c"]
+bg_color = Color(0.050980393, 0.16470589, 0.31764707, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5cxw"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aac20"]
+bg_color = Color(0.029716311, 0.26315358, 0.94161403, 1)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_aac20")
+
+[node name="UIControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+
+[node name="ColorRect" type="ColorRect" parent="UIControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 4.875
+anchor_top = 5.05
+anchor_right = 4.875
+anchor_bottom = 5.05
+offset_left = -95.0
+offset_top = -14.0
+offset_right = 39.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.019607844, 0.21960784, 0.8117647, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIControl/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_right = 15.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Playerlabel" type="Label" parent="UIControl/ColorRect/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9529412, 0.9882353, 0.9882353, 1)
+text = "MBAPPE"
+
+[node name="HomeTeam" type="TextureRect" parent="UIControl/ColorRect/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+texture = ExtResource("1_u7n8c")
+stretch_mode = 2
+
+[node name="Score" type="Label" parent="UIControl/ColorRect/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_u7n8c")
+text = " 2 - 3"
+horizontal_alignment = 1
+
+[node name="AwayTeam" type="TextureRect" parent="UIControl/ColorRect/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+texture = ExtResource("1_u7n8c")
+stretch_mode = 2
+
+[node name="TimeLabel" type="Label" parent="UIControl"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 236.0
+offset_top = 188.0
+offset_right = 266.0
+offset_bottom = 202.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_f5cxw")
+text = "01:34"
+horizontal_alignment = 1
+
+[node name="Ball" type="Label" parent="UIControl"]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 188.0
+offset_right = 285.0
+offset_bottom = 202.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_aac20")
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="UIControl/Ball"]
+position = Vector2(9.7, 7)
+scale = Vector2(0.6375012, 0.6249999)
+texture = ExtResource("2_f5cxw")

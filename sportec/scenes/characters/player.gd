@@ -15,7 +15,7 @@ const walk_anim := 0.5
 
 enum ControlScheme {CPU, P1, P2}
 enum State {MOVING, TACKLING, RECOVERING, PREP_SHOOT, PASSING, SHOOTING, 
-			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT, DIVING, CELEBRATING, SAD}
+			BICYCLE, VOLLEY, HEADER, CHEST_CONTROL, HURT, DIVING, CELEBRATING, SAD, RESETING}
 enum Role {KEEPER, DEFENSE, MIDFIELD, ATTACK}
 enum SkinColor {LIGHT, MEDIUM, DARK}
 
@@ -46,6 +46,7 @@ var spawn_position := Vector2.ZERO
 var weight_steering := 0.0
 var ia_behavior_fact := IABehaviorFact.new()
 var current_ia_behavior : IABehavior = null
+var kickoff_pos := Vector2.ZERO
 
 var pname := ""
 var role := Player.Role.MIDFIELD
@@ -64,7 +65,6 @@ func _ready() -> void:
 	set_actual_target()
 	flipt_sprites()
 	setup_ia_behavior()
-	switch_st(State.MOVING)
 	apply_custom_skin_and_team()
 	damage_area.monitoring = role == Role.KEEPER
 	tackle_area.body_entered.connect(tackle_player.bind())
@@ -72,6 +72,8 @@ func _ready() -> void:
 	damage_area.body_entered.connect(tackle_player.bind())
 	spawn_position = position
 	GameEvents.team_scored.connect(on_team_scored.bind())
+	var init_pos := kickoff_pos if team == GameManager.teams[0] else spawn_position
+	switch_st(State.RESETING, PlayerStateData.build().setResetPosition(init_pos))
 	
 func flipt_sprites() -> void:
 	if heading == Vector2.RIGHT:
@@ -83,10 +85,11 @@ func flipt_sprites() -> void:
 		tackle_area.scale.x = -1
 		opponent_area.scale.x = -1
 
-func loader(player_position: Vector2, manage_ball: Ball, own_frame: Goal, 
+func loader(player_position: Vector2, manage_kickoff_pos: Vector2, manage_ball: Ball, own_frame: Goal, 
 			target_frame: Goal, player_data: PlayerResources, manage_team: String):
 	
 	position = player_position
+	kickoff_pos = manage_kickoff_pos
 	ball = manage_ball
 	own_goal = own_frame
 	target_goal = target_frame
@@ -162,6 +165,7 @@ func animation_complete() -> void:
 		current_state.animation_complete()
 
 func set_actual_target() -> void:
+	if not control_sprite: return
 	control_sprite.texture = control_scheme_map[control_scheme]
 
 func sprite_visibility() -> void:
@@ -205,4 +209,15 @@ func on_team_scored(team_on: String) -> void:
 		switch_st(Player.State.SAD)
 	else:
 		switch_st(Player.State.CELEBRATING)
-		
+
+func face_target_goal() -> void:
+	if not facing_target_goal():
+		heading = heading * -1
+		flipt_sprites()
+
+func readyForKickoff() -> bool:
+	return current_state != null and current_state.readyForKickoff()
+
+func setControlScheme(scheme: ControlScheme) -> void:
+	control_scheme = scheme
+	set_actual_target()

@@ -21,7 +21,6 @@ boot_splash/minimum_display_time=3500
 
 [autoload]
 
-KeyUtils="*res://utils/key_utils.gd"
 Data="*res://utils/data.gd"
 GameEvents="*res://scenes/game_events.gd"
 GameManager="*res://scenes/gamemanager/game_manager.gd"
@@ -39,6 +38,15 @@ window/size/window_height_override=1920
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_width"
 window/handheld/orientation=4
+
+[editor_plugins]
+
+enabled=PackedStringArray()
+
+[gui]
+
+theme/custom="uid://xcnitsepjr7i"
+theme/custom_font="uid://bmdlnhcl2lppk"
 
 [input]
 

@@ -9,10 +9,11 @@ var teams : Array[String] = ["REAL MADRID", "BARCELONA"]
 var score := [0, 0]
 var state_fact := GameStateFactory.new()
 var current_state : GameState = null
+var player_setup : Array[String] = ["REAL MADRID", ""]
 
 func _ready() -> void:
 	time_left = game_duration
-	switch_st(State.PLAY)
+	switch_st(State.RESET)
 
 func switch_st(state: State, data: GameStateData = GameStateData.new()) -> void:
 	if current_state != null:
@@ -22,3 +23,9 @@ func switch_st(state: State, data: GameStateData = GameStateData.new()) -> void:
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| GameStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
+
+func isCoop() -> bool:
+	return player_setup[0] == player_setup[1]
+
+func isSingle() -> bool:
+	return player_setup[1].is_empty()

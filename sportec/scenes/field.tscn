@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=20 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
 [ext_resource type="Script" uid="uid://puhad2r74cml" path="res://scenes/camera.gd" id="1_tcubs"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://ccr8sldn6vsti" path="res://assets/music/testing.mp3" id="12_kxpcs"]
 [ext_resource type="Texture2D" uid="uid://cdqttxg3gmhtj" path="res://assets/art/ui/mainmenu/image-removebg-preview (3).png" id="13_7bjmq"]
 [ext_resource type="Texture2D" uid="uid://d4j0gcggm8wch" path="res://assets/art/ui/mainmenu/ball-selection.png" id="14_bsxxv"]
+[ext_resource type="PackedScene" uid="uid://dhxmwgx4eymj7" path="res://scenes/ui/ui.tscn" id="15_bsxxv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qjf2"]
 size = Vector2(802, 7)
@@ -129,6 +130,16 @@ position = Vector2(-29, -79)
 [node name="Attack2Pos" type="Node2D" parent="Actors/Ready"]
 position = Vector2(-29, 80)
 
+[node name="Kickoffs" type="Node2D" parent="Actors"]
+unique_name_in_owner = true
+position = Vector2(415, 162)
+
+[node name="KickoffPos" type="Node2D" parent="Actors/Kickoffs"]
+position = Vector2(-10, 0)
+
+[node name="KickoffPos2" type="Node2D" parent="Actors/Kickoffs"]
+position = Vector2(-5, 30)
+
 [node name="Objects" type="Node2D" parent="Actors"]
 y_sort_enabled = true
 
@@ -217,9 +228,11 @@ libraries = {
 autoplay = "rotation"
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
-position = Vector2(398, 88)
+position = Vector2(415, 166)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_kxpcs")
 volume_db = -15.467
 autoplay = true
+
+[node name="UI" parent="." instance=ExtResource("15_bsxxv")]

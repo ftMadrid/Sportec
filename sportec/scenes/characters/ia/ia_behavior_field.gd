@@ -28,7 +28,7 @@ func ia_decisions() -> void:
 		var target := player.target_goal.center_target_position()
 	
 		if player.position.distance_to(target) < 150 and randf() < 0.3:
-			face_target_goal()
+			player.face_target_goal()
 			var shoot_dir := player.position.direction_to(player.target_goal.random_target_position())
 			var data := PlayerStateData.build().set_shoot_power(player.power).set_shoot_direction(shoot_dir)
 			player.switch_st(Player.State.SHOOTING, data)

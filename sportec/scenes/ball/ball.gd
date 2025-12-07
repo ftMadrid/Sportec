@@ -17,9 +17,13 @@ var carrier : Player = null
 var velocity := Vector2.ZERO
 var height := 0.0
 var height_velocity := 0.0
+var spawn_pos := Vector2.ZERO
 
 func _ready() -> void:
 	switch_st(State.FREEFORM)
+	spawn_pos = position
+	GameEvents.team_reset.connect(team_reset.bind())
+	GameEvents.kickoff_started.connect(kickoffStarted.bind())
 
 func _physics_process(_delta: float) -> void:
 	ball_sprite.position = Vector2.UP * height
@@ -40,7 +44,7 @@ func shoot(shoot_velocity : Vector2) -> void:
 	carrier = null
 	switch_st(Ball.State.SHOOT)
 
-func pass_to(destination: Vector2) -> void:
+func pass_to(destination: Vector2, lock_duration: int = 500) -> void:
 	var direction := position.direction_to(destination)
 	var distance := position.distance_to(destination)
 	var intensity := sqrt(2 * distance * ground_fric)
@@ -48,7 +52,7 @@ func pass_to(destination: Vector2) -> void:
 	if distance > 130:
 		height_velocity = BallState.gravity * distance / (1.8 * intensity) # equation to give a gravity effect to the pass ball
 	carrier = null
-	switch_st(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(500))
+	switch_st(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(lock_duration))
 	
 func stop() -> void:
 	velocity = Vector2.ZERO
@@ -69,3 +73,11 @@ func headed_scoring_are(scoring_area: Area2D) -> bool:
 	if not scoring_raycast.is_colliding():
 		return false
 	return scoring_raycast.get_collider() == scoring_area
+
+func team_reset() -> void:
+	position = spawn_pos
+	velocity = Vector2.ZERO
+	switch_st(State.FREEFORM)
+
+func kickoffStarted() -> void:
+	pass_to(spawn_pos + Vector2.DOWN * 30.0)
