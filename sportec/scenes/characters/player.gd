@@ -10,7 +10,7 @@ const control_scheme_map : Dictionary = {
 	ControlScheme.P2: preload("res://assets/art/props/2p.png"),
 }
 
-const teams := ["DEFAULT", "REAL MADRID", "BARCELONA", "AC MILAN", "BAYERN MUNICH", "INTER", "LIVERPOOL", "M. UNITED", "ARSENAL"]
+const teams := ["DEFAULT", "REALMADRID", "BARCELONA", "AC.MILAN", "BAYERNMUNICH", "INTER", "LIVERPOOL", "M.UNITED", "ARSENAL"]
 const gravity := 6.0
 const walk_anim := 0.5
 
@@ -36,6 +36,8 @@ enum SkinColor {LIGHT, MEDIUM, DARK}
 @onready var opponent_area: Area2D = %OpponentArea
 @onready var damage_area: Area2D = %DamageArea
 @onready var keeper_hands_collider: CollisionShape2D = %KeeperHandsCollider
+@onready var particles: Node2D = %Particles
+@onready var execute_particles: GPUParticles2D = %ExecuteParticles
 
 var current_state: PlayerState = null
 var state_fact := PlayerStateFactory.new()
@@ -75,6 +77,7 @@ func _ready() -> void:
 	damage_area.body_entered.connect(tackle_player.bind())
 	spawn_position = position
 	GameEvents.team_scored.connect(on_team_scored.bind())
+	GameEvents.gameover.connect(gameOver.bind())
 	var init_pos := kickoff_pos if team == GameManager.teams[0] else spawn_position
 	switch_st(State.RESETING, PlayerStateData.build().setResetPosition(init_pos))
 
@@ -92,10 +95,12 @@ func flipt_sprites() -> void:
 		sprite.flip_h = false
 		tackle_area.scale.x = 1
 		opponent_area.scale.x = 1
+		particles.scale.x = 1
 	elif heading == Vector2.LEFT:
 		sprite.flip_h = true
 		tackle_area.scale.x = -1
 		opponent_area.scale.x = -1
+		particles.scale.x = -1
 
 func loader(player_position: Vector2, manage_kickoff_pos: Vector2, manage_ball: Ball, own_frame: Goal, 
 			target_frame: Goal, player_data: PlayerResources, manage_team: String):
@@ -182,6 +187,7 @@ func set_actual_target() -> void:
 
 func sprite_visibility() -> void:
 	control_sprite.visible = has_ball() or not control_scheme == ControlScheme.CPU
+	execute_particles.emitting = velocity.length() == speed
 
 func process_gravity(delta: float) -> void:
 	if height > 0 or height_velocity != 0:
@@ -221,6 +227,12 @@ func on_team_scored(team_on: String) -> void:
 		switch_st(Player.State.SAD)
 	else:
 		switch_st(Player.State.CELEBRATING)
+
+func gameOver(winning_team: String) -> void:
+	if team == winning_team:
+		switch_st(Player.State.CELEBRATING)
+	else:
+		switch_st(Player.State.SAD)
 
 func face_target_goal() -> void:
 	if not facing_target_goal():

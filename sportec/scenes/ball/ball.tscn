@@ -1,8 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://jrqbx3nawwhr"]
+[gd_scene load_steps=15 format=3 uid="uid://jrqbx3nawwhr"]
 
 [ext_resource type="Texture2D" uid="uid://k5kd4mao5pho" path="res://assets/art/props/soccer-ball.png" id="1_oqv3d"]
 [ext_resource type="Script" uid="uid://bwr1ntc44hb6x" path="res://scenes/ball/ball.gd" id="1_stoaj"]
 [ext_resource type="Texture2D" uid="uid://dyh2b41adgpcg" path="res://assets/art/props/ball-shadow.png" id="2_nv6q1"]
+[ext_resource type="Texture2D" uid="uid://de8m1i5arg02b" path="res://assets/art/particles/white-circle.png" id="2_xotqv"]
+
+[sub_resource type="Curve" id="Curve_jbgth"]
+_data = [Vector2(0, 0.27079308), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yjhvv"]
+curve = SubResource("Curve_jbgth")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a81tc"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_yjhvv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nv6q1"]
 radius = 5.0
@@ -67,11 +85,23 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_stoaj"]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xotqv"]
+radius = 60.0
+
 [node name="Ball" type="AnimatableBody2D"]
 collision_layer = 4
 collision_mask = 33
 sync_to_physics = false
 script = ExtResource("1_stoaj")
+
+[node name="ShootParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+emitting = false
+amount = 30
+texture = ExtResource("2_xotqv")
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_a81tc")
 
 [node name="BallSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -113,3 +143,13 @@ target_position = Vector2(80, 0)
 collision_mask = 16
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="PlayerProximity" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -5)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerProximity"]
+shape = SubResource("CircleShape2D_xotqv")

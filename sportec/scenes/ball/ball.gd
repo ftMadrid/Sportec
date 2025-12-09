@@ -10,6 +10,8 @@ enum State {CARRIED, SHOOT, FREEFORM}
 @onready var detection_area : Area2D = %DetectionArea
 @onready var ball_sprite : Sprite2D = %BallSprite
 @onready var scoring_raycast : RayCast2D = %ScoringRayCast
+@onready var shoot_particles : GPUParticles2D = %ShootParticles
+@onready var player_proximity : Area2D = %PlayerProximity
 
 var state_fact := BallStateFactory.new()
 var current_state : BallState = null
@@ -34,7 +36,7 @@ func switch_st(state: Ball.State, data: BallStateData = BallStateData.new()) -> 
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
-	current_state.setup(self, data, detection_area, carrier, player_animation, ball_sprite)
+	current_state.setup(self, data, detection_area, carrier, player_animation, ball_sprite, shoot_particles)
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| BallStateMachine" + str(state)
 	call_deferred("add_child", current_state)
@@ -81,3 +83,7 @@ func team_reset() -> void:
 
 func kickoffStarted() -> void:
 	pass_to(spawn_pos + Vector2.DOWN * 30.0)
+
+func getProximityTeammates(team: String) -> int:
+	var players := player_proximity.get_overlapping_bodies()
+	return players.filter(func(p: Player): return p.team == team).size()

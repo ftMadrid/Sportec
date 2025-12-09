@@ -1,15 +1,19 @@
 extends Node
 
 const game_duration := 2*60
+const duration_impact := 100
 
 enum State {PLAY, SCORED, RESET, KICKOFF, OVERTIME, GAMEOVER}
 
 var time_left : float
-var teams : Array[String] = ["REAL MADRID", "BARCELONA"]
-var score := [0, 0]
+var teams : Array[String] = ["M.UNITED", "ARSENAL"]
+var score : Array[int] = [0, 0]
 var state_fact := GameStateFactory.new()
 var current_state : GameState = null
-var player_setup : Array[String] = ["REAL MADRID", ""]
+var player_setup : Array[String] = ["M.UNITED", ""]
+
+func _init() -> void:
+	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
 
 func _ready() -> void:
 	time_left = game_duration
@@ -29,3 +33,21 @@ func isCoop() -> bool:
 
 func isSingle() -> bool:
 	return player_setup[1].is_empty()
+
+func getTeamWinner() -> String:
+	assert(not isGameTied())
+	return teams[0] if score[0] > score[1] else teams[1]
+	
+func isGameTied() -> bool:
+	return score[0]  == score[1]
+
+func isTimeUp() -> bool:
+	return time_left <= 0
+
+func increaseScore(team_scored: String) -> void:
+	var i_team_scored := 1 if team_scored == teams[0] else 0
+	score[i_team_scored] += 1
+	GameEvents.score_change.emit()
+
+func hasSomeoneScored() -> bool:
+	return score[0] > 0 or score[1] > 0

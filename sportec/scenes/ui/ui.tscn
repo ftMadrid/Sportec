@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhxmwgx4eymj7"]
+[gd_scene load_steps=15 format=3 uid="uid://dhxmwgx4eymj7"]
 
 [ext_resource type="Script" uid="uid://o4oc133ie3sk" path="res://scenes/ui/ui.gd" id="1_aac20"]
 [ext_resource type="Texture2D" uid="uid://bcbffnccqpe16" path="res://assets/art/ui/teams/team-placeholder.png" id="1_u7n8c"]
 [ext_resource type="Texture2D" uid="uid://d4j0gcggm8wch" path="res://assets/art/ui/mainmenu/ball-selection.png" id="2_f5cxw"]
+[ext_resource type="Texture2D" uid="uid://hkc88qarc3dn" path="res://assets/art/ui/goal.png" id="4_g5kmx"]
+[ext_resource type="Texture2D" uid="uid://bh475veux272b" path="res://assets/art/ui/times-up.png" id="5_0dwhk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5kmx"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7n8c"]
 bg_color = Color(0.050980393, 0.16470589, 0.31764707, 1)
@@ -13,80 +18,339 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aac20"]
 bg_color = Color(0.029716311, 0.26315358, 0.94161403, 1)
 
+[sub_resource type="Animation" id="Animation_0dwhk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIControl/Goal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIControl/Goal:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UIControl/GoalScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UIControl/ScoreInfo:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UIControl/Mask:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UIControl/TimesUp:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_pfayw"]
+resource_name = "goal_hide"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIControl/Mask:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.2627451), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIControl/Goal:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UIControl/GoalScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UIControl/ScoreInfo:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g5kmx"]
+resource_name = "goal_popup"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIControl/Goal:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIControl/Goal:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UIControl/GoalScore:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UIControl/ScoreInfo:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UIControl/Mask:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.2627451)]
+}
+
+[sub_resource type="Animation" id="Animation_7vp6q"]
+resource_name = "game_timeups"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIControl/TimesUp:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UIControl/Mask:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.39607844)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UIControl/ScoreInfo:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0dwhk"]
+_data = {
+&"RESET": SubResource("Animation_0dwhk"),
+&"game_timeups": SubResource("Animation_7vp6q"),
+&"goal_hide": SubResource("Animation_pfayw"),
+&"goal_popup": SubResource("Animation_g5kmx")
+}
+
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_aac20")
 
 [node name="UIControl" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 1.0
-offset_right = 40.0
-offset_bottom = 41.0
-
-[node name="ColorRect" type="ColorRect" parent="UIControl"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 4.175
-anchor_top = 4.9750004
-anchor_right = 4.175
-anchor_bottom = 4.9750004
-offset_left = -67.0
-offset_top = -16.000015
-offset_right = 67.0
-offset_bottom = -2.0000153
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.019607844, 0.21960784, 0.8117647, 1)
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UIControl/ColorRect"]
+[node name="Mask" type="ColorRect" parent="UIControl"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -13.0
-offset_right = 15.0
-offset_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
-alignment = 1
+color = Color(0, 0, 0, 1)
 
-[node name="Playerlabel" type="Label" parent="UIControl/ColorRect/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="UIControl"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 183.0
+offset_right = 231.0
+offset_bottom = 197.0
+color = Color(0.019607844, 0.21960784, 0.8117647, 1)
+
+[node name="Back" type="Label" parent="UIControl"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 183.0
+offset_right = 231.0
+offset_bottom = 197.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_g5kmx")
+
+[node name="PlayerLabel" type="Label" parent="UIControl"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
-layout_mode = 2
+layout_mode = 0
+offset_left = 99.0
+offset_top = 183.0
+offset_right = 159.0
+offset_bottom = 197.0
 theme_override_colors/font_color = Color(0.9529412, 0.9882353, 0.9882353, 1)
 text = "MBAPPE"
 
-[node name="HomeTeam" type="TextureRect" parent="UIControl/ColorRect/HBoxContainer"]
+[node name="HomeTeam" type="TextureRect" parent="UIControl"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
+layout_mode = 0
+offset_left = 160.0
+offset_top = 180.5
+offset_right = 184.0
+offset_bottom = 196.5
 texture = ExtResource("1_u7n8c")
-stretch_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Score" type="Label" parent="UIControl/ColorRect/HBoxContainer"]
+[node name="Score" type="Label" parent="UIControl"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
+layout_mode = 0
+offset_left = 182.0
+offset_top = 183.0
+offset_right = 210.0
+offset_bottom = 197.0
 theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_u7n8c")
-text = " 2 - 3"
+text = " 1 - 1"
 horizontal_alignment = 1
 
-[node name="AwayTeam" type="TextureRect" parent="UIControl/ColorRect/HBoxContainer"]
+[node name="AwayTeam" type="TextureRect" parent="UIControl"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
-layout_mode = 2
+layout_mode = 0
+offset_left = 209.0
+offset_top = 180.5
+offset_right = 233.0
+offset_bottom = 196.5
 texture = ExtResource("1_u7n8c")
-stretch_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
 [node name="TimeLabel" type="Label" parent="UIControl"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 236.0
+offset_left = 252.0
 offset_top = 183.0
-offset_right = 266.0
+offset_right = 279.0
 offset_bottom = 197.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_f5cxw")
@@ -95,15 +359,92 @@ horizontal_alignment = 1
 
 [node name="Ball" type="Label" parent="UIControl"]
 layout_mode = 0
-offset_left = 266.0
+offset_left = 233.0
 offset_top = 183.0
-offset_right = 285.0
+offset_right = 252.0
 offset_bottom = 197.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_aac20")
 horizontal_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="UIControl/Ball"]
-position = Vector2(9.7, 7)
-scale = Vector2(0.6375012, 0.6249999)
+position = Vector2(9.6, 7.3)
+scale = Vector2(0.5837509, 0.5624999)
 texture = ExtResource("2_f5cxw")
+
+[node name="Goal" type="TextureRect" parent="UIControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.5
+offset_top = -25.0
+offset_right = 66.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(66, 21)
+texture = ExtResource("4_g5kmx")
+
+[node name="TimesUp" type="TextureRect" parent="UIControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -78.0
+offset_right = 100.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(100, 55)
+texture = ExtResource("5_0dwhk")
+
+[node name="GoalScore" type="Label" parent="UIControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 25.0
+offset_right = 50.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93333334, 0.80784315, 0, 1)
+text = "MBAPPE HAS SCORED!"
+horizontal_alignment = 1
+
+[node name="ScoreInfo" type="Label" parent="UIControl"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 39.0
+offset_right = 60.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "REAL MADRID LEADS 1 - 0"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_0dwhk")
+}

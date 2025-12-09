@@ -1,10 +1,10 @@
 [{
-	"team": "REAL MADRID",
+	"team": "REALMADRID",
 	"players": [{
 		"name": "T. COURTOIS",
 		"skin": 0,
 		"role": 0,
-		"speed": 75,
+		"speed": 85,
 		"power": 100,
 	}, {
 		"name": "D. Huijsen",
@@ -29,13 +29,13 @@
 		"skin": 2,
 		"role": 3,
 		"speed": 85,
-		"power": 185,
+		"power": 190,
 	}, {
 		"name": "VINICIUS JR",
 		"skin": 2,
 		"role": 3,
 		"speed": 79,
-		"power": 170,
+		"power": 180,
 	}]
 }, {
 	"team": "BARCELONA",
@@ -77,7 +77,7 @@
 		"power": 175,
 	}]
 }, {
-	"team": "AC MILAN",
+	"team": "AC.MILAN",
 	"players": [{
 		"name": "M. MAIGNAN",
 		"skin": 2,
@@ -116,7 +116,7 @@
 		"power": 184,
 	}]
 }, {
-	"team": "BAYERN MUNICH",
+	"team": "BAYERNMUNICH",
 	"players": [{
 		"name": "M. NEUER",
 		"skin": 0,
@@ -233,7 +233,7 @@
 		"power": 175,
 	}]
 }, {
-	"team": "M. UNITED",
+	"team": "M.UNITED",
 	"players": [{
 		"name": "S. LAMMENS",
 		"skin": 0,

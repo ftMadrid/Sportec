@@ -11,16 +11,19 @@ var carrier : Player = null
 var player_animation : AnimationPlayer = null
 var bsprite : Sprite2D = null
 var state_data : BallStateData = null
+var shoot_particles : GPUParticles2D = null
 
 # manage ball statements features
-func setup(manage_ball: Ball, manage_state_data: BallStateData, manage_detection_area: Area2D, manage_carrier: Player, manage_player_animation: AnimationPlayer, manage_ball_sprite: Sprite2D ) -> void:
+func setup(manage_ball: Ball, manage_state_data: BallStateData, manage_detection_area: Area2D, manage_carrier: 
+			Player, manage_player_animation: AnimationPlayer, manage_ball_sprite: Sprite2D, manage_shoot_particles: GPUParticles2D) -> void:
 	ball = manage_ball
 	detection_area = manage_detection_area
 	player_animation = manage_player_animation
 	carrier = manage_carrier
 	bsprite = manage_ball_sprite
 	state_data = manage_state_data
-
+	shoot_particles = manage_shoot_particles
+	
 func trans_state(new_state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
 	transition_state.emit(new_state, data)
 

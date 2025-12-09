@@ -16,6 +16,7 @@ func ia_movement() -> void:
 				total_st_force += get_spawn_st_force()
 			elif ball.carrier == null:
 				total_st_force += ball_proximity_st_force()
+				total_st_force += getDensityAroundBall()
 				
 	total_st_force = total_st_force.limit_length(1.0)
 	player.velocity = total_st_force * player.speed
@@ -49,4 +50,12 @@ func assist_formation_st() -> Vector2:
 	var assist_dest := ball.carrier.position - spawn_diff * 0.8
 	var dir := player.position.direction_to(assist_dest)
 	var weight := bicircular_weight(player.position, assist_dest, 30, 0.2, 60, 1)
+	return weight * dir
+
+func getDensityAroundBall() -> Vector2:
+	var n_teammates := ball.getProximityTeammates(player.team)
+	if n_teammates == 0:
+		return Vector2.ZERO
+	var weight := 1 - 1.0 / n_teammates
+	var dir := ball.position.direction_to(player.position)
 	return weight * dir
