@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=3 uid="uid://dy7xt8d22oi75"]
+
+[ext_resource type="Script" uid="uid://b3wjvlhaaa76u" path="res://scenes/screens/mainmenu.gd" id="1_h04ts"]
+[ext_resource type="Texture2D" uid="uid://dioejkmjt3r6n" path="res://assets/art/ui/mainmenu/mainmenu.png" id="1_p2vnf"]
+[ext_resource type="Texture2D" uid="uid://5ktxd6kf16al" path="res://assets/art/ui/mainmenu/title.png" id="2_ie6p2"]
+[ext_resource type="Texture2D" uid="uid://cs7gq0tnqvrq1" path="res://assets/art/ui/mainmenu/play-button.png" id="3_tsr5v"]
+[ext_resource type="Texture2D" uid="uid://tfa4k85jg1v2" path="res://assets/art/ui/mainmenu/options-button.png" id="4_tsr5v"]
+
+[sub_resource type="Animation" id="Animation_tsr5v"]
+resource_name = "start"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(88, -50), Vector2(88, 28)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/PlayButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-80, 98), Vector2(153, 98)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/OptionsButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-80, 131), Vector2(153, 131)]
+}
+
+[sub_resource type="Animation" id="Animation_h04ts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(88, 35)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/PlayButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(153, 98)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/OptionsButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(153, 131)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mw2xy"]
+_data = {
+&"RESET": SubResource("Animation_h04ts"),
+&"start": SubResource("Animation_tsr5v")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 2.6950002
+anchor_bottom = 2.89
+offset_right = -644.1001
+offset_bottom = -379.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h04ts")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_p2vnf")
+expand_mode = 1
+
+[node name="Title" type="TextureRect" parent="Background"]
+layout_mode = 1
+offset_left = 88.0
+offset_top = 35.0
+offset_right = 293.0
+offset_bottom = 120.0
+texture = ExtResource("2_ie6p2")
+expand_mode = 1
+
+[node name="PlayButton" type="TextureButton" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40300003
+anchor_top = 0.5
+anchor_right = 0.6
+anchor_bottom = 0.61800003
+offset_left = -0.14001465
+offset_top = -1.5
+offset_right = -1.5258789e-05
+offset_bottom = 0.017990112
+texture_normal = ExtResource("3_tsr5v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="OptionsButton" type="TextureButton" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40300003
+anchor_top = 0.65800005
+anchor_right = 0.6
+anchor_bottom = 0.78400004
+offset_left = -0.14001465
+offset_top = 0.0579834
+offset_right = 0.00022888184
+offset_bottom = -0.01600647
+texture_normal = ExtResource("4_tsr5v")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MenuAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mw2xy")
+}
+autoplay = "start"
+
+[connection signal="pressed" from="Background/PlayButton" to="." method="playPressed"]
+[connection signal="pressed" from="Background/OptionsButton" to="." method="optionPressed"]

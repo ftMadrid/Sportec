@@ -122,22 +122,53 @@ func checkKickOffRead() -> void:
 	GameEvents.kickoff_ready.emit()
 
 func setupControlScheme() -> void:
+	print("--- Configurando Esquema de Controles ---")
+	# Primero reseteamos a todos a CPU
 	for player in home_squad + away_squad:
 		player.setControlScheme(Player.ControlScheme.CPU)
 	
-	var p1_team := GameManager.player_setup[0]
+	var p1_team_name := GameManager.player_setup[0]
+	print("Equipo seleccionado por P1: ", p1_team_name)
+	print("Equipo Local (Home): ", home_squad[0].team)
+	print("Equipo Visitante (Away): ", away_squad[0].team)
+
+	# Lógica para asignar controles
 	if GameManager.isCoop():
-		var player_team := home_squad if home_squad[0].team == p1_team else away_squad
-		player_team[4].setControlScheme(Player.ControlScheme.P1)
-		player_team[5].setControlScheme(Player.ControlScheme.P2)
+		var player_team := home_squad if home_squad[0].team == p1_team_name else away_squad
+		# Verificar que existan suficientes jugadores
+		if player_team.size() > 5:
+			player_team[4].setControlScheme(Player.ControlScheme.P1)
+			player_team[5].setControlScheme(Player.ControlScheme.P2)
+			print("Modo COOP: P1 asignado a ", player_team[4].name)
+		else:
+			print("ERROR: El equipo no tiene suficientes jugadores para COOP")
+
 	elif GameManager.isSingle():
-		var player_team := home_squad if home_squad[0].team == p1_team else away_squad
-		player_team[5].setControlScheme(Player.ControlScheme.P1)
+		# Aquí buscamos qué escuadra coincide con el nombre elegido por el P1
+		var player_team = home_squad if home_squad[0].team == p1_team_name else away_squad
+		
+		# IMPORTANTE: Si por error del menú los nombres no coinciden, forzamos Home
+		if home_squad[0].team != p1_team_name and away_squad[0].team != p1_team_name:
+			print("ADVERTENCIA: Ningún equipo coincide con la selección de P1. Forzando Home Squad.")
+			player_team = home_squad
+
+		if player_team.size() > 5:
+			player_team[5].setControlScheme(Player.ControlScheme.P1)
+			print("Modo SINGLE: P1 asignado a jugador índice 5 de ", player_team[0].team)
+		else:
+			# Si el array es mas pequeño, tomamos el último disponible
+			player_team.back().setControlScheme(Player.ControlScheme.P1)
+			print("Modo SINGLE: P1 asignado al último jugador de ", player_team[0].team)
+
 	else:
-		var p1_squad := home_squad if home_squad[0].team == p1_team else away_squad
+		# Lógica VERSUS
+		var p1_squad := home_squad if home_squad[0].team == p1_team_name else away_squad
 		var p2_squad := home_squad if p1_squad == away_squad else away_squad
-		p1_squad[5].setControlScheme(Player.ControlScheme.P1)
-		p2_squad[5].setControlScheme(Player.ControlScheme.P2)
+		
+		if p1_squad.size() > 5 and p2_squad.size() > 5:
+			p1_squad[5].setControlScheme(Player.ControlScheme.P1)
+			p2_squad[5].setControlScheme(Player.ControlScheme.P2)
+			print("Modo VERSUS activado")
 
 func impactReceived(impact_pos: Vector2, _high_impact: bool) -> void:
 	var spark := spark_fab.instantiate()

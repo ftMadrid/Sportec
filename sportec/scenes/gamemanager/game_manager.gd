@@ -5,19 +5,30 @@ const duration_impact := 100
 
 enum State {PLAY, SCORED, RESET, KICKOFF, OVERTIME, GAMEOVER}
 
+const AVAILABLE_TEAMS : Array[String] = [
+	"REALMADRID", "BARCELONA", "AC.MILAN", "BAYERNMUNICH", 
+	"INTER", "LIVERPOOL", "M.UNITED", "ARSENAL"
+]
+
 var time_left : float
-var teams : Array[String] = ["M.UNITED", "ARSENAL"]
+var teams : Array[String] = ["REALMADRID", "BARCELONA"]
 var score : Array[int] = [0, 0]
 var state_fact := GameStateFactory.new()
 var current_state : GameState = null
-var player_setup : Array[String] = ["M.UNITED", ""]
+var player_setup : Array[String] = ["REALMADRID", ""]
 
 func _init() -> void:
 	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
 
 func _ready() -> void:
 	time_left = game_duration
+	GameEvents.kickoff_ready.connect(on_kickoff_ready)
+	
 	switch_st(State.RESET)
+
+func on_kickoff_ready() -> void:
+	print("Todos listos. Iniciando KICKOFF...")
+	switch_st(State.PLAY) 
 
 func switch_st(state: State, data: GameStateData = GameStateData.new()) -> void:
 	if current_state != null:

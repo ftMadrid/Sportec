@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://drpvilo68h6q6" path="res://assets/art/backgrounds/top-wall.png" id="7_aaam2"]
 [ext_resource type="Texture2D" uid="uid://dtrdpm8ra84fg" path="res://assets/art/backgrounds/bottom-wall.png" id="8_5qjf2"]
 [ext_resource type="Texture2D" uid="uid://c3chxlno5av6c" path="res://assets/art/backgrounds/side-wall.png" id="9_mwwu5"]
+[ext_resource type="Texture2D" uid="uid://5ktxd6kf16al" path="res://assets/art/ui/mainmenu/title.png" id="11_bsxxv"]
 [ext_resource type="AudioStream" uid="uid://ccr8sldn6vsti" path="res://assets/music/testing.mp3" id="12_kxpcs"]
-[ext_resource type="Texture2D" uid="uid://cdqttxg3gmhtj" path="res://assets/art/ui/mainmenu/image-removebg-preview (3).png" id="13_7bjmq"]
 [ext_resource type="Texture2D" uid="uid://d4j0gcggm8wch" path="res://assets/art/ui/mainmenu/ball-selection.png" id="14_bsxxv"]
 [ext_resource type="PackedScene" uid="uid://dhxmwgx4eymj7" path="res://scenes/ui/ui.tscn" id="15_bsxxv"]
 
@@ -204,9 +204,9 @@ scale = Vector2(0.99999994, 1.004984)
 polygon = PackedVector2Array(14, -4, 26, -4, 11, 113, -1, 113)
 
 [node name="test1" type="Sprite2D" parent="Actors"]
-position = Vector2(379, 13)
-scale = Vector2(0.063126266, 0.041999992)
-texture = ExtResource("13_7bjmq")
+position = Vector2(379, 10)
+scale = Vector2(0.087278105, 0.050130073)
+texture = ExtResource("11_bsxxv")
 centered = false
 
 [node name="ballsprite" type="TextureRect" parent="Actors"]

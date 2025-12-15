@@ -33,4 +33,5 @@ func get_scoring_area() -> Area2D:
 	return scoring_area
 
 func ball_enter_scoring_area(_ball: Ball) -> void:
+	PlayerSound.playSound(PlayerSound.Sound.WHISTLE)
 	GameEvents.team_scored.emit(team)

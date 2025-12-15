@@ -1,0 +1,108 @@
+[gd_scene load_steps=8 format=3 uid="uid://bw0xti6cn73jm"]
+
+[ext_resource type="Script" uid="uid://bcabd53wsmtag" path="res://scenes/screens/team_selector.gd" id="1_kd5r0"]
+[ext_resource type="Texture2D" uid="uid://cetp8oaw3p4wt" path="res://assets/art/ui/teamselection/team-selection-background.png" id="1_t462t"]
+[ext_resource type="Texture2D" uid="uid://brgfusmh3u5oa" path="res://assets/art/ui/teamselection/select-team-label.png" id="2_wglid"]
+[ext_resource type="Texture2D" uid="uid://dvjpge1bdgdd3" path="res://assets/art/ui/teamselection/move.png" id="3_0mmhq"]
+[ext_resource type="Texture2D" uid="uid://dsc8crbndrky1" path="res://assets/art/ui/teams/team-realmadrid.png" id="5_qx4kt"]
+[ext_resource type="Texture2D" uid="uid://c7hucow4gvlud" path="res://assets/art/ui/teamselection/start_game.png" id="6_8jtv2"]
+[ext_resource type="Texture2D" uid="uid://brh0fdqlpv7wx" path="res://assets/art/ui/back_button.png" id="7_bjehg"]
+
+[node name="TeamSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kd5r0")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t462t")
+
+[node name="Title" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.047000002
+anchor_top = 0.12100001
+anchor_right = 0.497
+anchor_bottom = 0.26000002
+offset_left = 0.13999939
+offset_top = -1.2000008
+offset_right = 0.13999939
+texture = ExtResource("2_wglid")
+expand_mode = 1
+
+[node name="TeamImage" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 73.0
+offset_right = 137.0
+offset_bottom = 156.0
+texture = ExtResource("5_qx4kt")
+expand_mode = 1
+
+[node name="LeftButton" type="TextureButton" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042000003
+anchor_top = 0.51000005
+anchor_right = 0.105000004
+anchor_bottom = 0.615
+offset_left = 0.03999901
+offset_right = 0.099998474
+texture_normal = ExtResource("3_0mmhq")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="RightButton" type="TextureButton" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45000002
+anchor_top = 0.51000005
+anchor_right = 0.513
+anchor_bottom = 0.615
+offset_right = 0.05999756
+texture_normal = ExtResource("3_0mmhq")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="StartButton" type="TextureButton" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.69500005
+anchor_top = 0.64000005
+anchor_right = 0.897
+anchor_bottom = 0.785
+offset_left = -0.1000061
+offset_top = -1.5258789e-05
+offset_right = 0.13998413
+texture_normal = ExtResource("6_8jtv2")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="BackButton" type="TextureButton" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.69500005
+anchor_top = 0.8
+anchor_right = 0.897
+anchor_bottom = 0.94500005
+offset_left = -0.1000061
+offset_right = 0.13998413
+offset_bottom = -1.5258789e-05
+texture_normal = ExtResource("7_bjehg")
+ignore_texture_size = true
+stretch_mode = 0
+
+[connection signal="pressed" from="Background/LeftButton" to="." method="leftButtonPressed"]
+[connection signal="pressed" from="Background/RightButton" to="." method="rightButtonPressed"]
+[connection signal="pressed" from="Background/StartButton" to="." method="startButtonPressed"]
+[connection signal="pressed" from="Background/BackButton" to="." method="backButtonPressed"]

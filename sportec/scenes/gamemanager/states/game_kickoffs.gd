@@ -18,4 +18,5 @@ func _physics_process(_delta: float) -> void:
 	for control_scheme : Player.ControlScheme in valid_ct_shames:
 		if KeyUtils.action_just_pressed(control_scheme, KeyUtils.Action.PASS):
 			GameEvents.kickoff_started.emit()
+			PlayerSound.playSound(PlayerSound.Sound.WHISTLE)
 			trans_state(GameManager.State.PLAY)

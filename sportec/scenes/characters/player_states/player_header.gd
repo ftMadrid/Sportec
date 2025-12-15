@@ -19,6 +19,7 @@ func _enter_tree() -> void:
 # just to make sure the ball move through the header process 
 func ball_entered(tact_ball: Ball) -> void:
 	if tact_ball.air_connect(height_min, height_max):
+		PlayerSound.playSound(PlayerSound.Sound.POWERSHOOT)
 		tact_ball.shoot(player.velocity.normalized() * player.power * extra_power)
 
 func _physics_process(_delta: float) -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://k5kd4mao5pho" path="res://assets/art/props/soccer-ball.png" id="1_oqv3d"]
 [ext_resource type="Script" uid="uid://bwr1ntc44hb6x" path="res://scenes/ball/ball.gd" id="1_stoaj"]
 [ext_resource type="Texture2D" uid="uid://dyh2b41adgpcg" path="res://assets/art/props/ball-shadow.png" id="2_nv6q1"]
-[ext_resource type="Texture2D" uid="uid://de8m1i5arg02b" path="res://assets/art/particles/white-circle.png" id="2_xotqv"]
+[ext_resource type="Texture2D" uid="uid://gg6lbibyysii" path="res://assets/art/particles/ball-circle.png" id="2_xotqv"]
 
 [sub_resource type="Curve" id="Curve_jbgth"]
 _data = [Vector2(0, 0.27079308), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
