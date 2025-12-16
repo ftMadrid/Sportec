@@ -12,6 +12,7 @@ func player_enter(body: Player) -> void:
 		ball.carrier = body
 		body.control_ball()
 		trans_state(Ball.State.CARRIED)
+		GameEvents.ball_possessed.emit(body.pname)
 
 func _physics_process(delta: float) -> void:
 	detection_area.monitoring = (Time.get_ticks_msec() - time_freeform > state_data.lock_duration)

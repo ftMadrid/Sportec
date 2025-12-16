@@ -21,14 +21,16 @@ func _init() -> void:
 	GameEvents.impact_received.connect(impactReceived.bind())
 
 func _ready() -> void:
-	
 	home_squad = spawnPlayers(GameManager.teams[0], frame_home)
 	frame_home.init(GameManager.teams[0])
 	spawns.scale.x = -1
 	kickoffs.scale.x = -1
 	away_squad = spawnPlayers(GameManager.teams[1], frame_away)
 	frame_away.init(GameManager.teams[1])
+	
 	setupControlScheme()
+	GameManager.switch_st(GameManager.State.RESET)
+	MusicManager.play_music("gameplay")
 
 func _physics_process(_delta: float) -> void:
 	if Time.get_ticks_msec() - time_cache_refresh > weight_cache:

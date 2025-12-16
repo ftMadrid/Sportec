@@ -10,10 +10,14 @@ var current_team_index = 0
 @onready var team : TextureRect = $Background/TeamImage
 
 func _ready() -> void:
-	start_pos = team.position
+	start_pos = Vector2(72, 73) 
+
 	var team_name = GameManager.AVAILABLE_TEAMS[current_team_index]
 	team.texture = GameHelpers.getTexture(team_name)
 	updateGameManagerTeams()
+	
+	if has_node("AnimationPlayer"):
+		$AnimationPlayer.play("start")
 
 func leftButtonPressed() -> void:
 	if animated: return

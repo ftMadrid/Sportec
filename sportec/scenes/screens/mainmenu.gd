@@ -1,5 +1,8 @@
 extends Control
 
+func _ready() -> void:
+	MusicManager.play_music("menu")
+
 func playPressed() -> void:
 	var button = $Background/PlayButton
 	button.modulate.a = 0.5

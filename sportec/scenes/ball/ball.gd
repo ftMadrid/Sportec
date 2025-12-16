@@ -40,6 +40,9 @@ func switch_st(state: Ball.State, data: BallStateData = BallStateData.new()) -> 
 	current_state.transition_state.connect(switch_st.bind())
 	current_state.name = "| BallStateMachine" + str(state)
 	call_deferred("add_child", current_state)
+	
+	if carrier != null:
+		GameEvents.ball_possessed.emit(carrier.pname)
 
 func shoot(shoot_velocity : Vector2) -> void:
 	velocity = shoot_velocity

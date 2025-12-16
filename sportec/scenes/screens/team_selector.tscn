@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw0xti6cn73jm"]
+[gd_scene load_steps=11 format=3 uid="uid://bw0xti6cn73jm"]
 
 [ext_resource type="Script" uid="uid://bcabd53wsmtag" path="res://scenes/screens/team_selector.gd" id="1_kd5r0"]
 [ext_resource type="Texture2D" uid="uid://cetp8oaw3p4wt" path="res://assets/art/ui/teamselection/team-selection-background.png" id="1_t462t"]
@@ -7,6 +7,164 @@
 [ext_resource type="Texture2D" uid="uid://dsc8crbndrky1" path="res://assets/art/ui/teams/team-realmadrid.png" id="5_qx4kt"]
 [ext_resource type="Texture2D" uid="uid://c7hucow4gvlud" path="res://assets/art/ui/teamselection/start_game.png" id="6_8jtv2"]
 [ext_resource type="Texture2D" uid="uid://brh0fdqlpv7wx" path="res://assets/art/ui/back_button.png" id="7_bjehg"]
+
+[sub_resource type="Animation" id="Animation_1ar48"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, 23)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/LeftButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 102)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/RightButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(171, 102)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/TeamImage:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(72, 73)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/StartButton:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(264, 128)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Background/BackButton:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(264, 160)]
+}
+
+[sub_resource type="Animation" id="Animation_bjehg"]
+resource_name = "start"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(18, -30), Vector2(18, 23)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/LeftButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-29.999998, 102), Vector2(16, 102)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/RightButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-30, 102), Vector2(171, 102)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/TeamImage:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-70, 73), Vector2(72, 73)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/StartButton:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 128), Vector2(264, 128)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Background/BackButton:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 160), Vector2(264, 160)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ar48"]
+_data = {
+&"RESET": SubResource("Animation_1ar48"),
+&"start": SubResource("Animation_bjehg")
+}
 
 [node name="TeamSelector" type="Control"]
 layout_mode = 3
@@ -40,11 +198,14 @@ texture = ExtResource("2_wglid")
 expand_mode = 1
 
 [node name="TeamImage" type="TextureRect" parent="Background"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 73.0
-offset_right = 137.0
-offset_bottom = 156.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18900001
+anchor_top = 0.365
+anchor_right = 0.36100003
+anchor_bottom = 0.78000003
+offset_left = 0.17999268
+offset_right = -0.18000793
 texture = ExtResource("5_qx4kt")
 expand_mode = 1
 
@@ -101,6 +262,12 @@ offset_bottom = -1.5258789e-05
 texture_normal = ExtResource("7_bjehg")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1ar48")
+}
+autoplay = "start"
 
 [connection signal="pressed" from="Background/LeftButton" to="." method="leftButtonPressed"]
 [connection signal="pressed" from="Background/RightButton" to="." method="rightButtonPressed"]

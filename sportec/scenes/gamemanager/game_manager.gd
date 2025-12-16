@@ -23,12 +23,10 @@ func _init() -> void:
 func _ready() -> void:
 	time_left = game_duration
 	GameEvents.kickoff_ready.connect(on_kickoff_ready)
-	
 	switch_st(State.RESET)
 
 func on_kickoff_ready() -> void:
-	print("Todos listos. Iniciando KICKOFF...")
-	switch_st(State.PLAY) 
+	switch_st(State.PLAY)
 
 func switch_st(state: State, data: GameStateData = GameStateData.new()) -> void:
 	if current_state != null:

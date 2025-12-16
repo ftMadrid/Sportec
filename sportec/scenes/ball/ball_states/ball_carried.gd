@@ -30,4 +30,5 @@ func _physics_process(delta: float) -> void:
 	ball.position = carrier.position + Vector2(vx + carrier.heading.x * offset_player.x, offset_player.y)
 
 func _exit_tree() -> void:
-	GameEvents.ball_released.emit()
+	if ball.carrier == null:
+		GameEvents.ball_released.emit()

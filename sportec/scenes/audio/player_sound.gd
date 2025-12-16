@@ -37,3 +37,4 @@ func playSound(sound: Sound) -> void:
 	if stream_player != null:
 		stream_player.stream = AUDIO_MAP[sound]
 		stream_player.play()
+		stream_player.volume_db = 2
