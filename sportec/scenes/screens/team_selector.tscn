@@ -205,7 +205,7 @@ anchor_top = 0.365
 anchor_right = 0.36100003
 anchor_bottom = 0.78000003
 offset_left = 0.17999268
-offset_right = -0.18000793
+offset_right = 10.819992
 texture = ExtResource("5_qx4kt")
 expand_mode = 1
 

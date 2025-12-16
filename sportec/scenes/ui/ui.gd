@@ -35,7 +35,7 @@ func updateTeams() -> void:
 func updateTime() -> void:
 	if GameManager.time_left < 0:
 		time_text.add_theme_color_override("font_color", Color.RED)
-	time_text.text = GameHelpers.getTimeText(GameManager.time_left)
+	time_text.text = GameHelpers.getTimeText(GameManager.time_left, GameManager.score)
 
 func ballPossessed(player_name: String) -> void:
 	player_text.text = player_name

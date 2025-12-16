@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dy7xt8d22oi75"]
+[gd_scene load_steps=16 format=3 uid="uid://dy7xt8d22oi75"]
 
 [ext_resource type="Script" uid="uid://b3wjvlhaaa76u" path="res://scenes/screens/mainmenu.gd" id="1_h04ts"]
 [ext_resource type="Texture2D" uid="uid://dioejkmjt3r6n" path="res://assets/art/ui/mainmenu/mainmenu.png" id="1_p2vnf"]
 [ext_resource type="Texture2D" uid="uid://5ktxd6kf16al" path="res://assets/art/ui/mainmenu/title.png" id="2_ie6p2"]
 [ext_resource type="Texture2D" uid="uid://cs7gq0tnqvrq1" path="res://assets/art/ui/mainmenu/play-button.png" id="3_tsr5v"]
 [ext_resource type="Texture2D" uid="uid://tfa4k85jg1v2" path="res://assets/art/ui/mainmenu/options-button.png" id="4_tsr5v"]
+[ext_resource type="Texture2D" uid="uid://ccbusnovwutp5" path="res://assets/art/ui/mainmenu/plane.png" id="6_eh5n1"]
+[ext_resource type="Texture2D" uid="uid://xgx2bql0bmkn" path="res://assets/art/ui/mainmenu/mainmenu2.png" id="6_mw2xy"]
+[ext_resource type="Texture2D" uid="uid://bc2qmu38jdojq" path="res://assets/art/ui/mainmenu/mainmenu3.png" id="7_4l7hp"]
 
 [sub_resource type="Animation" id="Animation_h04ts"]
 length = 0.001
@@ -43,6 +46,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(153, 131)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_p2vnf")]
 }
 
 [sub_resource type="Animation" id="Animation_tsr5v"]
@@ -86,10 +101,67 @@ tracks/2/keys = {
 "values": [Vector2(-80, 131), Vector2(153, 131)]
 }
 
+[sub_resource type="Animation" id="Animation_4l7hp"]
+resource_name = "background_animation"
+length = 0.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_p2vnf"), ExtResource("6_mw2xy"), ExtResource("7_4l7hp")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mw2xy"]
 _data = {
 &"RESET": SubResource("Animation_h04ts"),
+&"background_animation": SubResource("Animation_4l7hp"),
 &"start": SubResource("Animation_tsr5v")
+}
+
+[sub_resource type="Animation" id="Animation_kslhp"]
+resource_name = "plane_pass"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Plane:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 9), Vector2(-200, 9)]
+}
+
+[sub_resource type="Animation" id="Animation_a82a5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Plane:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(385, 9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_si4ia"]
+_data = {
+&"RESET": SubResource("Animation_a82a5"),
+&"plane_pass": SubResource("Animation_kslhp")
 }
 
 [node name="MainMenu" type="Control"]
@@ -122,6 +194,7 @@ texture = ExtResource("2_ie6p2")
 expand_mode = 1
 
 [node name="PlayButton" type="TextureButton" parent="Background"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.40300003
@@ -137,6 +210,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="OptionsButton" type="TextureButton" parent="Background"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.40300003
@@ -151,11 +225,32 @@ texture_normal = ExtResource("4_tsr5v")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="Plane" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.013
+anchor_top = 0.045
+anchor_right = 1.434
+anchor_bottom = 0.216
+offset_left = 0.05999756
+offset_top = 0.045000076
+offset_right = 0.080444336
+offset_bottom = 0.01599884
+texture = ExtResource("6_eh5n1")
+expand_mode = 1
+
 [node name="MenuAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_mw2xy")
 }
 autoplay = "start"
+
+[node name="PlaneAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_si4ia")
+}
 
 [connection signal="pressed" from="Background/PlayButton" to="." method="playPressed"]
 [connection signal="pressed" from="Background/OptionsButton" to="." method="optionPressed"]
