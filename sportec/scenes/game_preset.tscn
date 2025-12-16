@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpf5npt28ckel"]
+
+[ext_resource type="Script" uid="uid://dvrv7rof0a0e" path="res://scenes/game_preset.gd" id="1_23osg"]
+
+[node name="GamePreset" type="Node"]
+script = ExtResource("1_23osg")

@@ -60,6 +60,24 @@ tracks/3/keys = {
 "values": [ExtResource("1_p2vnf")]
 }
 
+[sub_resource type="Animation" id="Animation_4l7hp"]
+resource_name = "background_animation"
+length = 0.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_p2vnf"), ExtResource("6_mw2xy"), ExtResource("7_4l7hp")]
+}
+
 [sub_resource type="Animation" id="Animation_tsr5v"]
 resource_name = "start"
 length = 1.2
@@ -101,29 +119,26 @@ tracks/2/keys = {
 "values": [Vector2(-80, 131), Vector2(153, 131)]
 }
 
-[sub_resource type="Animation" id="Animation_4l7hp"]
-resource_name = "background_animation"
-length = 0.9
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("1_p2vnf"), ExtResource("6_mw2xy"), ExtResource("7_4l7hp")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mw2xy"]
 _data = {
 &"RESET": SubResource("Animation_h04ts"),
 &"background_animation": SubResource("Animation_4l7hp"),
 &"start": SubResource("Animation_tsr5v")
+}
+
+[sub_resource type="Animation" id="Animation_a82a5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Plane:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(385, 9)]
 }
 
 [sub_resource type="Animation" id="Animation_kslhp"]
@@ -143,39 +158,16 @@ tracks/0/keys = {
 "values": [Vector2(385, 9), Vector2(-200, 9)]
 }
 
-[sub_resource type="Animation" id="Animation_a82a5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/Plane:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(385, 9)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_si4ia"]
 _data = {
 &"RESET": SubResource("Animation_a82a5"),
 &"plane_pass": SubResource("Animation_kslhp")
 }
 
-[node name="MainMenu" type="Control"]
-layout_mode = 3
-anchor_right = 2.6950002
-anchor_bottom = 2.89
-offset_right = -644.1001
-offset_bottom = -379.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainMenu" type="Node"]
 script = ExtResource("1_h04ts")
 
 [node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -202,9 +194,9 @@ anchor_top = 0.5
 anchor_right = 0.6
 anchor_bottom = 0.61800003
 offset_left = -0.14001465
-offset_top = -1.5
+offset_top = -2.0
 offset_right = -1.5258789e-05
-offset_bottom = 0.017990112
+offset_bottom = -0.4820099
 texture_normal = ExtResource("3_tsr5v")
 ignore_texture_size = true
 stretch_mode = 0
@@ -218,9 +210,9 @@ anchor_top = 0.65800005
 anchor_right = 0.6
 anchor_bottom = 0.78400004
 offset_left = -0.14001465
-offset_top = 0.0579834
+offset_top = -0.6000061
 offset_right = 0.00022888184
-offset_bottom = -0.01600647
+offset_bottom = -0.673996
 texture_normal = ExtResource("4_tsr5v")
 ignore_texture_size = true
 stretch_mode = 0
@@ -233,9 +225,8 @@ anchor_top = 0.045
 anchor_right = 1.434
 anchor_bottom = 0.216
 offset_left = 0.05999756
-offset_top = 0.045000076
 offset_right = 0.080444336
-offset_bottom = 0.01599884
+offset_bottom = -0.029003143
 texture = ExtResource("6_eh5n1")
 expand_mode = 1
 

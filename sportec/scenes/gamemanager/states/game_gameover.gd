@@ -9,5 +9,4 @@ func _enter_tree() -> void:
 	GameEvents.gameover.emit(team_winner)
 	PlayerSound.playSound(PlayerSound.Sound.WHISTLE)
 	await get_tree().create_timer(5.0).timeout
-	get_tree().change_scene_to_file("res://scenes/screens/mainmenu.tscn")
 	print("game over")

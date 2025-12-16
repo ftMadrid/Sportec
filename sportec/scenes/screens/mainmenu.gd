@@ -1,4 +1,4 @@
-extends Control
+extends Screen
 
 @onready var menu_animation : AnimationPlayer = %MenuAnimation
 @onready var plane_animation : AnimationPlayer = %PlaneAnimation
@@ -31,7 +31,7 @@ func playPressed() -> void:
 	await get_tree().create_timer(0.1).timeout
 	button.modulate.a = 1.0
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
-	get_tree().change_scene_to_file("res://scenes/screens/team_selector.tscn")
+	transScreen(GamePreset.Screens.TEAM_SELECTOR)
 
 func optionPressed() -> void:
 	var button = $Background/OptionsButton
@@ -39,3 +39,4 @@ func optionPressed() -> void:
 	await get_tree().create_timer(0.1).timeout
 	button.modulate.a = 1.0
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
+	#transScreen(GamePreset.Screens.OPTIONS)

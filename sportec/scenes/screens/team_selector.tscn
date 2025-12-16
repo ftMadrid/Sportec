@@ -166,17 +166,10 @@ _data = {
 &"start": SubResource("Animation_bjehg")
 }
 
-[node name="TeamSelector" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TeamSelector" type="Node"]
 script = ExtResource("1_kd5r0")
 
 [node name="Background" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

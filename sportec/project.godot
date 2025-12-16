@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sportec"
-run/main_scene="uid://dy7xt8d22oi75"
+run/main_scene="uid://dpf5npt28ckel"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.050980393, 0.0627451, 0.13725491, 1)
 boot_splash/fullsize=false
@@ -22,7 +22,7 @@ boot_splash/minimum_display_time=3500
 [autoload]
 
 Data="*res://utils/data.gd"
-GameEvents="*res://scenes/game_events.gd"
+GameEvents="*res://scenes/screens/field/game_events.gd"
 GameManager="*res://scenes/gamemanager/game_manager.gd"
 PlayerSound="*res://scenes/audio/player_sound.gd"
 MusicManager="*res://scenes/audio/music_manager.tscn"

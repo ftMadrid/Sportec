@@ -1,4 +1,4 @@
-extends Control
+extends Screen
 
 var animated = false
 var start_pos: Vector2
@@ -83,7 +83,7 @@ func backButtonPressed() -> void:
 	await get_tree().create_timer(0.1).timeout
 	button.modulate.a = 1.0
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
-	get_tree().change_scene_to_file("res://scenes/screens/mainmenu.tscn")
+	transScreen(GamePreset.Screens.MAINMENU)
 
 func startButtonPressed() -> void:
 	var button = $Background/StartButton
@@ -92,4 +92,5 @@ func startButtonPressed() -> void:
 	button.modulate.a = 1.0
 	updateGameManagerTeams()
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
-	get_tree().change_scene_to_file("res://scenes/field.tscn")
+	transScreen(GamePreset.Screens.IN_GAME)
+	
