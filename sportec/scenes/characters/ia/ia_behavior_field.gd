@@ -23,7 +23,7 @@ func ia_movement() -> void:
 
 func ia_decisions() -> void:
 	if ball_possessed_by_opponent() and player.position.distance_to(ball.position) < tackle_distance and randf() < 0.3:
-		player.switch_st(Player.State.TACKLING)
+		player.switchState(Player.State.TACKLING)
 	
 	if ball.carrier == player:
 		var target := player.target_goal.center_target_position()
@@ -32,9 +32,9 @@ func ia_decisions() -> void:
 			player.face_target_goal()
 			var shoot_dir := player.position.direction_to(player.target_goal.random_target_position())
 			var data := PlayerStateData.build().set_shoot_power(player.power).set_shoot_direction(shoot_dir)
-			player.switch_st(Player.State.SHOOTING, data)
+			player.switchState(Player.State.SHOOTING, data)
 		elif randf() < 0.05 and opponents_nearby() and has_teammate_view():
-			player.switch_st(Player.State.PASSING)
+			player.switchState(Player.State.PASSING)
 
 func duty_steering() -> Vector2:
 	return player.weight_steering * player.position.direction_to(ball.position)

@@ -10,6 +10,7 @@ var current_team_index = 0
 @onready var team : TextureRect = $Background/TeamImage
 
 func _ready() -> void:
+	MusicManager.play_music("menu") 
 	start_pos = Vector2(72, 73) 
 
 	var team_name = GameManager.AVAILABLE_TEAMS[current_team_index]
@@ -90,7 +91,16 @@ func startButtonPressed() -> void:
 	button.modulate.a = 0.5
 	await get_tree().create_timer(0.1).timeout
 	button.modulate.a = 1.0
+	
+	# 1. Guardar el equipo que elegiste
 	updateGameManagerTeams()
+	
+	# 2. IMPORTANTE: ¡Crear el torneo nuevo con ese equipo!
+	# Esto reinicia los cruces y te pone a ti en el primer partido
+	TournamentManager.startTournament()
+	
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
-	transScreen(GamePreset.Screens.IN_GAME)
+	
+	# 3. Ahora sí, ir a la pantalla del torneo
+	transScreen(GamePreset.Screens.TOURNAMENT)
 	

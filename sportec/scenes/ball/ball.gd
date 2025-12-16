@@ -22,7 +22,7 @@ var height_velocity := 0.0
 var spawn_pos := Vector2.ZERO
 
 func _ready() -> void:
-	switch_st(State.FREEFORM)
+	switchState(State.FREEFORM)
 	spawn_pos = position
 	GameEvents.team_reset.connect(team_reset.bind())
 	GameEvents.kickoff_started.connect(kickoffStarted.bind())
@@ -31,13 +31,13 @@ func _physics_process(_delta: float) -> void:
 	ball_sprite.position = Vector2.UP * height
 	scoring_raycast.rotation = velocity.angle()
 
-func switch_st(state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
+func switchState(state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
 	current_state.setup(self, data, detection_area, carrier, player_animation, ball_sprite, shoot_particles)
-	current_state.transition_state.connect(switch_st.bind())
+	current_state.transition_state.connect(switchState.bind())
 	current_state.name = "| BallStateMachine" + str(state)
 	call_deferred("add_child", current_state)
 	
@@ -47,7 +47,7 @@ func switch_st(state: Ball.State, data: BallStateData = BallStateData.new()) -> 
 func shoot(shoot_velocity : Vector2) -> void:
 	velocity = shoot_velocity
 	carrier = null
-	switch_st(Ball.State.SHOOT)
+	switchState(Ball.State.SHOOT)
 
 func pass_to(destination: Vector2, lock_duration: int = 500) -> void:
 	var direction := position.direction_to(destination)
@@ -57,7 +57,7 @@ func pass_to(destination: Vector2, lock_duration: int = 500) -> void:
 	if distance > 130:
 		height_velocity = BallState.gravity * distance / (1.8 * intensity) # equation to give a gravity effect to the pass ball
 	carrier = null
-	switch_st(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(lock_duration))
+	switchState(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(lock_duration))
 	
 func stop() -> void:
 	velocity = Vector2.ZERO
@@ -72,7 +72,7 @@ func tumble(tumble_velocity: Vector2) -> void:
 	velocity = tumble_velocity
 	carrier = null
 	height_velocity = 3.0
-	switch_st(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(200))
+	switchState(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(200))
 
 func headed_scoring_are(scoring_area: Area2D) -> bool:
 	if not scoring_raycast.is_colliding():
@@ -82,7 +82,7 @@ func headed_scoring_are(scoring_area: Area2D) -> bool:
 func team_reset() -> void:
 	position = spawn_pos
 	velocity = Vector2.ZERO
-	switch_st(State.FREEFORM)
+	switchState(State.FREEFORM)
 
 func kickoffStarted() -> void:
 	pass_to(spawn_pos + Vector2.DOWN * 30.0)

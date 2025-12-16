@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c5nipwlygrk0t" path="res://assets/art/ui/teamselection/quarters-label.png" id="4_ofkdx"]
 [ext_resource type="Texture2D" uid="uid://qw0yei16i16p" path="res://assets/art/ui/teamselection/semis-label.png" id="5_y233j"]
 [ext_resource type="Texture2D" uid="uid://vwxy1j32761t" path="res://assets/art/ui/teamselection/finals-label.png" id="6_mhltb"]
-[ext_resource type="Texture2D" uid="uid://d2ya82fbnulca" path="res://assets/art/ui/teamselection/worldcup-label.png" id="7_bwvqw"]
+[ext_resource type="Texture2D" uid="uid://b05vy0nnylgyd" path="res://assets/art/ui/teamselection/worldcuplabel.png" id="7_ofkdx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1dgg"]
 bg_color = Color(1, 1, 1, 1)
@@ -29,25 +29,25 @@ flip_h = true
 
 [node name="Q1Back" type="ColorRect" parent="."]
 offset_left = 15.0
-offset_top = 47.0
+offset_top = 51.0
 offset_right = 125.0
-offset_bottom = 61.0
+offset_bottom = 65.0
 color = Color(0.019607844, 0.21960784, 0.8117647, 1)
 
 [node name="Q1White" type="Label" parent="."]
 offset_left = 36.0
-offset_top = 47.0
+offset_top = 51.0
 offset_right = 102.0
-offset_bottom = 61.0
+offset_bottom = 65.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
 
 [node name="ScoreQ1" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
 offset_left = 55.0
-offset_top = 47.0
+offset_top = 51.0
 offset_right = 83.0
-offset_bottom = 61.0
+offset_bottom = 65.0
 theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
 text = "VS"
@@ -57,9 +57,57 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 35.0
-offset_top = 45.0
+offset_top = 49.0
 offset_right = 56.0
-offset_bottom = 59.0
+offset_bottom = 63.0
+texture = ExtResource("3_8ns3y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AwayQ1" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+offset_left = 82.0
+offset_top = 49.0
+offset_right = 103.0
+offset_bottom = 63.0
+texture = ExtResource("3_8ns3y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Q2Back" type="ColorRect" parent="."]
+offset_left = 15.0
+offset_top = 88.0
+offset_right = 125.0
+offset_bottom = 102.0
+color = Color(0.019607844, 0.21960784, 0.8117647, 1)
+
+[node name="Q2White" type="Label" parent="."]
+offset_left = 36.0
+offset_top = 88.0
+offset_right = 102.0
+offset_bottom = 102.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
+
+[node name="ScoreQ2" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 0)
+offset_left = 55.0
+offset_top = 88.0
+offset_right = 83.0
+offset_bottom = 102.0
+theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
+text = "VS"
+horizontal_alignment = 1
+
+[node name="HomeQ2" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+offset_left = 35.0
+offset_top = 86.0
+offset_right = 56.0
+offset_bottom = 100.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
@@ -68,34 +116,34 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 82.0
-offset_top = 45.0
+offset_top = 86.0
 offset_right = 103.0
-offset_bottom = 59.0
+offset_bottom = 100.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Q2Back" type="ColorRect" parent="."]
+[node name="Q3Back" type="ColorRect" parent="."]
 offset_left = 15.0
-offset_top = 84.0
+offset_top = 125.0
 offset_right = 125.0
-offset_bottom = 98.0
+offset_bottom = 139.0
 color = Color(0.019607844, 0.21960784, 0.8117647, 1)
 
-[node name="Q2White2" type="Label" parent="."]
+[node name="Q3White" type="Label" parent="."]
 offset_left = 36.0
-offset_top = 84.0
+offset_top = 125.0
 offset_right = 102.0
-offset_bottom = 98.0
+offset_bottom = 139.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
 
-[node name="ScoreQ2" type="Label" parent="."]
+[node name="ScoreQ3" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
 offset_left = 55.0
-offset_top = 84.0
+offset_top = 125.0
 offset_right = 83.0
-offset_bottom = 98.0
+offset_bottom = 139.0
 theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
 text = "VS"
@@ -105,45 +153,45 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 35.0
-offset_top = 82.0
+offset_top = 123.0
 offset_right = 56.0
-offset_bottom = 96.0
+offset_bottom = 137.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AwayQ4" type="TextureRect" parent="."]
+[node name="AwayQ3" type="TextureRect" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 82.0
-offset_top = 82.0
+offset_top = 123.0
 offset_right = 103.0
-offset_bottom = 96.0
+offset_bottom = 137.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Q3Back" type="ColorRect" parent="."]
+[node name="Q4Back" type="ColorRect" parent="."]
 offset_left = 15.0
-offset_top = 121.0
+offset_top = 161.0
 offset_right = 125.0
-offset_bottom = 135.0
+offset_bottom = 175.0
 color = Color(0.019607844, 0.21960784, 0.8117647, 1)
 
-[node name="Q3White" type="Label" parent="."]
+[node name="Q4White" type="Label" parent="."]
 offset_left = 36.0
-offset_top = 121.0
+offset_top = 161.0
 offset_right = 102.0
-offset_bottom = 135.0
+offset_bottom = 175.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
 
-[node name="ScoreQ3" type="Label" parent="."]
+[node name="ScoreQ4" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
 offset_left = 55.0
-offset_top = 121.0
+offset_top = 161.0
 offset_right = 83.0
-offset_bottom = 135.0
+offset_bottom = 175.0
 theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
 text = "VS"
@@ -153,93 +201,45 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 35.0
-offset_top = 119.0
+offset_top = 159.0
 offset_right = 56.0
-offset_bottom = 133.0
+offset_bottom = 173.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AwayQ5" type="TextureRect" parent="."]
+[node name="AwayQ4" type="TextureRect" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 82.0
-offset_top = 119.0
+offset_top = 159.0
 offset_right = 103.0
-offset_bottom = 133.0
-texture = ExtResource("3_8ns3y")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Q4Back" type="ColorRect" parent="."]
-offset_left = 15.0
-offset_top = 157.0
-offset_right = 125.0
-offset_bottom = 171.0
-color = Color(0.019607844, 0.21960784, 0.8117647, 1)
-
-[node name="Q4White" type="Label" parent="."]
-offset_left = 36.0
-offset_top = 157.0
-offset_right = 102.0
-offset_bottom = 171.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
-
-[node name="ScoreQ4" type="Label" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(28, 0)
-offset_left = 55.0
-offset_top = 157.0
-offset_right = 83.0
-offset_bottom = 171.0
-theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
-text = "VS"
-horizontal_alignment = 1
-
-[node name="HomeQ5" type="TextureRect" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 14)
-offset_left = 35.0
-offset_top = 155.0
-offset_right = 56.0
-offset_bottom = 169.0
-texture = ExtResource("3_8ns3y")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AwayQ6" type="TextureRect" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 14)
-offset_left = 82.0
-offset_top = 155.0
-offset_right = 103.0
-offset_bottom = 169.0
+offset_bottom = 173.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="S1Back" type="ColorRect" parent="."]
 offset_left = 140.0
-offset_top = 84.0
+offset_top = 88.0
 offset_right = 250.0
-offset_bottom = 98.0
+offset_bottom = 102.0
 color = Color(0.019607844, 0.21960784, 0.8117647, 1)
 
 [node name="S1White" type="Label" parent="."]
 offset_left = 161.0
-offset_top = 84.0
+offset_top = 88.0
 offset_right = 227.0
-offset_bottom = 98.0
+offset_bottom = 102.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
 
 [node name="ScoreS1" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
 offset_left = 180.0
-offset_top = 84.0
+offset_top = 88.0
 offset_right = 208.0
-offset_bottom = 98.0
+offset_bottom = 102.0
 theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
 text = "VS"
@@ -249,9 +249,57 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 160.0
-offset_top = 82.0
+offset_top = 86.0
 offset_right = 181.0
-offset_bottom = 96.0
+offset_bottom = 100.0
+texture = ExtResource("3_8ns3y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AwayS1" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+offset_left = 207.0
+offset_top = 86.0
+offset_right = 228.0
+offset_bottom = 100.0
+texture = ExtResource("3_8ns3y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="S2Back" type="ColorRect" parent="."]
+offset_left = 140.0
+offset_top = 125.0
+offset_right = 250.0
+offset_bottom = 139.0
+color = Color(0.019607844, 0.21960784, 0.8117647, 1)
+
+[node name="S2White" type="Label" parent="."]
+offset_left = 161.0
+offset_top = 125.0
+offset_right = 227.0
+offset_bottom = 139.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
+
+[node name="ScoreS2" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 0)
+offset_left = 180.0
+offset_top = 125.0
+offset_right = 208.0
+offset_bottom = 139.0
+theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
+text = "VS"
+horizontal_alignment = 1
+
+[node name="HomeS2" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 14)
+offset_left = 160.0
+offset_top = 123.0
+offset_right = 181.0
+offset_bottom = 137.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
@@ -260,82 +308,34 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 207.0
-offset_top = 82.0
+offset_top = 123.0
 offset_right = 228.0
-offset_bottom = 96.0
-texture = ExtResource("3_8ns3y")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="S2Back" type="ColorRect" parent="."]
-offset_left = 140.0
-offset_top = 121.0
-offset_right = 250.0
-offset_bottom = 135.0
-color = Color(0.019607844, 0.21960784, 0.8117647, 1)
-
-[node name="S2White" type="Label" parent="."]
-offset_left = 161.0
-offset_top = 121.0
-offset_right = 227.0
-offset_bottom = 135.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
-
-[node name="ScoreS2" type="Label" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(28, 0)
-offset_left = 180.0
-offset_top = 121.0
-offset_right = 208.0
-offset_bottom = 135.0
-theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
-text = "VS"
-horizontal_alignment = 1
-
-[node name="HomeS3" type="TextureRect" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 14)
-offset_left = 160.0
-offset_top = 119.0
-offset_right = 181.0
-offset_bottom = 133.0
-texture = ExtResource("3_8ns3y")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="AwayS4" type="TextureRect" parent="."]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 14)
-offset_left = 207.0
-offset_top = 119.0
-offset_right = 228.0
-offset_bottom = 133.0
+offset_bottom = 137.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="FBack" type="ColorRect" parent="."]
 offset_left = 261.0
-offset_top = 103.0
+offset_top = 107.0
 offset_right = 371.0
-offset_bottom = 117.0
+offset_bottom = 121.0
 color = Color(0.019607844, 0.21960784, 0.8117647, 1)
 
 [node name="FWhite" type="Label" parent="."]
 offset_left = 282.0
-offset_top = 103.0
+offset_top = 107.0
 offset_right = 348.0
-offset_bottom = 117.0
+offset_bottom = 121.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_f1dgg")
 
 [node name="ScoreF" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 0)
 offset_left = 301.0
-offset_top = 103.0
+offset_top = 107.0
 offset_right = 329.0
-offset_bottom = 117.0
+offset_bottom = 121.0
 theme_override_colors/font_color = Color(0.9782873, 0.9793574, 0.98276013, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ns3y")
 text = "VS"
@@ -345,9 +345,9 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 281.0
-offset_top = 101.0
+offset_top = 105.0
 offset_right = 302.0
-offset_bottom = 115.0
+offset_bottom = 119.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
@@ -356,43 +356,43 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 14)
 offset_left = 328.0
-offset_top = 101.0
+offset_top = 105.0
 offset_right = 349.0
-offset_bottom = 115.0
+offset_bottom = 119.0
 texture = ExtResource("3_8ns3y")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="QuarterFinals" type="TextureRect" parent="."]
 offset_left = 31.0
-offset_top = 21.0
+offset_top = 25.0
 offset_right = 105.0
-offset_bottom = 39.0
+offset_bottom = 43.0
 texture = ExtResource("4_ofkdx")
 expand_mode = 1
 
 [node name="SemiFinals" type="TextureRect" parent="."]
 offset_left = 157.0
-offset_top = 58.0
+offset_top = 62.0
 offset_right = 231.0
-offset_bottom = 76.0
+offset_bottom = 80.0
 texture = ExtResource("5_y233j")
 expand_mode = 1
 
 [node name="Final" type="TextureRect" parent="."]
 offset_left = 278.0
-offset_top = 79.0
+offset_top = 83.0
 offset_right = 352.0
-offset_bottom = 97.0
+offset_bottom = 101.0
 texture = ExtResource("6_mhltb")
 expand_mode = 1
 
 [node name="Title" type="TextureRect" parent="."]
-offset_left = 243.0
-offset_top = 7.0
-offset_right = 373.0
-offset_bottom = 34.0
-texture = ExtResource("7_bwvqw")
+offset_left = 246.0
+offset_top = 2.0
+offset_right = 379.0
+offset_bottom = 64.0
+texture = ExtResource("7_ofkdx")
 expand_mode = 1
 
 [node name="Touch" type="Label" parent="."]
@@ -401,3 +401,12 @@ offset_top = 183.0
 offset_right = 373.0
 offset_bottom = 197.0
 text = "TOUCH THE SCREEN TO CONTINUE..."
+
+[node name="Button" type="TextureButton" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

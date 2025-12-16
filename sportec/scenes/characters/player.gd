@@ -79,7 +79,7 @@ func _ready() -> void:
 	GameEvents.team_scored.connect(on_team_scored.bind())
 	GameEvents.gameover.connect(gameOver.bind())
 	var init_pos := kickoff_pos if team == GameManager.teams[0] else spawn_position
-	switch_st(State.RESETING, PlayerStateData.build().setResetPosition(init_pos))
+	switchState(State.RESETING, PlayerStateData.build().setResetPosition(init_pos))
 
 func check_auto_switch() -> void:
 	var carrying_now = has_ball()
@@ -146,13 +146,13 @@ func setup_ia_behavior() -> void:
 	current_ia_behavior.name = "IA Behavior"
 	add_child(current_ia_behavior)
 
-func switch_st(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
+func switchState(state: State, state_data: PlayerStateData = PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 		
 	current_state = state_fact.get_state(state)
 	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, tackle_area, current_ia_behavior)
-	current_state.transition_state.connect(switch_st.bind())
+	current_state.transition_state.connect(switchState.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
 	
@@ -202,14 +202,14 @@ func process_gravity(delta: float) -> void:
 
 func control_ball() -> void:
 	if ball.height > 10.0:
-		switch_st(Player.State.CHEST_CONTROL)
+		switchState(Player.State.CHEST_CONTROL)
 
 func facing_target_goal() -> bool:
 	var dir_target_goal := position.direction_to(target_goal.position)
 	return heading.dot(dir_target_goal) > 0 # return angle of the heading
 
 func get_hurt(hurt_pos: Vector2) -> void:
-	switch_st(Player.State.HURT, PlayerStateData.build().set_hurt_direction(hurt_pos))
+	switchState(Player.State.HURT, PlayerStateData.build().set_hurt_direction(hurt_pos))
 
 func tackle_player(player: Player) -> void:
 	if player != self and player.team != team and player == ball.carrier:
@@ -220,19 +220,19 @@ func can_carry_ball() -> bool:
 
 func get_pass_req(player: Player) -> void:
 	if ball.carrier == self and current_state != null and current_state.can_pass():
-		switch_st(Player.State.PASSING, PlayerStateData.build().set_pas_target(player))
+		switchState(Player.State.PASSING, PlayerStateData.build().set_pas_target(player))
 
 func on_team_scored(team_on: String) -> void:
 	if team == team_on:
-		switch_st(Player.State.SAD)
+		switchState(Player.State.SAD)
 	else:
-		switch_st(Player.State.CELEBRATING)
+		switchState(Player.State.CELEBRATING)
 
 func gameOver(winning_team: String) -> void:
 	if team == winning_team:
-		switch_st(Player.State.CELEBRATING)
+		switchState(Player.State.CELEBRATING)
 	else:
-		switch_st(Player.State.SAD)
+		switchState(Player.State.SAD)
 
 func face_target_goal() -> void:
 	if not facing_target_goal():

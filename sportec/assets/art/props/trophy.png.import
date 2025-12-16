@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsvxvu3qb6eml"
-path="res://.godot/imported/tournament-qfs.png-8bf8650c5d6ba894ac7101e09a47f259.ctex"
+uid="uid://drgp4cjh7d8hm"
+path="res://.godot/imported/trophy.png-7e1ac78c068648f784abdbffbe9bbe1b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/ui/teamselection/tournament-qfs.png"
-dest_files=["res://.godot/imported/tournament-qfs.png-8bf8650c5d6ba894ac7101e09a47f259.ctex"]
+source_file="res://assets/art/props/trophy.png"
+dest_files=["res://.godot/imported/trophy.png-7e1ac78c068648f784abdbffbe9bbe1b.ctex"]
 
 [params]
 

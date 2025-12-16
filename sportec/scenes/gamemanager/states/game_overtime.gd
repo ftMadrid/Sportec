@@ -6,5 +6,6 @@ func _enter_tree() -> void:
 	print("overtime")
 
 func teamScore(team_scored: String) -> void:
-	manager.increaseScore(state_data.team_scored)
-	trans_state(GameManager.State.GAMEOVER)
+	manager.increaseScore(team_scored) 
+	var data = GameStateData.build().set_team_scored(team_scored)
+	trans_state(GameManager.State.GAMEOVER, data)

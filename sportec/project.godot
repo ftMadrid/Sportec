@@ -26,6 +26,7 @@ GameEvents="*res://scenes/screens/field/game_events.gd"
 GameManager="*res://scenes/gamemanager/game_manager.gd"
 PlayerSound="*res://scenes/audio/player_sound.gd"
 MusicManager="*res://scenes/audio/music_manager.tscn"
+TournamentManager="*res://scenes/screens/tournament_manager.gd"
 
 [debug]
 

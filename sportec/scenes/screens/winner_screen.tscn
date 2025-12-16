@@ -1,0 +1,219 @@
+[gd_scene load_steps=8 format=3 uid="uid://caumia06kisic"]
+
+[ext_resource type="Script" uid="uid://bknf0kl6w8af2" path="res://scenes/screens/winner_screen.gd" id="1_cibqs"]
+[ext_resource type="Texture2D" uid="uid://d3k6mc44274b7" path="res://assets/art/ui/teamselection/tournament_background.png" id="1_rh6e8"]
+[ext_resource type="Texture2D" uid="uid://ft862t4tx38h" path="res://assets/art/ui/teamselection/winner-label.png" id="2_reewu"]
+[ext_resource type="Texture2D" uid="uid://dsc8crbndrky1" path="res://assets/art/ui/teams/team-realmadrid.png" id="3_cibqs"]
+
+[sub_resource type="Animation" id="Animation_yh5le"]
+resource_name = "start"
+length = 5.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(99, -50), Vector2(99, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/TeamLogo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/TeamLogo:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/WinnerLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/LeaveLabel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4.749883, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(121, 200), Vector2(121, 177)]
+}
+
+[sub_resource type="Animation" id="Animation_cibqs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/Title:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(99, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/TeamLogo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/TeamLogo:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/WinnerLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Background/LeaveLabel:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(121, 173)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4ca5"]
+_data = {
+&"RESET": SubResource("Animation_cibqs"),
+&"start": SubResource("Animation_yh5le")
+}
+
+[node name="WinnerScreen" type="Node"]
+script = ExtResource("1_cibqs")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rh6e8")
+expand_mode = 1
+flip_h = true
+
+[node name="Title" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 9.0
+offset_right = 271.0
+offset_bottom = 55.0
+texture = ExtResource("2_reewu")
+
+[node name="TeamLogo" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38700002
+anchor_top = 0.3
+anchor_right = 0.583
+anchor_bottom = 0.75500005
+offset_left = -0.060012817
+offset_right = -0.54000854
+offset_bottom = -1.5258789e-05
+texture = ExtResource("3_cibqs")
+expand_mode = 1
+
+[node name="WinnerLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.076000005
+anchor_top = 0.75000006
+anchor_right = 0.892
+anchor_bottom = 0.89000005
+offset_left = 0.11999893
+offset_top = -1.5258789e-05
+offset_right = 0.039978027
+offset_bottom = -1.5258789e-05
+theme_override_colors/font_color = Color(1, 0.69803923, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "REALMADRID WINS THE CLUB WORLD CUP!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeaveLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31800002
+anchor_top = 0.88000005
+anchor_right = 0.64500004
+anchor_bottom = 0.95000005
+offset_left = 0.15999603
+offset_top = -3.0000153
+offset_right = -0.10002136
+offset_bottom = -3.0000153
+text = "TOUCH THE SCREEN TO LEAVE..."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u4ca5")
+}
+autoplay = "start"
+
+[node name="Button" type="TextureButton" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Button" to="." method="buttonPressed"]

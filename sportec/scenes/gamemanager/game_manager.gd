@@ -1,6 +1,6 @@
 extends Node
 
-const game_duration := 2*60
+const game_duration := 5#60
 const duration_impact := 100
 
 enum State {PLAY, SCORED, RESET, KICKOFF, OVERTIME, GAMEOVER}
@@ -16,24 +16,25 @@ var score : Array[int] = [0, 0]
 var state_fact := GameStateFactory.new()
 var current_state : GameState = null
 var player_setup : Array[String] = ["REALMADRID", ""]
+var active_screen = null
 
 func _init() -> void:
 	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
 
 func _ready() -> void:
 	time_left = game_duration
-	GameEvents.kickoff_ready.connect(on_kickoff_ready)
-	switch_st(State.RESET)
+	GameEvents.kickoff_ready.connect(kickoffReady)
+	switchState(State.RESET)
 
-func on_kickoff_ready() -> void:
-	switch_st(State.PLAY)
+func kickoffReady() -> void:
+	switchState(State.PLAY)
 
-func switch_st(state: State, data: GameStateData = GameStateData.new()) -> void:
+func switchState(state: State, data: GameStateData = GameStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 	current_state = state_fact.get_fresh_state(state)
 	current_state.setup(self, data)
-	current_state.transition_state.connect(switch_st.bind())
+	current_state.transition_state.connect(switchState.bind())
 	current_state.name = "| GameStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
 
@@ -60,3 +61,14 @@ func increaseScore(team_scored: String) -> void:
 
 func hasSomeoneScored() -> bool:
 	return score[0] > 0 or score[1] > 0
+
+func resetMatchData():
+	score = [0, 0]
+	
+	time_left = game_duration 
+	
+	if current_state:
+		current_state.queue_free()
+		current_state = null
+	
+	switchState(State.RESET)

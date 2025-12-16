@@ -8,7 +8,7 @@ func ia_movement() -> void:
 
 func ia_decisions() -> void:
 	if ball.headed_scoring_are(player.own_goal.get_scoring_area()):
-		player.switch_st(Player.State.DIVING)
+		player.switchState(Player.State.DIVING)
 
 func keeper_st_force() -> Vector2:
 	var top := player.own_goal.top_target_pos()

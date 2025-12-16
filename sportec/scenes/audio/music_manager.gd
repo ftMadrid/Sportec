@@ -3,6 +3,7 @@ extends Node2D
 const TRACKS = {
 	"menu": preload("res://assets/music/menu.mp3"),
 	"gameplay": preload("res://assets/music/testing.mp3"),
+	"winner": preload("res://assets/music/winner.mp3"),
 }
 
 @onready var player: AudioStreamPlayer = $MusicPlayer

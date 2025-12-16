@@ -6,6 +6,10 @@ signal screen_trans_req(new_screen: GamePreset.Screens, data: ScreenData)
 var game : GamePreset = null
 var screen_data : ScreenData = null
 
+func _enter_tree() -> void:
+	if GameManager:
+		GameManager.active_screen = self
+
 func setUp(manage_game: GamePreset, manage_data: ScreenData) -> void:
 	game = manage_game
 	screen_data = manage_data

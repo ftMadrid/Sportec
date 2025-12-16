@@ -1,7 +1,7 @@
 class_name GamePreset
 extends Node
 
-enum Screens {MAINMENU, TEAM_SELECTOR, TOURNAMENT, IN_GAME}
+enum Screens {MAINMENU, TEAM_SELECTOR, TOURNAMENT, IN_GAME, WINNER}
 
 var current_screen : Screen = null
 var screen_fact := ScreenFactory.new()

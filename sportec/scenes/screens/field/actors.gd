@@ -29,7 +29,7 @@ func _ready() -> void:
 	frame_away.init(GameManager.teams[1])
 	
 	setupControlScheme()
-	GameManager.switch_st(GameManager.State.RESET)
+	GameManager.switchState(GameManager.State.RESET)
 	MusicManager.play_music("gameplay")
 
 func _physics_process(_delta: float) -> void:
