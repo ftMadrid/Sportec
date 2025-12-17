@@ -10,7 +10,7 @@
 * **Modos de Juego:**
     * Modo Torneo (Cuartos, Semis y Final).
 * **Equipos:** Selección de varios equipos con estadísticas personalizadas.
-* **Jugabilidad:** Pases, disparos, barridas y sistema de faltas.
+* **Jugabilidad:** Pases, disparos, barridas.
 * **Controles Táctiles:** Joystick virtual y botones de acción integrados.
 
 ## 🎮 Controles
