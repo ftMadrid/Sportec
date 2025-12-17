@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dptrshbm4h1w4"]
+[gd_scene load_steps=22 format=3 uid="uid://dptrshbm4h1w4"]
 
 [ext_resource type="Texture2D" uid="uid://dsvfeh2f477h" path="res://assets/art/backgrounds/pitch-background.png" id="1_lptdg"]
 [ext_resource type="Script" uid="uid://uvbf550xethi" path="res://scenes/screens/field/field.gd" id="1_r7opo"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dtrdpm8ra84fg" path="res://assets/art/backgrounds/bottom-wall.png" id="8_5qjf2"]
 [ext_resource type="Texture2D" uid="uid://c3chxlno5av6c" path="res://assets/art/backgrounds/side-wall.png" id="9_mwwu5"]
 [ext_resource type="Texture2D" uid="uid://5ktxd6kf16al" path="res://assets/art/ui/mainmenu/title.png" id="11_bsxxv"]
-[ext_resource type="AudioStream" uid="uid://ccr8sldn6vsti" path="res://assets/music/testing.mp3" id="12_kxpcs"]
 [ext_resource type="Texture2D" uid="uid://d4j0gcggm8wch" path="res://assets/art/ui/mainmenu/ball-selection.png" id="14_bsxxv"]
 [ext_resource type="PackedScene" uid="uid://dhxmwgx4eymj7" path="res://scenes/ui/ui.tscn" id="15_bsxxv"]
 [ext_resource type="Texture2D" uid="uid://ce51o4jojv4ar" path="res://assets/art/ui/pause_button.png" id="16_x21br"]
@@ -233,10 +232,6 @@ autoplay = "rotation"
 
 [node name="Ball" parent="Actors" instance=ExtResource("6_wnvii")]
 position = Vector2(415, 166)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_kxpcs")
-volume_db = -15.467
 
 [node name="UI" parent="." instance=ExtResource("15_bsxxv")]
 
