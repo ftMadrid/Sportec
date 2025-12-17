@@ -62,19 +62,18 @@ Para exportar el APK y jugarlo en tu celular, sigue estos pasos:
 
 ### Assets y Recursos de Terceros
 Proporcionados por: nicolasbize
-Este proyecto utiliza recursos de terceros bajo sus respectivas licencias:
+[Este proyecto utiliza recursos de terceros bajo sus respectivas licencias:]
 
 * **Motor:** [Godot Engine](https://godotengine.org/) (Licencia MIT).
 * **Fuentes:**
     * *Daydream*: Incluida en `assets/fonts/`. Ver licencia en `Daydream 1.0 Personal License.txt`.
     * *Pixeled*: Fuente estilo retro utilizada en la UI.
 * **Plugin:**
-    * **Virtual Joystick:** Utilizado para el control táctil (ubicado en `addons/virtual_joystick`). Créditos a su respectivo autor (MarcoFazioRandom).
-
-## ⚖️ Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.    
+    * **Virtual Joystick:** Utilizado para el control táctil (ubicado en `addons/virtual_joystick`). Créditos a su respectivo autor (MarcoFazioRandom).  
 * **Audio y Música:**
     * Efectos de sonido (rebote, disparo, silbato) y música de fondo (`gameplay.mp3`, `menu.mp3`).
 
+## ⚖️ Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.  
 ---
