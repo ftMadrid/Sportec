@@ -39,4 +39,4 @@ func optionPressed() -> void:
 	await get_tree().create_timer(0.1).timeout
 	button.modulate.a = 1.0
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
-	#transScreen(GamePreset.Screens.OPTIONS)
+	transScreen(GamePreset.Screens.OPTIONS)

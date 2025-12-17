@@ -1,0 +1,172 @@
+[gd_scene load_steps=8 format=3 uid="uid://dh0g0lpxyjayr"]
+
+[ext_resource type="Script" uid="uid://bw45ij6y6rm5s" path="res://scenes/screens/pause_menu.gd" id="1_lhvur"]
+[ext_resource type="Texture2D" uid="uid://btqwheyvtf8ha" path="res://assets/art/ui/paused.png" id="1_rpmok"]
+[ext_resource type="Texture2D" uid="uid://crygp1qw2yo04" path="res://assets/art/ui/resume_button.png" id="2_5dx7k"]
+[ext_resource type="Texture2D" uid="uid://dsq1untdd8jqq" path="res://assets/art/ui/exitgame_button.png" id="3_lhvur"]
+
+[sub_resource type="Animation" id="Animation_iom0v"]
+resource_name = "start"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.37254903)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-130, 25), Vector2(127, 25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ResumeButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-100, 91), Vector2(147, 91)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExitButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-100, 131), Vector2(148, 131)]
+}
+
+[sub_resource type="Animation" id="Animation_1g06u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(127, 25)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ResumeButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(147, 91)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExitButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(148, 131)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nkwdc"]
+_data = {
+&"RESET": SubResource("Animation_1g06u"),
+&"start": SubResource("Animation_iom0v")
+}
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_lhvur")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Title" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.125
+anchor_right = 0.66800004
+anchor_bottom = 0.37500003
+offset_left = 0.0799942
+offset_right = 0.16003418
+texture = ExtResource("1_rpmok")
+expand_mode = 1
+
+[node name="ResumeButton" type="TextureButton" parent="."]
+anchors_preset = -1
+anchor_left = 0.38700002
+anchor_top = 0.455
+anchor_right = 0.611
+anchor_bottom = 0.61
+offset_left = -0.060012817
+offset_right = -0.18000793
+texture_normal = ExtResource("2_5dx7k")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ExitButton" type="TextureButton" parent="."]
+anchors_preset = -1
+anchor_left = 0.38900003
+anchor_top = 0.65500003
+anchor_right = 0.611
+anchor_bottom = 0.80500007
+offset_left = 0.17999268
+offset_right = -0.18000793
+offset_bottom = -1.5258789e-05
+texture_normal = ExtResource("3_lhvur")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nkwdc")
+}
+
+[connection signal="pressed" from="ResumeButton" to="." method="resumePressed"]
+[connection signal="pressed" from="ExitButton" to="." method="exitPressed"]

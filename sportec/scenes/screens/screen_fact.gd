@@ -9,6 +9,7 @@ func _init() -> void:
 		GamePreset.Screens.TEAM_SELECTOR: preload("res://scenes/screens/team_selector.tscn"),
 		GamePreset.Screens.TOURNAMENT: preload("res://scenes/screens/tournament_screen.tscn"),
 		GamePreset.Screens.WINNER: preload("res://scenes/screens/winner_screen.tscn"),
+		GamePreset.Screens.OPTIONS: preload("res://scenes/screens/options_screen.tscn"),
 	}
 
 func getScreen(screen: GamePreset.Screens) -> Screen:

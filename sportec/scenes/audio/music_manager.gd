@@ -8,6 +8,9 @@ const TRACKS = {
 
 @onready var player: AudioStreamPlayer = $MusicPlayer
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func playMusic(track_name: String):
 	if not TRACKS.has(track_name):
 		print("This track doesnt exists - ", track_name)
@@ -20,7 +23,6 @@ func playMusic(track_name: String):
 
 	player.stream = next_stream
 	player.play()
-	player.volume_db = -10
 
 func stopMusic():
 	player.stop()

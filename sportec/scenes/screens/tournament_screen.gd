@@ -67,6 +67,8 @@ func _on_button_pressed() -> void:
 		GameManager.teams = [match_now.home, match_now.away]
 		GameManager.player_setup = [mi_equipo, ""] 
 		if GameManager.has_method("resetMatchData"): GameManager.resetMatchData()
+		
+		GameManager.is_tournament_mode = true 
 		transScreen(GamePreset.Screens.IN_GAME)
 		
 	else:

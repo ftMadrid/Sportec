@@ -1,0 +1,435 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxb8ssil2hd5o"]
+
+[ext_resource type="Script" uid="uid://v460h72pqjau" path="res://scenes/screens/options_screen.gd" id="1_j06wm"]
+[ext_resource type="Texture2D" uid="uid://dioejkmjt3r6n" path="res://assets/art/ui/mainmenu/mainmenu.png" id="1_o6w1q"]
+[ext_resource type="Texture2D" uid="uid://i2hd0e133fyc" path="res://assets/art/ui/options.png" id="2_ymojy"]
+[ext_resource type="Texture2D" uid="uid://brh0fdqlpv7wx" path="res://assets/art/ui/back_button.png" id="4_0gljp"]
+[ext_resource type="Texture2D" uid="uid://dr6qxfnlylsl3" path="res://assets/art/ui/table.png" id="5_rkkdo"]
+
+[sub_resource type="Animation" id="Animation_j06wm"]
+resource_name = "start"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.3722513, 0.3722513, 0.37225124, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(104, -60), Vector2(104, -14)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BackButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(156, 205), Vector2(156, 168)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Table:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-240, 46), Vector2(71, 46)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Master:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-160.00002, 87), Vector2(135, 87)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Music:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-160.00002, 109), Vector2(135, 109)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sound:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-160.00002, 131), Vector2(135, 131)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Volume:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-149.99998, 55), Vector2(118, 55)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MasterVolume:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-50, 87), Vector2(97, 87)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MusicVolume:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-50, 109), Vector2(107, 109)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SoundVolume:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-50.000008, 131), Vector2(100.5, 131)]
+}
+
+[sub_resource type="Animation" id="Animation_5as5e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(104, -14)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BackButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(156, 168)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Table:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(71, 46)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Master:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(135, 87)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Music:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(135, 109)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sound:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(135, 131)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Volume:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(118, 55)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("MasterVolume:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(97, 87)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MusicVolume:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(107, 109)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SoundVolume:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100.5, 131)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5as5e"]
+_data = {
+&"RESET": SubResource("Animation_5as5e"),
+&"start": SubResource("Animation_j06wm")
+}
+
+[node name="OptionsScreen" type="Node"]
+script = ExtResource("1_j06wm")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_o6w1q")
+expand_mode = 1
+
+[node name="Title" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.266
+anchor_top = -0.07
+anchor_right = 0.72900003
+anchor_bottom = 0.35500002
+offset_left = 2.9199982
+offset_right = 2.9799805
+texture = ExtResource("2_ymojy")
+expand_mode = 1
+
+[node name="BackButton" type="TextureButton" parent="."]
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.84000003
+anchor_right = 0.58900005
+anchor_bottom = 0.97
+offset_left = -0.18000793
+offset_right = 0.17997742
+texture_normal = ExtResource("4_0gljp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Table" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.187
+anchor_top = 0.23
+anchor_right = 0.81100005
+anchor_bottom = 0.82000005
+offset_left = -0.060005188
+offset_right = -0.17990112
+offset_bottom = -1.5258789e-05
+texture = ExtResource("5_rkkdo")
+expand_mode = 1
+
+[node name="Master" type="HSlider" parent="."]
+anchors_preset = -1
+anchor_left = 0.35500002
+anchor_top = 0.44500002
+anchor_right = 0.753
+anchor_bottom = 0.52500004
+offset_left = 0.099990845
+offset_top = -2.0000076
+offset_right = -0.14001465
+offset_bottom = -2.0000076
+max_value = 1.0
+step = 0.001
+
+[node name="Music" type="HSlider" parent="."]
+anchors_preset = -1
+anchor_left = 0.35500002
+anchor_top = 0.555
+anchor_right = 0.753
+anchor_bottom = 0.63500005
+offset_left = 0.099990845
+offset_top = -2.0
+offset_right = -0.14001465
+offset_bottom = -2.0000076
+max_value = 0.5
+step = 0.001
+
+[node name="Sound" type="HSlider" parent="."]
+anchors_preset = -1
+anchor_left = 0.35500002
+anchor_top = 0.665
+anchor_right = 0.753
+anchor_bottom = 0.74500006
+offset_left = 0.099990845
+offset_top = -2.0
+offset_right = -0.14001465
+offset_bottom = -2.0000153
+max_value = 1.0
+step = 0.001
+
+[node name="Volume" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.31100002
+anchor_top = 0.28500003
+anchor_right = 0.69500005
+anchor_bottom = 0.425
+offset_left = -0.18000793
+offset_top = -2.0000038
+offset_right = -0.1000061
+offset_bottom = -2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "VOLUME SETTINGS"
+
+[node name="MasterVolume" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.25500003
+anchor_top = 0.44500002
+anchor_right = 0.35000002
+anchor_bottom = 0.51500005
+offset_left = 0.099990845
+offset_top = -2.0000076
+offset_right = -1.5258789e-05
+offset_bottom = -2.0000076
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "MASTER: "
+
+[node name="MusicVolume" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.282
+anchor_top = 0.555
+anchor_right = 0.35000002
+anchor_bottom = 0.625
+offset_left = -0.16000366
+offset_top = -2.0
+offset_right = -1.5258789e-05
+offset_bottom = -2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "MUSIC:"
+
+[node name="SoundVolume" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.264
+anchor_top = 0.665
+anchor_right = 0.35000002
+anchor_bottom = 0.735
+offset_left = 0.1800003
+offset_top = -2.0
+offset_right = 7.6293945e-05
+offset_bottom = -2.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "SOUNDS:"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5as5e")
+}
+autoplay = "start"
+
+[connection signal="pressed" from="BackButton" to="." method="backPressed"]

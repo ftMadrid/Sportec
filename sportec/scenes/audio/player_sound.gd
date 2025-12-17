@@ -23,6 +23,7 @@ var stream_players : Array[AudioStreamPlayer] = []
 func _ready() -> void:
 	for i in range(channels):
 		var stream_player := AudioStreamPlayer.new()
+		stream_player.bus = "Sfx"
 		stream_players.append(stream_player)
 		add_child(stream_player)
 

@@ -1,6 +1,6 @@
 extends Node
 
-const game_duration := 5#*60
+const game_duration := 1*60
 const duration_impact := 100
 
 enum State {PLAY, SCORED, RESET, KICKOFF, OVERTIME, GAMEOVER}
@@ -17,14 +17,23 @@ var state_fact := GameStateFactory.new()
 var current_state : GameState = null
 var player_setup : Array[String] = ["REALMADRID", ""]
 var active_screen = null
+var is_tournament_mode: bool = false
 
 const TEAMS_DATA_RES := "res://assets/json/teams_stats.json"
 const TEAMS_DATA_USER := "user://teams_stats.json"
+const SETTINGS_PATH = "user://settings.json"
 var teams_info : Dictionary = {}
+
+var game_settings = {
+	"master": 1.0,
+	"music": 0.25,
+	"sfx": 0.9
+}
 
 func _init() -> void:
 	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
 	loadTeamsData()
+	loadSettings()
 
 func _ready() -> void:
 	time_left = game_duration
@@ -78,6 +87,20 @@ func resetMatchData():
 	
 	switchState(State.RESET)
 
+func resolveFortreit() -> void:
+	if is_tournament_mode:
+		var my_goals = randi_range(0, 2)
+		var cpu_goals = my_goals + randi_range(1, 3)
+		
+		if teams[0] == player_setup[0]:
+			score[0] = my_goals
+			score[1] = cpu_goals
+		else:
+			score[0] = cpu_goals
+			score[1] = my_goals
+	
+	switchState(State.GAMEOVER)
+
 func loadTeamsData():
 	if FileAccess.file_exists(TEAMS_DATA_USER):
 		var file = FileAccess.open(TEAMS_DATA_USER, FileAccess.READ)
@@ -95,3 +118,21 @@ func addCuptoTeam(team_name: String):
 	if teams_info.has(team_name):
 		teams_info[team_name]["cups"] += 1
 		saveTeamData()
+
+func loadSettings() -> void:
+	if FileAccess.file_exists(SETTINGS_PATH):
+		var file = FileAccess.open(SETTINGS_PATH, FileAccess.READ)
+		var text = file.get_as_text()
+		game_settings = JSON.parse_string(text)
+	
+	applyVolume(0, game_settings["master"])
+	applyVolume(AudioServer.get_bus_index("Music"), game_settings["music"])
+	applyVolume(AudioServer.get_bus_index("Sfx"), game_settings["sfx"])
+
+func saveSettings() -> void:
+	var file = FileAccess.open(SETTINGS_PATH, FileAccess.WRITE)
+	file.store_string(JSON.stringify(game_settings))
+
+func applyVolume(bus_idx: int, value: float) -> void:
+	AudioServer.set_bus_volume_db(bus_idx, linear_to_db(value))
+	AudioServer.set_bus_mute(bus_idx, value < 0.01)
