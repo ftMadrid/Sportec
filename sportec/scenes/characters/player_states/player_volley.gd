@@ -3,7 +3,7 @@ extends PlayerState
 
 const extra_power := 1.5
 const height_min := 1.0
-const height_max := 20.0
+const height_max := 25.0
 
 func _enter_tree() -> void:
 	player_animation.play("volley")

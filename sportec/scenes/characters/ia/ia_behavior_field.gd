@@ -27,7 +27,9 @@ func iaDecisions() -> void:
 	
 	if ball.carrier == player:
 		var target := player.target_goal.centerTargetPos()
-	
+		var shoot_probability := 0.3
+		if GameManager.player_setup[0] == player.team or GameManager.player_setup[1] == player.team:
+			shoot_probability = shoot_probability / 10.0
 		if player.position.distance_to(target) < 150 and randf() < 0.3:
 			player.faceTargetGoal()
 			var shoot_dir := player.position.direction_to(player.target_goal.randomTargetPos())

@@ -4,7 +4,7 @@ extends PlayerState
 const height_start := 0.1
 const height_velocity := 2.0
 const extra_power := 1.3
-const height_min := 10.0
+const height_min := 5.0
 const height_max := 30.0
 
 var is_landing := false
@@ -20,7 +20,9 @@ func _enter_tree() -> void:
 func ballEntered(tact_ball: Ball) -> void:
 	if tact_ball.airConnect(height_min, height_max):
 		PlayerSound.playSound(PlayerSound.Sound.POWERSHOOT)
-		tact_ball.shoot(player.velocity.normalized() * player.power * extra_power)
+		var destination := player.target_goal.randomTargetPos()
+		var dir := tact_ball.position.direction_to(destination)
+		tact_ball.shoot(dir * player.power * extra_power)
 
 func _physics_process(_delta: float) -> void:
 	# check if the player touch the ground

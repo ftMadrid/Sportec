@@ -54,8 +54,8 @@ func passTo(destination: Vector2, lock_duration: int = 500) -> void:
 	var distance := position.distance_to(destination)
 	var intensity := sqrt(2 * distance * ground_fric)
 	velocity = intensity * direction
-	if distance > 130:
-		height_velocity = BallState.gravity * distance / (1.8 * intensity) # equation to give a gravity effect to the pass ball
+	if distance > 90:
+		height_velocity = BallState.gravity * distance / (1.85 * intensity) # equation to give a gravity effect to the pass ball
 	carrier = null
 	switchState(Ball.State.FREEFORM, BallStateData.build().setLockDuration(lock_duration))
 	
@@ -82,6 +82,7 @@ func headScoring(scoring_area: Area2D) -> bool:
 func teamReset() -> void:
 	position = spawn_pos
 	velocity = Vector2.ZERO
+	height = 0
 	switchState(State.FREEFORM)
 
 func kickoffStarted() -> void:

@@ -2,7 +2,7 @@ class_name PlayerStateBicycle
 extends PlayerState
 
 const extra_power := 2.0
-const height_min := 5.0
+const height_min := 1.0
 const height_max := 25.0
 
 func _enter_tree() -> void:
