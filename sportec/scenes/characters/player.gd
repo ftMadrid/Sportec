@@ -67,6 +67,7 @@ func _physics_process(delta: float) -> void:
 	checkAutoSwitch()
 
 func _ready() -> void:
+	add_to_group("players")
 	setActualTarget()
 	flipSprites()
 	setupIABehavior()
