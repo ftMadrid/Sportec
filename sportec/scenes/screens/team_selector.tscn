@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bw0xti6cn73jm"]
+[gd_scene load_steps=12 format=3 uid="uid://bw0xti6cn73jm"]
 
 [ext_resource type="Script" uid="uid://bcabd53wsmtag" path="res://scenes/screens/team_selector.gd" id="1_kd5r0"]
 [ext_resource type="Texture2D" uid="uid://cetp8oaw3p4wt" path="res://assets/art/ui/teamselection/team-selection-background.png" id="1_t462t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dsc8crbndrky1" path="res://assets/art/ui/teams/team-realmadrid.png" id="5_qx4kt"]
 [ext_resource type="Texture2D" uid="uid://c7hucow4gvlud" path="res://assets/art/ui/teamselection/start_game.png" id="6_8jtv2"]
 [ext_resource type="Texture2D" uid="uid://brh0fdqlpv7wx" path="res://assets/art/ui/back_button.png" id="7_bjehg"]
+[ext_resource type="Texture2D" uid="uid://d2y0lh4mtnt4c" path="res://assets/art/ui/teamselection/team-shadow.png" id="8_1ar48"]
 
 [sub_resource type="Animation" id="Animation_1ar48"]
 length = 0.001
@@ -81,6 +82,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(264, 160)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background/Shadow:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(73, 146)]
 }
 
 [sub_resource type="Animation" id="Animation_bjehg"]
@@ -159,6 +172,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(385, 160), Vector2(264, 160)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Background/Shadow:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-69.99999, 146), Vector2(73, 146)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ar48"]
 _data = {
@@ -193,12 +218,13 @@ expand_mode = 1
 [node name="TeamImage" type="TextureRect" parent="Background"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.18900001
+anchor_left = 0.179
 anchor_top = 0.365
-anchor_right = 0.36100003
-anchor_bottom = 0.78000003
-offset_left = 0.17999268
-offset_right = 10.819992
+anchor_right = 0.379
+anchor_bottom = 0.82500005
+offset_left = 3.9799957
+offset_right = 3.97995
+offset_bottom = -1.5258789e-05
 texture = ExtResource("5_qx4kt")
 expand_mode = 1
 
@@ -210,7 +236,7 @@ anchor_top = 0.51000005
 anchor_right = 0.105000004
 anchor_bottom = 0.615
 offset_left = 0.03999901
-offset_right = 0.099998474
+offset_right = 0.099990845
 texture_normal = ExtResource("3_0mmhq")
 ignore_texture_size = true
 stretch_mode = 0
@@ -255,6 +281,19 @@ offset_bottom = -1.5258789e-05
 texture_normal = ExtResource("7_bjehg")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="Shadow" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.192
+anchor_top = 0.73
+anchor_right = 0.386
+anchor_bottom = 0.93000007
+offset_left = 0.040000916
+offset_right = -0.18022156
+offset_bottom = -1.5258789e-05
+texture = ExtResource("8_1ar48")
+expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -2,16 +2,19 @@ extends Screen
 
 var animated = false
 var start_pos: Vector2
+var start_pos_shadow: Vector2
 
 var current_team_index = 0 
 
 @export var player_index: int = 0 
 
 @onready var team : TextureRect = $Background/TeamImage
+@onready var shadow : TextureRect = $Background/Shadow
 
 func _ready() -> void:
-	MusicManager.play_music("menu") 
-	start_pos = Vector2(72, 73) 
+	MusicManager.playMusic("menu") 
+	start_pos = Vector2(72, 73)
+	start_pos_shadow = Vector2(73, 146)
 
 	var team_name = GameManager.AVAILABLE_TEAMS[current_team_index]
 	team.texture = GameHelpers.getTexture(team_name)
@@ -42,30 +45,30 @@ func rightButtonPressed() -> void:
 
 func changeImageAnimation(right: bool) -> void:
 	animated = true
-	
+
 	var offscreen_x = 60
 	var start_x = start_pos.x + (offscreen_x if right else -offscreen_x)
+
 	team.position = Vector2(start_x, start_pos.y)
-	
+	shadow.position = Vector2(start_x + 1, start_pos_shadow.y)
+
 	var total_teams = GameManager.AVAILABLE_TEAMS.size()
-	
+
 	if right:
-		current_team_index += 1
-		if current_team_index >= total_teams:
-			current_team_index = 0
+		current_team_index = (current_team_index + 1) % total_teams
 	else:
-		current_team_index -= 1
-		if current_team_index < 0:
-			current_team_index = total_teams - 1
+		current_team_index = (current_team_index - 1 + total_teams) % total_teams
 
 	var team_name = GameManager.AVAILABLE_TEAMS[current_team_index]
 	team.texture = GameHelpers.getTexture(team_name)
-	
 	updateGameManagerTeams()
-	
+
 	var tween = create_tween()
-	tween.tween_property(team, "position", start_pos, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	tween.finished.connect(Callable(self, "animationFinished"))
+	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(team, "position", start_pos, 0.4)
+	tween.parallel().tween_property(shadow, "position", start_pos_shadow, 0.4)
+	tween.finished.connect(animationFinished)
 
 func animationFinished():
 	animated = false
@@ -91,16 +94,11 @@ func startButtonPressed() -> void:
 	button.modulate.a = 0.5
 	await get_tree().create_timer(0.1).timeout
 	button.modulate.a = 1.0
-	
-	# 1. Guardar el equipo que elegiste
+
 	updateGameManagerTeams()
 	
-	# 2. IMPORTANTE: ¡Crear el torneo nuevo con ese equipo!
-	# Esto reinicia los cruces y te pone a ti en el primer partido
 	TournamentManager.startTournament()
 	
 	PlayerSound.playSound(PlayerSound.Sound.SELECT)
-	
-	# 3. Ahora sí, ir a la pantalla del torneo
 	transScreen(GamePreset.Screens.TOURNAMENT)
 	

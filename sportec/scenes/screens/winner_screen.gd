@@ -4,7 +4,7 @@ extends Screen
 @onready var winner_label = $Background/WinnerLabel
 
 func _ready() -> void:
-	MusicManager.play_music("winner")
+	MusicManager.playMusic("winner")
 
 	var winner_name = TournamentManager.matchs["F"].winner
 	

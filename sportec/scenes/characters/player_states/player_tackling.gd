@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 			time_finish_tackle = Time.get_ticks_msec()
 
 	elif Time.get_ticks_msec() - time_finish_tackle > tackle_duration:
-		trans_state(Player.State.RECOVERING)
+		transState(Player.State.RECOVERING)
 
 func _exit_tree() -> void:
 	tackle_area.monitoring = false

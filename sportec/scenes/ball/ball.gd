@@ -24,7 +24,7 @@ var spawn_pos := Vector2.ZERO
 func _ready() -> void:
 	switchState(State.FREEFORM)
 	spawn_pos = position
-	GameEvents.team_reset.connect(team_reset.bind())
+	GameEvents.teamReset.connect(teamReset.bind())
 	GameEvents.kickoff_started.connect(kickoffStarted.bind())
 
 func _physics_process(_delta: float) -> void:
@@ -35,7 +35,7 @@ func switchState(state: Ball.State, data: BallStateData = BallStateData.new()) -
 	if current_state != null:
 		current_state.queue_free()
 		
-	current_state = state_fact.get_state(state)
+	current_state = state_fact.getState(state)
 	current_state.setup(self, data, detection_area, carrier, player_animation, ball_sprite, shoot_particles)
 	current_state.transition_state.connect(switchState.bind())
 	current_state.name = "| BallStateMachine" + str(state)
@@ -49,7 +49,7 @@ func shoot(shoot_velocity : Vector2) -> void:
 	carrier = null
 	switchState(Ball.State.SHOOT)
 
-func pass_to(destination: Vector2, lock_duration: int = 500) -> void:
+func passTo(destination: Vector2, lock_duration: int = 500) -> void:
 	var direction := position.direction_to(destination)
 	var distance := position.distance_to(destination)
 	var intensity := sqrt(2 * distance * ground_fric)
@@ -57,35 +57,35 @@ func pass_to(destination: Vector2, lock_duration: int = 500) -> void:
 	if distance > 130:
 		height_velocity = BallState.gravity * distance / (1.8 * intensity) # equation to give a gravity effect to the pass ball
 	carrier = null
-	switchState(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(lock_duration))
+	switchState(Ball.State.FREEFORM, BallStateData.build().setLockDuration(lock_duration))
 	
 func stop() -> void:
 	velocity = Vector2.ZERO
 
-func in_air_action() -> bool:
-	return current_state != null and current_state.in_air_action()
+func inAirAction() -> bool:
+	return current_state != null and current_state.inAirAction()
 
-func air_connect(air_min_height: float, air_max_height: float) -> bool:
+func airConnect(air_min_height: float, air_max_height: float) -> bool:
 	return height >= air_min_height and height <= air_max_height
 
 func tumble(tumble_velocity: Vector2) -> void:
 	velocity = tumble_velocity
 	carrier = null
 	height_velocity = 3.0
-	switchState(Ball.State.FREEFORM, BallStateData.build().set_lock_duration(200))
+	switchState(Ball.State.FREEFORM, BallStateData.build().setLockDuration(200))
 
-func headed_scoring_are(scoring_area: Area2D) -> bool:
+func headScoring(scoring_area: Area2D) -> bool:
 	if not scoring_raycast.is_colliding():
 		return false
 	return scoring_raycast.get_collider() == scoring_area
 
-func team_reset() -> void:
+func teamReset() -> void:
 	position = spawn_pos
 	velocity = Vector2.ZERO
 	switchState(State.FREEFORM)
 
 func kickoffStarted() -> void:
-	pass_to(spawn_pos + Vector2.DOWN * 30.0)
+	passTo(spawn_pos + Vector2.DOWN * 30.0)
 
 func getProximityTeammates(team: String) -> int:
 	var players := player_proximity.get_overlapping_bodies()

@@ -8,30 +8,30 @@ extends Node2D
 var team := ""
 
 func _ready() -> void:
-	back_area.body_entered.connect(ball_enter_back_area.bind())
-	scoring_area.body_entered.connect(ball_enter_scoring_area.bind())
+	back_area.body_entered.connect(ballEnterBackArea.bind())
+	scoring_area.body_entered.connect(ballEnterScoringArea.bind())
 
 func init(manage_team: String) -> void:
 	team = manage_team
 
-func ball_enter_back_area(ball: Ball) -> void:
+func ballEnterBackArea(ball: Ball) -> void:
 	ball.stop()
 
-func random_target_position() -> Vector2:
+func randomTargetPos() -> Vector2:
 	return targets.get_child(randi_range(0, targets.get_child_count() - 1)).global_position
 
-func center_target_position() -> Vector2:
+func centerTargetPos() -> Vector2:
 	return targets.get_child(int(targets.get_child_count() / 2.0)).global_position
 
-func top_target_pos() -> Vector2:
+func topTargetPos() -> Vector2:
 	return targets.get_child(0).global_position
 
-func bottom_target_pos() -> Vector2:
+func bottomTargetPos() -> Vector2:
 	return targets.get_child(targets.get_child_count() - 1).global_position
 
-func get_scoring_area() -> Area2D:
+func getScoringArea() -> Area2D:
 	return scoring_area
 
-func ball_enter_scoring_area(_ball: Ball) -> void:
+func ballEnterScoringArea(_ball: Ball) -> void:
 	PlayerSound.playSound(PlayerSound.Sound.WHISTLE)
-	GameEvents.team_scored.emit(team)
+	GameEvents.teamScored.emit(team)

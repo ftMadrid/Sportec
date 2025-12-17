@@ -9,6 +9,6 @@ func _init() -> void:
 		Ball.State.FREEFORM: BallStateFreeForm,
 	}
 	
-func get_state(state: Ball.State) -> BallState:
+func getState(state: Ball.State) -> BallState:
 	assert(states.has(state), " that state doesnt exists!")
 	return states.get(state).new()

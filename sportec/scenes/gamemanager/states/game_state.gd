@@ -10,5 +10,5 @@ func setup(manage_manager: GameManager, manage_data: GameStateData) -> void:
 	manager = manage_manager
 	state_data = manage_data
 
-func trans_state(new_state: GameManager.State, data: GameStateData = GameStateData.new()) -> void:
+func transState(new_state: GameManager.State, data: GameStateData = GameStateData.new()) -> void:
 	transition_state.emit(new_state, data)

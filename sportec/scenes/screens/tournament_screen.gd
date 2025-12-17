@@ -13,6 +13,7 @@ var team_logos = {
 }
 
 func _ready():
+	MusicManager.playMusic("menu")
 	updateValues()
 
 func updateValues():

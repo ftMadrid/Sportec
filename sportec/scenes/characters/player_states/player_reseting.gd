@@ -15,8 +15,8 @@ func _physics_process(_delta: float) -> void:
 	if not arrived:
 		var dir := player.position.direction_to(state_data.reset_pos)
 		player.velocity = dir * player.speed
-		player.set_heading()
-		player.movement_animation()
+		player.setHeading()
+		player.movementAnimation()
 		
 		if player.position.distance_to(state_data.reset_pos) < 5.0:
 			llegada_confirmada()
@@ -25,9 +25,9 @@ func llegada_confirmada() -> void:
 	arrived = true
 	player.velocity = Vector2.ZERO
 	
-	player.movement_animation() 
+	player.movementAnimation() 
 	
-	player.face_target_goal()
+	player.faceTargetGoal()
 
 	player.position = state_data.reset_pos 
 	

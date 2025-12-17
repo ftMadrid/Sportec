@@ -5,24 +5,24 @@ extends Screen
 
 func _ready() -> void:
 	menu_animation.play("start")
-	menu_animation.animation_finished.connect(_on_menu_animation_finished)
+	menu_animation.animation_finished.connect(menuAnimationFinished)
 	
-	MusicManager.play_music("menu")
-	start_plane_timer()
+	MusicManager.playMusic("menu")
+	startPlaneTimer()
 
-func _on_menu_animation_finished(anim_name: String) -> void:
+func menuAnimationFinished(anim_name: String) -> void:
 	if anim_name == "start":
 		menu_animation.play("background_animation")
 
-func start_plane_timer() -> void:
+func startPlaneTimer() -> void:
 	var timer = Timer.new()
 	timer.wait_time = 19.0
 	timer.autostart = true
 	timer.one_shot = false
 	add_child(timer)
-	timer.timeout.connect(_on_plane_timer_timeout)
+	timer.timeout.connect(planeTimerTimeout)
 
-func _on_plane_timer_timeout() -> void:
+func planeTimerTimeout() -> void:
 	plane_animation.play("plane_pass")
 
 func playPressed() -> void:

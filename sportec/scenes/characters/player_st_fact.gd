@@ -21,6 +21,6 @@ func _init() -> void:
 		Player.State.RESETING: PlayerStateReseting,
 	}
 
-func get_state(state: Player.State) -> PlayerState:
+func getState(state: Player.State) -> PlayerState:
 	assert(states.has(state), " that state doesnt exists!")
 	return states.get(state).new()

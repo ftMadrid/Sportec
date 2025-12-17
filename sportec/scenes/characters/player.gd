@@ -61,28 +61,28 @@ const TEAM_PALETTE = preload("res://assets/art/palettes/teams-color-palette.png"
 const SHADER = preload("res://shaders/replace_color.gdshader")
 
 func _physics_process(delta: float) -> void:
-	sprite_visibility()
-	process_gravity(delta)
+	spriteVisibility()
+	processGravity(delta)
 	move_and_slide()
-	check_auto_switch()
+	checkAutoSwitch()
 
 func _ready() -> void:
-	set_actual_target()
-	flipt_sprites()
-	setup_ia_behavior()
-	apply_custom_skin_and_team()
+	setActualTarget()
+	flipSprites()
+	setupIABehavior()
+	applyCustomSkinAndTeam()
 	damage_area.monitoring = role == Role.KEEPER
-	tackle_area.body_entered.connect(tackle_player.bind())
+	tackle_area.body_entered.connect(tacklePlayer.bind())
 	keeper_hands_collider.disabled = role != Role.KEEPER
-	damage_area.body_entered.connect(tackle_player.bind())
+	damage_area.body_entered.connect(tacklePlayer.bind())
 	spawn_position = position
-	GameEvents.team_scored.connect(on_team_scored.bind())
+	GameEvents.teamScored.connect(onTeamScored.bind())
 	GameEvents.gameover.connect(gameOver.bind())
 	var init_pos := kickoff_pos if team == GameManager.teams[0] else spawn_position
 	switchState(State.RESETING, PlayerStateData.build().setResetPosition(init_pos))
 
-func check_auto_switch() -> void:
-	var carrying_now = has_ball()
+func checkAutoSwitch() -> void:
+	var carrying_now = hasBall()
 	
 	if carrying_now and not was_carrying_ball:
 		if control_scheme == ControlScheme.CPU:
@@ -90,7 +90,7 @@ func check_auto_switch() -> void:
 			
 	was_carrying_ball = carrying_now
 
-func flipt_sprites() -> void:
+func flipSprites() -> void:
 	if heading == Vector2.RIGHT:
 		sprite.flip_h = false
 		tackle_area.scale.x = 1
@@ -122,7 +122,7 @@ func loader(player_position: Vector2, manage_kickoff_pos: Vector2, manage_ball: 
 	heading = Vector2.LEFT if target_goal.position.x < position.x else Vector2.RIGHT
 
 # function to apply all the shaders
-func apply_custom_skin_and_team() -> void:
+func applyCustomSkinAndTeam() -> void:
 	if not sprite: return
 	
 	var mat = ShaderMaterial.new()
@@ -140,8 +140,8 @@ func apply_custom_skin_and_team() -> void:
 	mat.set_shader_parameter("team_color", int(team_idx)) 
 	mat.set_shader_parameter("skin_color", int(skincolor))
 
-func setup_ia_behavior() -> void:
-	current_ia_behavior = ia_behavior_fact.get_ia_behavior(role)
+func setupIABehavior() -> void:
+	current_ia_behavior = ia_behavior_fact.getIABehavior(role)
 	current_ia_behavior.setup(self, ball, opponent_area, teammate_area)
 	current_ia_behavior.name = "IA Behavior"
 	add_child(current_ia_behavior)
@@ -150,13 +150,13 @@ func switchState(state: State, state_data: PlayerStateData = PlayerStateData.new
 	if current_state != null:
 		current_state.queue_free()
 		
-	current_state = state_fact.get_state(state)
+	current_state = state_fact.getState(state)
 	current_state.setup(self, state_data, player_animation, ball, teammate_area, ball_area, own_goal, target_goal, tackle_area, current_ia_behavior)
 	current_state.transition_state.connect(switchState.bind())
 	current_state.name = "| PlayerStateMachine: " + str(state)
 	call_deferred("add_child", current_state)
 	
-func movement_animation() -> void:
+func movementAnimation() -> void:
 	var vel := velocity.length()
 	
 	if vel < 1:
@@ -166,7 +166,7 @@ func movement_animation() -> void:
 	else:
 		player_animation.play("run")
 
-func set_heading() -> void:
+func setHeading() -> void:
 	if velocity.x > 0:
 		heading = Vector2.RIGHT
 		sprite.flip_h = false
@@ -174,22 +174,22 @@ func set_heading() -> void:
 		heading = Vector2.LEFT
 		sprite.flip_h = true
 
-func has_ball() -> bool:
+func hasBall() -> bool:
 	return ball.carrier == self
 
 func animation_complete() -> void:
 	if current_state != null:
 		current_state.animation_complete()
 
-func set_actual_target() -> void:
+func setActualTarget() -> void:
 	if not control_sprite: return
 	control_sprite.texture = control_scheme_map[control_scheme]
 
-func sprite_visibility() -> void:
-	control_sprite.visible = has_ball() or not control_scheme == ControlScheme.CPU
+func spriteVisibility() -> void:
+	control_sprite.visible = hasBall() or not control_scheme == ControlScheme.CPU
 	execute_particles.emitting = velocity.length() == speed
 
-func process_gravity(delta: float) -> void:
+func processGravity(delta: float) -> void:
 	if height > 0 or height_velocity != 0:
 		height_velocity -= gravity * delta
 		height += height_velocity
@@ -200,29 +200,29 @@ func process_gravity(delta: float) -> void:
 	
 	sprite.position = Vector2.UP * height
 
-func control_ball() -> void:
+func controlBall() -> void:
 	if ball.height > 10.0:
 		switchState(Player.State.CHEST_CONTROL)
 
-func facing_target_goal() -> bool:
+func facingTargetGoal() -> bool:
 	var dir_target_goal := position.direction_to(target_goal.position)
 	return heading.dot(dir_target_goal) > 0 # return angle of the heading
 
-func get_hurt(hurt_pos: Vector2) -> void:
-	switchState(Player.State.HURT, PlayerStateData.build().set_hurt_direction(hurt_pos))
+func getHurt(hurt_pos: Vector2) -> void:
+	switchState(Player.State.HURT, PlayerStateData.build().setHurtDirection(hurt_pos))
 
-func tackle_player(player: Player) -> void:
+func tacklePlayer(player: Player) -> void:
 	if player != self and player.team != team and player == ball.carrier:
-		player.get_hurt(position.direction_to(player.position))
+		player.getHurt(position.direction_to(player.position))
 
-func can_carry_ball() -> bool:
-	return current_state != null and current_state.can_carry_ball()
+func canCarryBall() -> bool:
+	return current_state != null and current_state.canCarryBall()
 
-func get_pass_req(player: Player) -> void:
-	if ball.carrier == self and current_state != null and current_state.can_pass():
-		switchState(Player.State.PASSING, PlayerStateData.build().set_pas_target(player))
+func getPassReq(player: Player) -> void:
+	if ball.carrier == self and current_state != null and current_state.canPass():
+		switchState(Player.State.PASSING, PlayerStateData.build().setPassTarget(player))
 
-func on_team_scored(team_on: String) -> void:
+func onTeamScored(team_on: String) -> void:
 	if team == team_on:
 		switchState(Player.State.SAD)
 	else:
@@ -234,14 +234,14 @@ func gameOver(winning_team: String) -> void:
 	else:
 		switchState(Player.State.SAD)
 
-func face_target_goal() -> void:
-	if not facing_target_goal():
+func faceTargetGoal() -> void:
+	if not facingTargetGoal():
 		heading = heading * -1
-		flipt_sprites()
+		flipSprites()
 
 func readyForKickoff() -> bool:
 	return current_state != null and current_state.readyForKickoff()
 
 func setControlScheme(scheme: ControlScheme) -> void:
 	control_scheme = scheme
-	set_actual_target()
+	setActualTarget()

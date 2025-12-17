@@ -31,16 +31,16 @@ func setup(manage_player: Player, manage_data: PlayerStateData, manage_player_an
 	tackle_area = manage_tackle_area
 
 # to control in a good way the states from the player
-func trans_state(new_state: Player.State, data: PlayerStateData = PlayerStateData.new()) -> void:
+func transState(new_state: Player.State, data: PlayerStateData = PlayerStateData.new()) -> void:
 	transition_state.emit(new_state, data)
 
 func animation_complete() -> void:
 	pass # override the original method from player.gd
 
-func can_carry_ball() -> bool:
+func canCarryBall() -> bool:
 	return false
 
-func can_pass() -> bool:
+func canPass() -> bool:
 	return false
 
 func readyForKickoff() -> bool:

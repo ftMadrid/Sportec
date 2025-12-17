@@ -1,7 +1,7 @@
 extends Node
 
-signal team_scored(team_scored: String)
-signal team_reset
+signal teamScored(teamScored: String)
+signal teamReset
 signal kickoff_ready
 signal kickoff_started
 signal ball_possessed(player_name: String)

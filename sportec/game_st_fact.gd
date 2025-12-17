@@ -12,6 +12,6 @@ func _init() -> void:
 		GameManager.State.KICKOFF: GameStateKickoffs,
 	}
 
-func get_fresh_state(state: GameManager.State) -> GameState:
+func getState(state: GameManager.State) -> GameState:
 	assert(states.has(state), " state doesnt exists!")
 	return states.get(state).new()

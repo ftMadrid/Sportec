@@ -15,17 +15,17 @@ func _enter_tree() -> void:
 	
 func _physics_process(delta: float) -> void:
 	
-	shoot_direction += KeyUtils.get_input_vector(player.control_scheme) * delta
+	shoot_direction += KeyUtils.getInputVector(player.control_scheme) * delta
 	
-	if KeyUtils.action_just_released(player.control_scheme, KeyUtils.Action.SHOOT):
+	if KeyUtils.actionJustReleased(player.control_scheme, KeyUtils.Action.SHOOT):
 		var duration_press := clampf(Time.get_ticks_msec() - start_shoot, 0.0, max_duration)
 		var st_time := duration_press / max_duration
 		var bonus := ease(st_time, ease_factor)
 		var shoot_power := player.power * (1 + bonus)
 		shoot_direction = shoot_direction.normalized()
-		var data = PlayerStateData.build().set_shoot_power(shoot_power).set_shoot_direction(shoot_direction)
+		var data = PlayerStateData.build().setShootPower(shoot_power).setShootDirection(shoot_direction)
 		print(shoot_power, shoot_direction)
-		trans_state(Player.State.SHOOTING, data)
+		transState(Player.State.SHOOTING, data)
 
-func can_pass() -> bool:
+func canPass() -> bool:
 	return true

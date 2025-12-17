@@ -19,5 +19,5 @@ func _enter_tree() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Time.get_ticks_msec() - time_hurt > hurt_duration:
-		trans_state(Player.State.RECOVERING)
+		transState(Player.State.RECOVERING)
 	player.velocity = player.velocity.move_toward(Vector2.ZERO, delta * air_fric)

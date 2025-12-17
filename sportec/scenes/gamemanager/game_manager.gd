@@ -32,7 +32,7 @@ func kickoffReady() -> void:
 func switchState(state: State, data: GameStateData = GameStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
-	current_state = state_fact.get_fresh_state(state)
+	current_state = state_fact.getState(state)
 	current_state.setup(self, data)
 	current_state.transition_state.connect(switchState.bind())
 	current_state.name = "| GameStateMachine: " + str(state)
@@ -54,8 +54,8 @@ func isGameTied() -> bool:
 func isTimeUp() -> bool:
 	return time_left <= 0
 
-func increaseScore(team_scored: String) -> void:
-	var i_team_scored := 1 if team_scored == teams[0] else 0
+func increaseScore(teamScored: String) -> void:
+	var i_team_scored := 1 if teamScored == teams[0] else 0
 	score[i_team_scored] += 1
 	GameEvents.score_change.emit()
 

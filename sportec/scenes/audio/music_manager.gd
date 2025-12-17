@@ -8,7 +8,7 @@ const TRACKS = {
 
 @onready var player: AudioStreamPlayer = $MusicPlayer
 
-func play_music(track_name: String):
+func playMusic(track_name: String):
 	if not TRACKS.has(track_name):
 		print("This track doesnt exists - ", track_name)
 		return
@@ -22,5 +22,5 @@ func play_music(track_name: String):
 	player.play()
 	player.volume_db = -10
 
-func stop_music():
+func stopMusic():
 	player.stop()

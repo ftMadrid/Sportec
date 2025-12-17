@@ -19,7 +19,7 @@ func _ready() -> void:
 	GameEvents.ball_possessed.connect(ballPossessed.bind())
 	GameEvents.ball_released.connect(ballReleased.bind())
 	GameEvents.score_change.connect(scoreChange.bind())
-	GameEvents.team_reset.connect(teamReset.bind())
+	GameEvents.teamReset.connect(teamReset.bind())
 	GameEvents.gameover.connect(gameOver.bind())
 
 func _physics_process(_delta: float) -> void:

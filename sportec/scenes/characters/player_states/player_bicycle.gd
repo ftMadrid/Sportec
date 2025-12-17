@@ -7,14 +7,14 @@ const height_max := 25.0
 
 func _enter_tree() -> void:
 	player_animation.play("bicycle")
-	ball_area.body_entered.connect(ball_entered.bind())
+	ball_area.body_entered.connect(ballEntered.bind())
 
-func ball_entered(tact_ball: Ball) -> void:
-	if tact_ball.air_connect(height_min, height_max):
-		var dest := target_goal.random_target_position()
+func ballEntered(tact_ball: Ball) -> void:
+	if tact_ball.airConnect(height_min, height_max):
+		var dest := target_goal.randomTargetPos()
 		var dir := ball.position.direction_to(dest)
 		PlayerSound.playSound(PlayerSound.Sound.POWERSHOOT)
 		tact_ball.shoot(dir * player.power * extra_power)
 
 func animation_complete() -> void:
-	trans_state(Player.State.RECOVERING)
+	transState(Player.State.RECOVERING)

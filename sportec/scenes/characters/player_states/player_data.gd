@@ -9,19 +9,19 @@ var reset_pos: Vector2
 static func build() -> PlayerStateData:
 	return PlayerStateData.new()
 
-func set_shoot_direction(direction: Vector2) -> PlayerStateData:
+func setShootDirection(direction: Vector2) -> PlayerStateData:
 	shoot_direction = direction
 	return self
 
-func set_shoot_power(power: float) -> PlayerStateData:
+func setShootPower(power: float) -> PlayerStateData:
 	shoot_power = power
 	return self
 
-func set_hurt_direction(dir: Vector2) -> PlayerStateData:
+func setHurtDirection(dir: Vector2) -> PlayerStateData:
 	hurt_direction = dir
 	return self
 
-func set_pas_target(player: Player) -> PlayerStateData:
+func setPassTarget(player: Player) -> PlayerStateData:
 	pass_target = player
 	return self
 

@@ -3,47 +3,47 @@ extends PlayerState
 
 func _physics_process(_delta: float) -> void:
 	if player.control_scheme == Player.ControlScheme.CPU:
-		ia_behavior.process_ia()
+		ia_behavior.processIA()
 	else:
-		handle_human_moves()
+		handleHumanMoves()
 		
-	player.movement_animation()
-	player.set_heading()
+	player.movementAnimation()
+	player.setHeading()
 	
-func handle_human_moves() -> void:
-	var dir := KeyUtils.get_input_vector(player.control_scheme)
+func handleHumanMoves() -> void:
+	var dir := KeyUtils.getInputVector(player.control_scheme)
 	player.velocity = dir * player.speed
 	
 	if player.velocity != Vector2.ZERO:
 		teammate_area.rotation = player.velocity.angle()
 		
-	if KeyUtils.action_just_pressed(player.control_scheme, KeyUtils.Action.PASS):
-		if player.has_ball():
-			trans_state(Player.State.PASSING)
-		elif can_teammate_pass_ball():
-			ball.carrier.get_pass_req(player)
+	if KeyUtils.actionJustPressed(player.control_scheme, KeyUtils.Action.PASS):
+		if player.hasBall():
+			transState(Player.State.PASSING)
+		elif canTeammatePassBall():
+			ball.carrier.getPassReq(player)
 		else:
 			player.swap_requested.emit(player)
 	
-	elif KeyUtils.action_just_pressed(player.control_scheme, KeyUtils.Action.SHOOT):
-		if player.has_ball():
-			trans_state(Player.State.PREP_SHOOT)
-		elif ball.in_air_action():
+	elif KeyUtils.actionJustPressed(player.control_scheme, KeyUtils.Action.SHOOT):
+		if player.hasBall():
+			transState(Player.State.PREP_SHOOT)
+		elif ball.inAirAction():
 			if player.velocity == Vector2.ZERO:
-				if player.facing_target_goal():
-					trans_state(Player.State.VOLLEY)
+				if player.facingTargetGoal():
+					transState(Player.State.VOLLEY)
 				else:
-					trans_state(Player.State.BICYCLE)
+					transState(Player.State.BICYCLE)
 			else:
-				trans_state(Player.State.HEADER)	
+				transState(Player.State.HEADER)	
 		elif player.velocity != Vector2.ZERO:
-			trans_state(Player.State.TACKLING)
+			transState(Player.State.TACKLING)
 
-func can_carry_ball() -> bool:
+func canCarryBall() -> bool:
 	return player.role != Player.Role.KEEPER
 
-func can_teammate_pass_ball() -> bool:
+func canTeammatePassBall() -> bool:
 	return ball.carrier != null and ball.carrier.team == player.team and ball.carrier.control_scheme == Player.ControlScheme.CPU
 
-func can_pass() -> bool:
+func canPass() -> bool:
 	return true

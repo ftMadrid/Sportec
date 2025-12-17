@@ -24,7 +24,7 @@ func setup(manage_ball: Ball, manage_state_data: BallStateData, manage_detection
 	state_data = manage_state_data
 	shoot_particles = manage_shoot_particles
 	
-func trans_state(new_state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
+func transState(new_state: Ball.State, data: BallStateData = BallStateData.new()) -> void:
 	transition_state.emit(new_state, data)
 
 # making looks pretty while ball's velocity is comming to 0
@@ -39,7 +39,7 @@ func set_ball_animation_velocity() -> void:
 		player_animation.advance(0)
 
 # adding the gravity process to the ball
-func gravity_process(delta: float, rebound: float = 0.0) -> void:
+func gravityProcess(delta: float, rebound: float = 0.0) -> void:
 	if ball.height > 0 or ball.height_velocity > 0:
 		ball.height_velocity -= gravity * delta
 		ball.height += ball.height_velocity
@@ -49,12 +49,12 @@ func gravity_process(delta: float, rebound: float = 0.0) -> void:
 				ball.height_velocity = -ball.height_velocity * rebound
 				ball.velocity = ball.velocity * rebound
 
-func move_bounce(delta: float) -> void:
+func moveBounce(delta: float) -> void:
 	var collision := ball.move_and_collide(ball.velocity * delta)
 	if collision != null:
 		ball.velocity = ball.velocity.bounce(collision.get_normal()) * 0.8
 		PlayerSound.playSound(PlayerSound.Sound.BOUNCE)
 		ball.switchState(Ball.State.FREEFORM)
 
-func in_air_action() -> bool:
+func inAirAction() -> bool:
 	return false

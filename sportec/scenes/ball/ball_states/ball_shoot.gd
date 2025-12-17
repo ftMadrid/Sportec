@@ -17,9 +17,9 @@ func _enter_tree() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if Time.get_ticks_msec() - since_shoot > shoot_duration:
-		trans_state(Ball.State.FREEFORM)
+		transState(Ball.State.FREEFORM)
 	else:
-		move_bounce(delta)
+		moveBounce(delta)
 
 func _exit_tree() -> void:
 	bsprite.scale.y	= 1.0

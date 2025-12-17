@@ -5,7 +5,7 @@ var init_delay := randi_range(200, 800)
 var celebrating_time := Time.get_ticks_msec()
 
 func _enter_tree() -> void:
-	GameEvents.team_reset.connect(teamReset.bind())
+	GameEvents.teamReset.connect(teamReset.bind())
 
 func _physics_process(delta: float) -> void:
 	if player.height == 0 and Time.get_ticks_msec() - celebrating_time > init_delay:
@@ -18,4 +18,4 @@ func celebrate() -> void:
 	player.height_velocity = 2.0
 
 func teamReset() -> void:
-	trans_state(Player.State.RESETING, PlayerStateData.build().setResetPosition(player.spawn_position))
+	transState(Player.State.RESETING, PlayerStateData.build().setResetPosition(player.spawn_position))

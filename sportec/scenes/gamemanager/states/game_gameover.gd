@@ -2,7 +2,7 @@ class_name GameStateGameOver
 extends GameState
 
 func _enter_tree() -> void:
-	MusicManager.stop_music()
+	MusicManager.stopMusic()
 	
 	var team_winner := manager.getTeamWinner()
 	GameEvents.gameover.emit(team_winner)

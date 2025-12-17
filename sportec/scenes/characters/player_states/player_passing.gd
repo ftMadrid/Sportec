@@ -9,14 +9,14 @@ func _enter_tree() -> void:
 func animation_complete() -> void:
 	var pass_target := state_data.pass_target
 	if pass_target == null:
-		pass_target = teammate_in_view() # get the pass from other player (requested from player 1)
+		pass_target = teammateInView() # get the pass from other player (requested from player 1)
 	if pass_target == null: # to pass the ball to the target and make the condition if is not null
-		ball.pass_to(ball.position + player.heading * player.speed)
+		ball.passTo(ball.position + player.heading * player.speed)
 	else:
-		ball.pass_to(pass_target.position + pass_target.velocity)
-	trans_state(Player.State.MOVING)
+		ball.passTo(pass_target.position + pass_target.velocity)
+	transState(Player.State.MOVING)
 
-func teammate_in_view() -> Player:
+func teammateInView() -> Player:
 	var players_in_view := teammate_area.get_overlapping_bodies()
 	var teammates_in_view := players_in_view.filter(
 		func(p: Player): return p != player

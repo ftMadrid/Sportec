@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		player_animation.play("idle")
 	
-	gravity_process(delta)
+	gravityProcess(delta)
 	ball.position = carrier.position + Vector2(vx + carrier.heading.x * offset_player.x, offset_player.y)
 
 func _exit_tree() -> void:

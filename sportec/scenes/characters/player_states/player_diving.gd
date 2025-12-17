@@ -17,4 +17,4 @@ func _enter_tree() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if Time.get_ticks_msec() - start_dive > duration_dive:
-		trans_state(Player.State.RECOVERING)
+		transState(Player.State.RECOVERING)
