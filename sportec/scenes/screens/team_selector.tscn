@@ -97,6 +97,78 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(73, 146)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Background/BoxTitle:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(252, 18)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Background/Box:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(252, 36)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Background/TeamName:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 37)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Background/Rhythm:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 60)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Background/Strength:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 73)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Background/WorldCups:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 87)]
+}
 
 [sub_resource type="Animation" id="Animation_bjehg"]
 resource_name = "start"
@@ -185,6 +257,78 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-69.99999, 146), Vector2(73, 146)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Background/BoxTitle:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 18), Vector2(252, 18)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Background/Box:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 36), Vector2(252, 36)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Background/TeamName:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 37), Vector2(256, 37)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Background/Rhythm:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 60), Vector2(256, 60)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Background/Strength:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 73), Vector2(256, 73)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Background/WorldCups:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(385, 87), Vector2(256, 87)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ar48"]
@@ -292,24 +436,24 @@ anchor_top = 0.73
 anchor_right = 0.386
 anchor_bottom = 0.93000007
 offset_left = 0.040000916
-offset_right = -0.18022156
+offset_right = -0.1802826
 offset_bottom = -1.5258789e-05
 texture = ExtResource("8_1ar48")
 expand_mode = 1
 
 [node name="BoxTitle" type="TextureRect" parent="Background"]
 layout_mode = 0
-offset_left = 255.0
+offset_left = 252.0
 offset_top = 18.0
-offset_right = 350.0
+offset_right = 354.0
 offset_bottom = 76.0
 texture = ExtResource("9_rbdff")
 
 [node name="Box" type="TextureRect" parent="Background"]
 layout_mode = 0
-offset_left = 255.0
+offset_left = 252.0
 offset_top = 36.0
-offset_right = 350.0
+offset_right = 354.0
 offset_bottom = 113.0
 texture = ExtResource("9_p7yvk")
 expand_mode = 1
@@ -321,37 +465,46 @@ anchor_left = 0.69500005
 anchor_top = 0.185
 anchor_right = 0.897
 anchor_bottom = 0.25500003
-offset_left = -0.1000061
-offset_right = 0.13998413
+offset_left = -8.100006
+offset_right = -7.860016
 theme_override_colors/font_color = Color(0.9723318, 0.9520876, 0.95910805, 1)
 text = "REALMADRID STATS"
 
 [node name="Rhythm" type="Label" parent="Background"]
-layout_mode = 0
-offset_left = 262.0
-offset_top = 60.0
-offset_right = 327.0
-offset_bottom = 74.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.674
+anchor_top = 0.3
+anchor_right = 0.845
+anchor_bottom = 0.37
+offset_left = -0.11999512
+offset_right = -0.1000061
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "RHYTHM:  88"
+text = "RHYTHM:  90"
 
 [node name="Strength" type="Label" parent="Background"]
-layout_mode = 0
-offset_left = 262.0
-offset_top = 73.0
-offset_right = 327.0
-offset_bottom = 87.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.674
+anchor_top = 0.365
+anchor_right = 0.845
+anchor_bottom = 0.43500003
+offset_left = -0.11999512
+offset_right = -0.1000061
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "STRENGTH:  90"
+text = "STRENGTH:  86"
 
 [node name="WorldCups" type="Label" parent="Background"]
-layout_mode = 0
-offset_left = 262.0
-offset_top = 87.0
-offset_right = 327.0
-offset_bottom = 101.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.674
+anchor_top = 0.43500003
+anchor_right = 0.845
+anchor_bottom = 0.505
+offset_left = -0.11999512
+offset_right = -0.1000061
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "WORLD CUPS: 1"
+text = "WORLD CUPS: 5"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

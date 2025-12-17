@@ -1,0 +1,42 @@
+{
+	"AC.MILAN": {
+		"cups": 1.0,
+		"rhythm": 88.0,
+		"strength": 86.0
+	},
+	"ARSENAL": {
+		"cups": 0.0,
+		"rhythm": 88.0,
+		"strength": 85.0
+	},
+	"BARCELONA": {
+		"cups": 3.0,
+		"rhythm": 89.0,
+		"strength": 85.0
+	},
+	"BAYERNMUNICH": {
+		"cups": 2.0,
+		"rhythm": 84.0,
+		"strength": 84.0
+	},
+	"INTER": {
+		"cups": 1.0,
+		"rhythm": 85.0,
+		"strength": 86.0
+	},
+	"LIVERPOOL": {
+		"cups": 1.0,
+		"rhythm": 88.0,
+		"strength": 84.0
+	},
+	"M.UNITED": {
+		"cups": 1.0,
+		"rhythm": 86.0,
+		"strength": 85.0
+	},
+	"REALMADRID": {
+		"cups": 6.0,
+		"rhythm": 90.0,
+		"strength": 86.0
+	}
+}

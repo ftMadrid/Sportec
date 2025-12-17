@@ -1,6 +1,6 @@
 extends Node
 
-const game_duration := 5#60
+const game_duration := 2*60
 const duration_impact := 100
 
 enum State {PLAY, SCORED, RESET, KICKOFF, OVERTIME, GAMEOVER}
@@ -18,8 +18,12 @@ var current_state : GameState = null
 var player_setup : Array[String] = ["REALMADRID", ""]
 var active_screen = null
 
+const TEAMS_DATA_PATH = "res://assets/json/teams_stats.json"
+var teams_info : Dictionary = {}
+
 func _init() -> void:
 	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
+	loadTeamsData()
 
 func _ready() -> void:
 	time_left = game_duration
@@ -72,3 +76,22 @@ func resetMatchData():
 		current_state = null
 	
 	switchState(State.RESET)
+
+func loadTeamsData():
+	if not FileAccess.file_exists(TEAMS_DATA_PATH):
+		var default_data = FileAccess.get_file_as_string("res://assets/json/teams_stats.json")
+		var json = JSON.parse_string(default_data)
+		teams_info = json
+		saveTeamData()
+	else:
+		var file = FileAccess.open(TEAMS_DATA_PATH, FileAccess.READ)
+		teams_info = JSON.parse_string(file.get_as_text())
+
+func saveTeamData():
+	var file = FileAccess.open(TEAMS_DATA_PATH, FileAccess.WRITE)
+	file.store_string(JSON.stringify(teams_info, "\t"))
+
+func addCuptoTeam(team_name: String):
+	if teams_info.has(team_name):
+		teams_info[team_name]["cups"] += 1
+		saveTeamData()

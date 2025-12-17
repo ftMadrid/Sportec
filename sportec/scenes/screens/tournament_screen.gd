@@ -71,7 +71,9 @@ func _on_button_pressed() -> void:
 		
 	else:
 		if TournamentManager.matchs["F"].played:
-			print("Tournament Finished! Winner: " + TournamentManager.matchs["F"].winner)
+			var winner: String = TournamentManager.matchs["F"].winner
+			print("Tournament Finished! Winner: " + winner)
+			GameManager.addCuptoTeam(winner)
 			transScreen(GamePreset.Screens.WINNER)
 			
 		else:
