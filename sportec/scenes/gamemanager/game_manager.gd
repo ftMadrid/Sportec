@@ -1,6 +1,6 @@
 extends Node
 
-const game_duration := 2*60
+const game_duration := 5#*60
 const duration_impact := 100
 
 enum State {PLAY, SCORED, RESET, KICKOFF, OVERTIME, GAMEOVER}
@@ -18,7 +18,8 @@ var current_state : GameState = null
 var player_setup : Array[String] = ["REALMADRID", ""]
 var active_screen = null
 
-const TEAMS_DATA_PATH = "res://assets/json/teams_stats.json"
+const TEAMS_DATA_RES := "res://assets/json/teams_stats.json"
+const TEAMS_DATA_USER := "user://teams_stats.json"
 var teams_info : Dictionary = {}
 
 func _init() -> void:
@@ -78,17 +79,16 @@ func resetMatchData():
 	switchState(State.RESET)
 
 func loadTeamsData():
-	if not FileAccess.file_exists(TEAMS_DATA_PATH):
-		var default_data = FileAccess.get_file_as_string("res://assets/json/teams_stats.json")
-		var json = JSON.parse_string(default_data)
-		teams_info = json
-		saveTeamData()
-	else:
-		var file = FileAccess.open(TEAMS_DATA_PATH, FileAccess.READ)
+	if FileAccess.file_exists(TEAMS_DATA_USER):
+		var file = FileAccess.open(TEAMS_DATA_USER, FileAccess.READ)
 		teams_info = JSON.parse_string(file.get_as_text())
+	else:
+		var default_data = FileAccess.get_file_as_string(TEAMS_DATA_RES)
+		teams_info = JSON.parse_string(default_data)
+		saveTeamData()
 
 func saveTeamData():
-	var file = FileAccess.open(TEAMS_DATA_PATH, FileAccess.WRITE)
+	var file = FileAccess.open(TEAMS_DATA_USER, FileAccess.WRITE)
 	file.store_string(JSON.stringify(teams_info, "\t"))
 
 func addCuptoTeam(team_name: String):

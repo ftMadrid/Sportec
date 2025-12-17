@@ -23,6 +23,7 @@ func _ready() -> void:
 	var team_name = GameManager.AVAILABLE_TEAMS[current_team_index]
 	team.texture = GameHelpers.getTexture(team_name)
 	updateGameManagerTeams()
+	updateStats(team_name)
 	
 	if has_node("AnimationPlayer"):
 		$AnimationPlayer.play("start")
